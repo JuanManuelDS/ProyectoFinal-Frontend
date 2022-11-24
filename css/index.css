@@ -1,3 +1,6 @@
+body{
+    margin: 0;
+}
 #userin{
     float: right;
     margin-top: 1%;
@@ -6,8 +9,8 @@
 }
 #login{
     margin-right: 25%;
-    background-color: #ffad76;
-    border: 1px solid #ffad76;
+    background-color: #00c3ff;
+    border: 1px solid #00c3ff;
     color: black;
     text-decoration: none;
     display: inline;
@@ -51,7 +54,14 @@
     color: white;
     border: 2px solid black;
 }
+#carrosel{
+    margin-top: 2%;
+}
+#img_oficina{
+    width: 100%;
+}
 #autores{
+    background-color: rgb(167, 167, 167);
     text-align: center;
     width: 100%;
     float: left;
@@ -79,5 +89,7 @@
     width: 150px;
 }
 footer{
+    background-color: rgb(20, 20, 20);
+    color: gray;
     text-align: center;
 }
