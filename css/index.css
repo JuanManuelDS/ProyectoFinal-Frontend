@@ -1,0 +1,83 @@
+#userin{
+    float: right;
+    margin-top: 1%;
+    margin-right: 5%;
+    width: 15%;
+}
+#login{
+    margin-right: 25%;
+    background-color: #ffad76;
+    border: 1px solid #ffad76;
+    color: black;
+    text-decoration: none;
+    display: inline;
+    text-align: center;
+    width: 45%;
+    padding: 5%;
+}
+#signup{
+    background-color: #FF6F00;
+    border: 1px solid #FF6F00;
+    color: black;
+    text-decoration: none;
+    display: inline;
+    text-align: center;
+    width: 45%;
+    padding: 5%;
+    
+}
+#login:hover{
+    color: white;
+    border: 1px solid black;
+}
+#signup:hover{
+    color: white;
+    border: 1px solid black;
+}
+#content-box{
+    text-align: center;
+}
+#start{
+    background-color: #FF6F00;
+    border: 2px solid #FF6F00;
+    text-decoration: none;
+    color: black;
+    padding-top: 10px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+}
+#start:hover{
+    color: white;
+    border: 2px solid black;
+}
+#autores{
+    text-align: center;
+    width: 100%;
+    float: left;
+    display: flex;
+    justify-content: center;
+}
+#autor1{
+    float: left;
+}
+#autor2{
+    float: left;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+#autor3{
+    float: left;
+}
+#foto_autor1{
+    width: 150px;
+}
+#foto_autor2{
+    width: 150px;
+}
+#foto_autor3{
+    width: 150px;
+}
+footer{
+    text-align: center;
+}
