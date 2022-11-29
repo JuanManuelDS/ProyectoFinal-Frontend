@@ -1,0 +1,34 @@
+main {
+    width: 100vw;
+    height: 100vh;
+}
+
+div#admin_page_container {
+    max-width: 1080px;
+}
+
+div#informacion {
+    color: black;
+}
+
+div#menu {
+    color: white
+}
+
+button.admin_menu_button {
+    border-bottom: white 1px solid;
+    height: 40px;
+}
+
+div#paginacion>div>a:first-child,
+div#paginacion>div>a:last-child {
+    background-color: #ff6f00;
+    color: white;
+    border: 0px;
+    font-weight: bold;
+}
+
+div#paginacion>div>a {
+    border: #ff6f00 1px solid;
+    color: #ff6f00;
+}

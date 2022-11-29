@@ -1,0 +1,7 @@
+div#navbar_container {
+    max-width: 1380px;
+}
+
+.navbar_link:hover {
+    cursor: pointer;
+}
