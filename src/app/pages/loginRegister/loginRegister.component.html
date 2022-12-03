@@ -1,3 +1,21 @@
-<p>
-  loginRegister works!
-</p>
+<main
+  class="container-fluid bg-light d-flex justify-content-center align-items-center"
+>
+  <div class="row d-flex justify-content-center">
+    <div
+      class="col-lg-6 col-sm-9 d-flex flex-column justify-content-center presentacion_container"
+    >
+      <img src="assets/logo.png" alt="ShrimPDF logo" width="350px" />
+      <h3 class="mt-4">
+        ShrimPDF te ayuda a crear y firmar tus plantillas personalizadas
+      </h3>
+    </div>
+    <div class="col-lg-6 col-sm-12 formulario_container p-4 m-4 shadow">
+      <h3>{{ titulo }}</h3>
+      <hr />
+      <!-- Aquí elegimos el register o login según la ruta -->
+      <!-- <app-register></app-register> -->
+      <app-login></app-login>
+    </div>
+  </div>
+</main>

@@ -5,6 +5,8 @@ import { CrearPlantillaComponent } from './crearPlantilla/crearPlantilla.compone
 import { DashboardUsuarioComponent } from './dashboardUsuario/dashboardUsuario.component';
 import { HomeComponent } from './home/home.component';
 import { LoginRegisterComponent } from './loginRegister/loginRegister.component';
+import { LoginComponent } from './loginRegister/login/login.component';
+import { RegisterComponent } from './loginRegister/register/register.component';
 
 @NgModule({
   imports: [CommonModule],
@@ -14,6 +16,8 @@ import { LoginRegisterComponent } from './loginRegister/loginRegister.component'
     DashboardUsuarioComponent,
     HomeComponent,
     LoginRegisterComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   exports: [
     AdminComponent,

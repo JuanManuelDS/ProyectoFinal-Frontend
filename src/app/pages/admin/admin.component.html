@@ -1,3 +1,183 @@
-<p>
-  admin works!
-</p>
+<main>
+  <div class="container-fluid" id="admin_page_container">
+    <div class="row">
+      <div class="col-12">
+        <button
+          class="btn btn-dark"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasWithBothOptions"
+          aria-controls="offcanvasWithBothOptions"
+          id="boton_menu"
+        >
+          Opciones
+        </button>
+      </div>
+
+      <!-------------- MENÚ DE ADMIN ESCONDIDO --------------->
+
+      <div
+        class="offcanvas offcanvas-start p-0 bg-dark menu_escondido"
+        data-bs-scroll="true"
+        tabindex="-1"
+        id="offcanvasWithBothOptions"
+        aria-labelledby="offcanvasWithBothOptionsLabel"
+      >
+        <div class="offcanvas-header p-0">
+          <h5 class="offcanvas-title ms-3" id="offcanvasWithBothOptionsLabel">
+            Menú administrador
+          </h5>
+          <button
+            type="button"
+            class="btn-close btn-close-white m-3"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <hr class="m-0" />
+        <div class="offcanvas-body p-0">
+          <button type="button" class="btn btn-dark w-100 admin_menu_button">
+            Ver lista de usuarios
+          </button>
+          <hr class="m-0" />
+          <button type="button" class="btn btn-dark w-100 admin_menu_button">
+            Ver lista de plantillas
+          </button>
+          <hr class="m-0" />
+        </div>
+      </div>
+
+      <!-------------- TABLA DE USUARIOS / LISTA  --------------->
+      <div class="col-12" id="informacion">
+        <div class="container-fluid">
+          <div class="row mb-3">
+            <!----------- TÍTULO ------------->
+            <div class="col-12 m-4 text-center">
+              <h1 class="">Listado de Usuarios del Sistema</h1>
+            </div>
+
+            <!------ OPCIONES DE BÚSQUEDA Y CANTIDAD DE REGISTROS -------->
+            <div class="col">
+              <div class="row d-flex justify-content-between">
+                <div class="col">
+                  <span>Cantidad de registros: </span>
+                  <form>
+                    <select
+                      class="form-select form-select-sm"
+                      aria-label=".form-select-sm example"
+                      id="cantidad_registros"
+                    >
+                      <option selected>10</option>
+                      <option>20</option>
+                      <option>50</option>
+                    </select>
+                  </form>
+                </div>
+                <div class="col flex-grow-3"></div>
+                <div class="col">
+                  <span>Buscar: </span>
+                  <form class="d-flex" role="search">
+                    <input
+                      class="form-control me-2"
+                      type="search"
+                      aria-label="Search"
+                    />
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--------------- TABLA ------------------->
+          <div class="row">
+            <div class="col p-0 m-0">
+              <table class="table table-striped table-bordered">
+                <thead class="table-light">
+                  <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Sector</th>
+                    <th>Ultimo Ingreso</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr>
+                    <td>1</td>
+                    <td>admin</td>
+                    <td>Administación</td>
+                    <td>2018-01-17 12:49:56</td>
+                    <td>
+                      <img src="assets/eye.svg" />
+                      <img src="assets/edit.svg" />
+                      <img src="assets/trash-2.svg" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>marcelo</td>
+                    <td>Administación</td>
+                    <td>2018-02-24 13:38:56</td>
+                    <td>
+                      <img src="assets/eye.svg" />
+                      <img src="assets/edit.svg" />
+                      <img src="assets/trash-2.svg" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>eduardo</td>
+                    <td>Producción</td>
+                    <td>2018-02-08 10:54:36</td>
+                    <td>
+                      <img src="assets/eye.svg" />
+                      <img src="assets/edit.svg" />
+                      <img src="assets/trash-2.svg" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>jorge</td>
+                    <td>Administación</td>
+                    <td>2018-02-08 09:43:26</td>
+                    <td>
+                      <img src="assets/eye.svg" />
+                      <img src="assets/edit.svg" />
+                      <img src="assets/trash-2.svg" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>gaston</td>
+                    <td>Producción</td>
+                    <td>2018-02-20 17:25:45</td>
+                    <td>
+                      <img src="assets/eye.svg" />
+                      <img src="assets/edit.svg" />
+                      <img src="assets/trash-2.svg" />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 text-end">
+              Mostrando del 1 al 5 de un total de 5 registros
+            </div>
+            <div class="col-12 m-4 text-center" id="paginacion">
+              <div class="btn-group" role="group">
+                <a class="btn btn-primary">Anterior</a>
+                <a class="btn btn-outline-primary">1</a>
+                <a class="btn btn-outline-primary">2</a>
+                <a class="btn btn-outline-primary">...</a>
+                <a class="btn btn-outline-primary">9</a>
+                <a class="btn btn-primary">Siguiente</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
