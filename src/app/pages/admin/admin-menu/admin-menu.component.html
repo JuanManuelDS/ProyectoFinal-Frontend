@@ -1,0 +1,42 @@
+<div
+  class="offcanvas offcanvas-start p-0 bg-dark menu_escondido"
+  data-bs-scroll="true"
+  tabindex="-1"
+  id="offcanvasWithBothOptions"
+  aria-labelledby="offcanvasWithBothOptionsLabel"
+>
+  <div class="offcanvas-header p-0">
+    <h5 class="offcanvas-title ms-3" id="offcanvasWithBothOptionsLabel">
+      Menú administrador
+    </h5>
+    <button
+      type="button"
+      class="btn-close btn-close-white m-3"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <hr class="m-0" />
+  <div class="offcanvas-body p-0">
+    <button
+      type="button"
+      class="btn btn-dark w-100 admin_menu_button"
+      (click)="cambiarTabla('users')"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    >
+      Ver lista de usuarios
+    </button>
+    <hr class="m-0" />
+    <button
+      type="button"
+      class="btn btn-dark w-100 admin_menu_button"
+      (click)="cambiarTabla('plantillas')"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    >
+      Ver lista de plantillas
+    </button>
+    <hr class="m-0" />
+  </div>
+</div>
