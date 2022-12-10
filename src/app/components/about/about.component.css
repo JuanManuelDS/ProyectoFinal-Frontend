@@ -1,0 +1,23 @@
+#autores{
+    background-color: rgb(167, 167, 167);
+    text-align: center;
+    width: 100%;
+    float: left;
+    display: flex;
+    justify-content: center;
+}
+#autor1{
+    float: left;
+}
+#autor2{
+    float: left;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+#autor3{
+    float: left;
+}
+.fotos{
+    width: 150px;
+}
+
