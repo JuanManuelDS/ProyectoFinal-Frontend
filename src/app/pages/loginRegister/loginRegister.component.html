@@ -14,8 +14,10 @@
       <h3>{{ titulo }}</h3>
       <hr />
       <!-- Aquí elegimos el register o login según la ruta -->
-      <!-- <app-register></app-register> -->
-      <app-login></app-login>
+      <app-login *ngIf="currentRoute === '/login'; else register"></app-login>
+      <ng-template #register>
+        <app-register></app-register>
+      </ng-template>
     </div>
   </div>
 </main>

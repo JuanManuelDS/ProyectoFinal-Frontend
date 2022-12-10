@@ -7,9 +7,10 @@ import { HomeComponent } from './home/home.component';
 import { LoginRegisterComponent } from './loginRegister/loginRegister.component';
 import { LoginComponent } from './loginRegister/login/login.component';
 import { RegisterComponent } from './loginRegister/register/register.component';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, ComponentsModule],
   declarations: [
     AdminComponent,
     CrearPlantillaComponent,
