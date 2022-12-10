@@ -1,7 +1,28 @@
 div#navbar_container {
-    max-width: 1380px;
+  max-width: 1380px;
+
 }
 
 .navbar_link:hover {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.navbarNav{
+height: 85px;
+}
+
+.navCol{
+padding: 0%;
+}
+
+.botones{
+width: 100%;
+height: 100%;
+border-radius: 0%;
+}
+
+
+#btnRegister{
+background-color: #ed6f1a;
+color: white;
 }
