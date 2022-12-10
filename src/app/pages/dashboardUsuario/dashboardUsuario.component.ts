@@ -11,5 +11,5 @@ export class DashboardUsuarioComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  
 }

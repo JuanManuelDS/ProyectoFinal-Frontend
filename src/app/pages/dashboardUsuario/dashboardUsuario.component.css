@@ -1,34 +1,31 @@
-.btn-logout {
-    width: 100%;
-    padding: 3px 20px;
-    text-align: left;
-}
-
-.img-as-bg {
-    height: 300px;
-    overflow: hidden;
-    background-image: url('../../../assets/cvpdf.png');
-    background-size: cover;
-    background-position: center center;
-}
-
-.cards {
-    display: flex;
-    flex-direction: row;
-    margin: 5px;
+div.carta {
+    width: 14rem;
+    max-width: 14rem;
+    min-width: 14rem;
+    box-shadow: 0 0 8px rgba(33, 33, 33, .2);
+    transition: box-shadow .2s;
 }
 
 
-.card {
-    display: flex;
-    flex-direction: column;
-    padding: 5px;
-    margin: 20px;
-    margin-bottom: 5px;
-    height: 280px;
-    width: 18rem;
+a:not(.crear_plantilla) {
+    background-color: #ed6f1a;
+    border: #ed6f1a;
+    color: white;
 }
 
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+a {
+    font-weight: 500;
+}
+
+a:hover:not(.crear_plantilla) {
+    background-color: #e45b00;
+    color: white;
+}
+
+div.carta:first-child:hover {
+    box-shadow: 0 0 20px rgba(33, 33, 33, .2);
+}
+
+div.carta:first-child:hover {
+    cursor: pointer;
 }
