@@ -1,3 +1,21 @@
 .textoCarousel{
     color: black;
 }
+.fh{
+    position: absolute;
+    top: 25%;
+    left: 38%;
+}
+.fh2{
+    position: absolute;
+    top: 30%;
+    left: 46%;
+}
+.gt{
+    background-color: #ed6f1a;
+    color: white;
+    width: 7%;
+    position: absolute;
+    bottom: 25%;
+    left: 46%;
+}
