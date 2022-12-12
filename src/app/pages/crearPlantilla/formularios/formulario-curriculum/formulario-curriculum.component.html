@@ -1,0 +1,84 @@
+<div class="container">
+  <!------------------ DATOS (Falta imagen)  ----------------------->
+  <form [formGroup]="datosForm" (submit)="guardarDatos()">
+    <div class="row">
+      <div class="col">
+        <label class="form-label">Nombre y apellidos: </label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="datos_nombre"
+        />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="form-label">Ciudad y provincia: </label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="datos_ciudad"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label class="form-label">Fecha de nacimiento: </label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="datos_nacimiento"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label class="form-label">Teléfono: </label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="datos_telefono"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label class="form-label">Email: </label>
+        <input type="text" class="form-control" formControlName="datos_email" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label class="form-label">Presentación: </label>
+        <textarea
+          class="form-control"
+          formControlName="datos_presentacion"
+          rows="4"
+        ></textarea>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3 float-end">
+      Guardar
+    </button>
+  </form>
+
+  <!----------- EXPERIENCIA LABORAL  ---------------->
+  <form [formGroup]="experienciaForm" class="mt-5">
+    <div class="row">
+      <div class="col"></div>
+    </div>
+    <div class="row">
+      <div class="col"></div>
+    </div>
+    <div class="row">
+      <div class="col"></div>
+    </div>
+    <div class="row">
+      <div class="col"></div>
+    </div>
+    <div class="row">
+      <div class="col"></div>
+    </div>
+  </form>
+</div>

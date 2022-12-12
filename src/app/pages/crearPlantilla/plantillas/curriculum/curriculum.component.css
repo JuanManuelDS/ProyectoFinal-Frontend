@@ -1,0 +1,17 @@
+#documento {
+    width: 21cm;
+    /*Le ponemos min-height por si tiene más de una página*/
+    min-height: 29.7cm;
+    padding: 2cm;
+    border: 1px #D3D3D3 solid;
+    border-radius: 5px;
+}
+
+/* ----- IMAGEN ----- */
+img {
+    border-radius: 50%;
+}
+
+table {
+    max-width: 500px;
+}

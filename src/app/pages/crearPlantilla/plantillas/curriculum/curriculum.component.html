@@ -1,0 +1,242 @@
+<div class="bg-white" id="documento" #documento>
+  <!-------- INFORMACIÓN PERSONAL -------->
+  <div class="row" id="info_personal" *ngIf="datos">
+    <div class="row">
+      <div class="col-sm-4">
+        <img
+          src="assets/cv-ejemplo.jpg"
+          width="180px"
+          alt="persona"
+          id="foto"
+        />
+      </div>
+      <div class="col-sm-8">
+        <h3 class="mb-4">{{ datos.nombre }}</h3>
+        <div class="row mb-1">
+          <div class="col">
+            <img
+              src="assets/iconos/location-icon.png"
+              alt="icono localización"
+              width="24px"
+              class="me-3"
+            />
+            <span>{{ datos.ciudad }}</span>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col">
+            <img
+              src="assets/iconos/calendar-icon.png"
+              alt="fecha email"
+              width="24px"
+              class="me-3"
+            />
+            <span>{{ datos.nacimiento }}</span>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col">
+            <img
+              src="assets/iconos/telefono-icon.png"
+              alt="ícono teléfono"
+              width="24px"
+              class="me-3"
+            />
+            <span>{{ datos.telefono }}</span>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col">
+            <img
+              src="assets/iconos/email-icon.png"
+              alt="icono email"
+              width="24px"
+              class="me-3"
+            />
+            <span>{{ datos.email }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!------- MARCA PERSONAL / INTERESES ------->
+    <div class="row mt-5">
+      <div class="col">
+        <h6 class="text-center px-3">
+          {{ datos.presentacion }}
+        </h6>
+      </div>
+    </div>
+  </div>
+
+  <!------------ EXPERIENCIA LABORAL --------------------->
+  <div class="container-fluid experiencia_container">
+    <h3 class="mt-5">Experiencia laboral</h3>
+    <hr />
+    <div class="row mt-4">
+      <div class="col-sm-4 pt-1">
+        <span class="fw-bold">Desde 10/05/2018<br />hasta 15/08/2020</span>
+      </div>
+      <div class="col-sm-8">
+        <div class="row">
+          <div class="col">
+            <span class="nombre_empresa fs-5 fw-semibold">Pepe Gaviota SA</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="lugar_empresa fw-light">Soportújar, Granada</span>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col">
+            <span class="descripcion_puesto">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla ex
+              ducimus at in optio esse modi. Praesentium deserunt ut
+              excepturi.</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row mt-4">
+      <div class="col-sm-4 pt-1 ps-0">
+        <span class="fw-bold">Desde 22/12/2022<br />hasta actualidad</span>
+      </div>
+      <div class="col-sm-8">
+        <div class="row">
+          <div class="col">
+            <span class="nombre_empresa fs-5 fw-semibold">T-Systems</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="lugar_empresa fw-light">Reus, Tarragona</span>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col">
+            <span class="descripcion_puesto">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla ex
+              ducimus at in optio esse modi. Praesentium deserunt ut
+              excepturi.</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--------------- ESTUDIOS ------------------->
+  <div class="container-fluid estudios_container">
+    <h3 class="mt-5">Estudios</h3>
+    <hr />
+    <div class="row mt-4">
+      <div class="col-sm-4 pt-1 d-flex justify-content-center">
+        <span class="fecha_estudios fw-bold">2022</span>
+      </div>
+      <div class="col-sm-8">
+        <div class="row">
+          <div class="col">
+            <span class="titulo_estudios">Desarrollador Java Fullstack</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="lugar_estudios fw-light">Techma Business School</span>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col">
+            <span class="descripcion_estudios"
+              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
+              aperiam nisi ipsa fugiat, autem itaque quo possimus natus rem
+              consequatur. Minus laudantium dicta perspiciatis cum dignissimos,
+              magni ipsum facilis quisquam.</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row mt-4">
+      <div class="col-sm-4 pt-1 d-flex justify-content-center">
+        <span class="fecha_estudios fw-bold">2021</span>
+      </div>
+      <div class="col-sm-8">
+        <div class="row">
+          <div class="col">
+            <span class="titulo_estudios">Desarrollador Frontend</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="lugar_estudios fw-light">Techma Business School</span>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col">
+            <span class="descripcion_estudios"
+              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
+              aperiam nisi ipsa fugiat, autem itaque quo possimus natus rem
+              consequatur. Minus laudantium dicta perspiciatis cum dignissimos,
+              magni ipsum facilis quisquam.</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!------------ CONOCIMIENTOS TECNOLÓGICOS -------------->
+  <h3 class="mt-5">Conocimientos tecnológicos</h3>
+  <hr />
+  <div class="container">
+    <ul>
+      <li>Frameworks: Angular, ReactJS, Spring Boot</li>
+      <li>Lenguajes: Java SE8, Javascript, Typescript</li>
+      <li>Desarrollo web: HTML5, CSS3, JS</li>
+    </ul>
+  </div>
+
+  <!------------ IDIOMAS -------------------->
+  <h3 class="mt-5">Idiomas</h3>
+  <hr />
+  <div class="container mt-2 d-flex justify-content-center">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Idioma</th>
+          <th scope="col">Escrito</th>
+          <th scope="col">Oral</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Castellano</td>
+          <td>Nativo</td>
+          <td>Nativo</td>
+        </tr>
+        <tr>
+          <td>Inglés</td>
+          <td>Avanzado</td>
+          <td>Avanzado</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!----------- OTROS DATOS DE INTERÉS ------------- -->
+  <h3 class="mt-5">Otros datos de interés</h3>
+  <hr />
+  <div class="container">
+    <ul>
+      <li>Carnet de conducir</li>
+      <li>Disponibilidad inmediata</li>
+      <li>Disponibilidad Full time</li>
+    </ul>
+  </div>
+</div>
