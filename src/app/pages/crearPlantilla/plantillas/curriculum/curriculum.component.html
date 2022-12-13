@@ -72,122 +72,73 @@
   </div>
 
   <!------------ EXPERIENCIA LABORAL --------------------->
-  <div class="container-fluid experiencia_container">
+  <div
+    class="container-fluid experiencia_container"
+    *ngIf="experiencias.length > 0"
+  >
     <h3 class="mt-5">Experiencia laboral</h3>
     <hr />
-    <div class="row mt-4">
+    <div class="row mt-4" *ngFor="let experiencia of experiencias">
       <div class="col-sm-4 pt-1">
-        <span class="fw-bold">Desde 10/05/2018<br />hasta 15/08/2020</span>
+        <span class="fw-bold"
+          >Desde {{ experiencia.inicio }}<br />hasta {{ experiencia.fin }}</span
+        >
       </div>
       <div class="col-sm-8">
         <div class="row">
           <div class="col">
-            <span class="nombre_empresa fs-5 fw-semibold">Pepe Gaviota SA</span>
+            <span class="nombre_empresa fs-5 fw-semibold">{{
+              experiencia.empresa
+            }}</span>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <span class="lugar_empresa fw-light">Soportújar, Granada</span>
+            <span class="lugar_empresa fw-light">{{
+              experiencia.localidad
+            }}</span>
           </div>
         </div>
         <div class="row mt-1">
           <div class="col">
             <span class="descripcion_puesto">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla ex
-              ducimus at in optio esse modi. Praesentium deserunt ut
-              excepturi.</span
+              {{ experiencia.descripcion }}</span
             >
           </div>
         </div>
       </div>
-    </div>
-    <hr />
-    <div class="row mt-4">
-      <div class="col-sm-4 pt-1 ps-0">
-        <span class="fw-bold">Desde 22/12/2022<br />hasta actualidad</span>
-      </div>
-      <div class="col-sm-8">
-        <div class="row">
-          <div class="col">
-            <span class="nombre_empresa fs-5 fw-semibold">T-Systems</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <span class="lugar_empresa fw-light">Reus, Tarragona</span>
-          </div>
-        </div>
-        <div class="row mt-1">
-          <div class="col">
-            <span class="descripcion_puesto">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla ex
-              ducimus at in optio esse modi. Praesentium deserunt ut
-              excepturi.</span
-            >
-          </div>
-        </div>
-      </div>
+      <hr class="mt-2" />
     </div>
   </div>
 
   <!--------------- ESTUDIOS ------------------->
-  <div class="container-fluid estudios_container">
+  <div class="container-fluid estudios_container" *ngIf="estudios.length > 0">
     <h3 class="mt-5">Estudios</h3>
     <hr />
-    <div class="row mt-4">
+    <div class="row mt-4" *ngFor="let estudio of estudios">
       <div class="col-sm-4 pt-1 d-flex justify-content-center">
-        <span class="fecha_estudios fw-bold">2022</span>
+        <span class="fecha_estudios fw-bold">{{ estudio.year }}</span>
       </div>
       <div class="col-sm-8">
         <div class="row">
           <div class="col">
-            <span class="titulo_estudios">Desarrollador Java Fullstack</span>
+            <span class="titulo_estudios">{{ estudio.titulo }}</span>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <span class="lugar_estudios fw-light">Techma Business School</span>
+            <span class="lugar_estudios fw-light">{{
+              estudio.establecimiento
+            }}</span>
           </div>
         </div>
         <div class="row mt-1">
           <div class="col">
-            <span class="descripcion_estudios"
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-              aperiam nisi ipsa fugiat, autem itaque quo possimus natus rem
-              consequatur. Minus laudantium dicta perspiciatis cum dignissimos,
-              magni ipsum facilis quisquam.</span
-            >
+            <span class="descripcion_estudios">{{ estudio.descripcion }}</span>
           </div>
         </div>
       </div>
-    </div>
-    <hr />
-    <div class="row mt-4">
-      <div class="col-sm-4 pt-1 d-flex justify-content-center">
-        <span class="fecha_estudios fw-bold">2021</span>
-      </div>
-      <div class="col-sm-8">
-        <div class="row">
-          <div class="col">
-            <span class="titulo_estudios">Desarrollador Frontend</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <span class="lugar_estudios fw-light">Techma Business School</span>
-          </div>
-        </div>
-        <div class="row mt-1">
-          <div class="col">
-            <span class="descripcion_estudios"
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-              aperiam nisi ipsa fugiat, autem itaque quo possimus natus rem
-              consequatur. Minus laudantium dicta perspiciatis cum dignissimos,
-              magni ipsum facilis quisquam.</span
-            >
-          </div>
-        </div>
-      </div>
+      <hr class="mt-3" />
     </div>
   </div>
 

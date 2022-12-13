@@ -11,5 +11,13 @@ export class CurriculumComponent {
     return this.cvService.datos;
   }
 
+  get experiencias() {
+    return this.cvService.experiencias;
+  }
+
+  get estudios() {
+    return this.cvService.estudios;
+  }
+
   constructor(private cvService: CurriculumService) {}
 }

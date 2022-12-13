@@ -10,3 +10,18 @@ export interface Datos {
   email: string;
   presentacion: string;
 }
+
+export interface Experiencia {
+  empresa: string;
+  localidad: string;
+  descripcion: string;
+  inicio: string;
+  fin: string;
+}
+
+export interface Estudio {
+  year: string;
+  titulo: string;
+  establecimiento: string;
+  descripcion: string;
+}
