@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TitleStrategy } from '@angular/router';
 import { CurriculumService } from 'src/app/services/curriculum.service';
 
 @Component({
@@ -17,6 +18,18 @@ export class CurriculumComponent {
 
   get estudios() {
     return this.cvService.estudios;
+  }
+
+  get conocimientos() {
+    return this.cvService.conocimientos;
+  }
+
+  get idiomas() {
+    return this.cvService.idiomas;
+  }
+
+  get datosInteres() {
+    return this.cvService.datosInteres;
   }
 
   constructor(private cvService: CurriculumService) {}

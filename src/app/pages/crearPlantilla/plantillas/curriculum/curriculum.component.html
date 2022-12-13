@@ -143,51 +143,49 @@
   </div>
 
   <!------------ CONOCIMIENTOS TECNOLÓGICOS -------------->
-  <h3 class="mt-5">Conocimientos tecnológicos</h3>
-  <hr />
-  <div class="container">
-    <ul>
-      <li>Frameworks: Angular, ReactJS, Spring Boot</li>
-      <li>Lenguajes: Java SE8, Javascript, Typescript</li>
-      <li>Desarrollo web: HTML5, CSS3, JS</li>
-    </ul>
+  <div class="container-fluid" *ngIf="conocimientos.length > 0">
+    <h3 class="mt-5">Conocimientos tecnológicos</h3>
+    <hr />
+    <div class="container">
+      <ul>
+        <li *ngFor="let conocimiento of conocimientos">
+          {{ conocimiento.conocimiento }}
+        </li>
+      </ul>
+    </div>
   </div>
-
   <!------------ IDIOMAS -------------------->
-  <h3 class="mt-5">Idiomas</h3>
-  <hr />
-  <div class="container mt-2 d-flex justify-content-center">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Idioma</th>
-          <th scope="col">Escrito</th>
-          <th scope="col">Oral</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Castellano</td>
-          <td>Nativo</td>
-          <td>Nativo</td>
-        </tr>
-        <tr>
-          <td>Inglés</td>
-          <td>Avanzado</td>
-          <td>Avanzado</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="container-fluid" *ngIf="idiomas.length > 0">
+    <h3 class="mt-5">Idiomas</h3>
+    <hr />
+    <div class="container mt-2 d-flex justify-content-center">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Idioma</th>
+            <th scope="col">Escrito</th>
+            <th scope="col">Oral</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let idioma of idiomas">
+            <td>{{ idioma.idioma }}</td>
+            <td>{{ idioma.escrito }}</td>
+            <td>{{ idioma.oral }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <!----------- OTROS DATOS DE INTERÉS ------------- -->
-  <h3 class="mt-5">Otros datos de interés</h3>
-  <hr />
-  <div class="container">
-    <ul>
-      <li>Carnet de conducir</li>
-      <li>Disponibilidad inmediata</li>
-      <li>Disponibilidad Full time</li>
-    </ul>
+  <div class="container-fluid" *ngIf="datosInteres.length > 0">
+    <h3 class="mt-5">Otros datos de interés</h3>
+    <hr />
+    <div class="container">
+      <ul>
+        <li *ngFor="let dato of datosInteres">{{ dato.dato }}</li>
+      </ul>
+    </div>
   </div>
 </div>

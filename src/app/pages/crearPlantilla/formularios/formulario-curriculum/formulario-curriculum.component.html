@@ -152,4 +152,102 @@
       </div>
     </div>
   </form>
+
+  <!--------------- CONOCIMIENTOS TECNOLÓGICOS  --------------->
+  <form
+    [formGroup]="nuevoConocimientoForm"
+    (submit)="guardarConocimiento()"
+    class="mt-5"
+  >
+    <div class="row">
+      <div class="col">
+        <label class="form-label"
+          >Herramientas/Conocimientos tecnológicos:
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="conocimiento"
+        />
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+
+    <!-------- LISTA DE CONOCIMIENTOS --------->
+    <div class="container-fluid mt-2" formArrayName="conocimientos">
+      <div
+        class="row"
+        *ngFor="let conocimiento of arrConocimientos.controls; let i = index"
+      >
+        {{ conocimiento.get("conocimiento")?.value }}
+        <button class="btn btn-danger" (click)="eliminarConocimiento(i)">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <!----------------IDIOMAS  --------------------->
+  <form (ngSubmit)="guardarIdioma()" [formGroup]="nuevoIdiomaForm" class="mt-5">
+    <div class="row">
+      <div class="col">
+        <label class="form-label">Idioma: </label>
+        <input type="text" class="form-control" formControlName="idioma" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label class="form-label">Nivel escrito: </label>
+        <input type="text" class="form-control" formControlName="escrito" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label class="form-label">Nivel oral: </label>
+        <input type="text" class="form-control" formControlName="oral" />
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+
+    <!-------- LISTA DE IDIOMAS --------->
+    <div class="container-fluid mt-2" formArrayName="idiomas">
+      <div
+        class="row"
+        *ngFor="let idioma of arrIdiomas.controls; let i = index"
+      >
+        {{ idioma.get("idioma")?.value }}
+        <button class="btn btn-danger" (click)="eliminarIdioma(i)">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <!---------------- OTROS DATOS DE INTERÉS  ------------------->
+  <form
+    [formGroup]="datoInteresForm"
+    (submit)="guardarDatoInteres()"
+    class="mt-5"
+  >
+    <div class="row">
+      <div class="col">
+        <label class="form-label">Dato de interés: </label>
+        <input type="text" class="form-control" formControlName="dato" />
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+
+    <!-------- LISTA DE DATOS DE INTERÉS --------->
+    <div class="container-fluid mt-2" formArrayName="datosInteres">
+      <div
+        class="row"
+        *ngFor="let dato of arrDatosInteres.controls; let i = index"
+      >
+        {{ dato.get("dato")?.value }}
+        <button class="btn btn-danger" (click)="eliminarDatoInteres(i)">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </form>
 </div>

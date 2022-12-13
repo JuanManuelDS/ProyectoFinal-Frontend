@@ -25,3 +25,17 @@ export interface Estudio {
   establecimiento: string;
   descripcion: string;
 }
+
+export interface Conocimiento {
+  conocimiento: string;
+}
+
+export interface Idioma {
+  idioma: string;
+  escrito: string;
+  oral: string;
+}
+
+export interface DatosInteres {
+  dato: string;
+}
