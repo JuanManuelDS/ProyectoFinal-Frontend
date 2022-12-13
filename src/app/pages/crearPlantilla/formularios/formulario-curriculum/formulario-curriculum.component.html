@@ -1,6 +1,22 @@
 <div class="container">
   <!------------------ DATOS (Falta imagen)  ----------------------->
-  <form [formGroup]="datosForm" (submit)="guardarDatos()">
+  <!-- Botón para ocultar y desocultar formulario -->
+  <a
+    class="btn btn-primary text-start"
+    data-bs-toggle="collapse"
+    href="#datosPersonales"
+    role="button"
+    aria-expanded="false"
+    aria-controls="datosPersonales"
+    >Datos Personales</a
+  >
+
+  <form
+    [formGroup]="datosForm"
+    (submit)="guardarDatos()"
+    class="collapse multi-collapse"
+    id="datosPersonales"
+  >
     <div class="row">
       <div class="col">
         <label class="form-label">Nombre y apellidos: </label>
@@ -46,10 +62,21 @@
   </form>
 
   <!----------- EXPERIENCIA LABORAL  ---------------->
+  <a
+    class="btn btn-primary text-start"
+    data-bs-toggle="collapse"
+    href="#experienciasLaborales"
+    role="button"
+    aria-expanded="false"
+    aria-controls="experienciasLaborales"
+    >Agregar Experiencia Laboral</a
+  >
   <form
     [formGroup]="nuevaExperienciaForm"
     class="mt-5"
     (submit)="guardarExperiencia()"
+    class="collapse multi-collapse"
+    id="experienciasLaborales"
   >
     <div class="row">
       <div class="col">
@@ -104,10 +131,22 @@
   </form>
 
   <!------------- ESTUDIOS  ----------------->
+  <a
+    class="btn btn-primary text-start"
+    data-bs-toggle="collapse"
+    href="#estudios"
+    role="button"
+    aria-expanded="false"
+    aria-controls="estudios"
+    >Agregar Estudios</a
+  >
+
   <form
     [formGroup]="nuevosEstudiosForm"
     (submit)="guardarEstudios()"
     class="mt-5"
+    class="collapse multi-collapse"
+    id="estudios"
   >
     <div class="row">
       <div class="col">
@@ -154,10 +193,21 @@
   </form>
 
   <!--------------- CONOCIMIENTOS TECNOLÓGICOS  --------------->
+
+  <a
+    class="btn btn-primary text-start"
+    data-bs-toggle="collapse"
+    href="#conocimientosTeconologicos"
+    role="button"
+    aria-expanded="false"
+    aria-controls="conocimientosTeconologicos"
+    >Agregar Conocimientos Tecnológicos</a
+  >
   <form
     [formGroup]="nuevoConocimientoForm"
     (submit)="guardarConocimiento()"
-    class="mt-5"
+    class="collapse multi-collapse"
+    id="conocimientosTeconologicos"
   >
     <div class="row">
       <div class="col">
@@ -188,7 +238,21 @@
   </form>
 
   <!----------------IDIOMAS  --------------------->
-  <form (ngSubmit)="guardarIdioma()" [formGroup]="nuevoIdiomaForm" class="mt-5">
+  <a
+    class="btn btn-primary text-start"
+    data-bs-toggle="collapse"
+    href="#idiomas"
+    role="button"
+    aria-expanded="false"
+    aria-controls="idiomas"
+    >Agregar Idiomas</a
+  >
+  <form
+    (ngSubmit)="guardarIdioma()"
+    [formGroup]="nuevoIdiomaForm"
+    class="collapse multi-collapse"
+    id="idiomas"
+  >
     <div class="row">
       <div class="col">
         <label class="form-label">Idioma: </label>
@@ -224,10 +288,20 @@
   </form>
 
   <!---------------- OTROS DATOS DE INTERÉS  ------------------->
+  <a
+    class="btn btn-outline-primary text-start"
+    data-bs-toggle="collapse"
+    href="#datosInteres"
+    role="button"
+    aria-expanded="false"
+    aria-controls="datosInteres"
+    >Agregar Datos de interés</a
+  >
   <form
     [formGroup]="datoInteresForm"
     (submit)="guardarDatoInteres()"
-    class="mt-5"
+    class="collapse multi-collapse"
+    id="datosInteres"
   >
     <div class="row">
       <div class="col">
