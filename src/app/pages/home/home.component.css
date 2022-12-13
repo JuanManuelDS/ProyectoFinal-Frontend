@@ -4,7 +4,7 @@
 .fh{
     position: absolute;
     top: 25%;
-    left: 38%;
+    left: 36%;
 }
 .fh2{
     position: absolute;
@@ -14,8 +14,12 @@
 .gt{
     background-color: #ed6f1a;
     color: white;
-    width: 7%;
+    width: 12%;
+    font-size: xx-large;
     position: absolute;
-    bottom: 25%;
-    left: 46%;
+    bottom: 18%;
+    left: 43.5%;
+}
+img{
+    height: 90vh;
 }
