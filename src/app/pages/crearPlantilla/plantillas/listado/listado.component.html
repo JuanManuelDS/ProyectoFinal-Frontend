@@ -1,0 +1,7 @@
+<div class="bg-white" id="documento" #documento>
+  <img src="{{imagen}}" alt="">
+  <h2 class="text-center mb-4">{{ titulo }}</h2>
+  <ul *ngIf="listado.length > 0">
+    <li *ngFor="let item of listado">{{ item.item }}</li>
+  </ul>
+</div>

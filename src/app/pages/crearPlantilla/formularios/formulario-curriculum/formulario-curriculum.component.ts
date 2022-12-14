@@ -9,6 +9,7 @@ import {
   Idioma,
 } from 'src/app/models/curriculum.interface';
 import { CurriculumService } from 'src/app/services/curriculum.service';
+import convertBase64 from 'src/app/utils/convertBase64';
 
 @Component({
   selector: 'app-formulario-curriculum',
@@ -16,12 +17,16 @@ import { CurriculumService } from 'src/app/services/curriculum.service';
   styleUrls: ['./formulario-curriculum.component.css'],
 })
 export class FormularioCurriculumComponent {
+  abajo: boolean = true;
+  imagen: any;
+
   datosForm: FormGroup = this.formBuilder.group({
     nombre: [''],
     ciudad: [''],
     nacimiento: [''],
     telefono: [''],
     email: [''],
+    imagen: [],
     presentacion: [''],
   });
 
@@ -108,7 +113,10 @@ export class FormularioCurriculumComponent {
       telefono: this.datosForm.get('telefono')?.value,
       email: this.datosForm.get('email')?.value,
       presentacion: this.datosForm.get('presentacion')?.value,
+      imagen: this.imagen,
     };
+    let img = this.datosForm.get('imagen')?.value;
+    console.log(img);
     this.cvService.agregarDatos(datos);
   }
 
@@ -238,5 +246,38 @@ export class FormularioCurriculumComponent {
   eliminarDatoInteres(index: number) {
     this.arrDatosInteres.removeAt(index);
     this.cvService.eliminarDatoInteres(index);
+  }
+
+  async cargarImagen(event: any) {
+    const file = event.target.files[0];
+    const base64 = await convertBase64(file);
+    this.imagen = base64;
+  }
+
+  limpiar(formulario: string) {
+    switch (formulario) {
+      case 'datos':
+        this.datosForm.reset();
+        this.cvService.limpiarDatos();
+        break;
+      case 'experiencias':
+        this.nuevaExperienciaForm.reset();
+        break;
+      case 'idiomas':
+        this.nuevoIdiomaForm.reset();
+        break;
+      case 'datosInteres':
+        this.datoInteresForm.reset();
+        break;
+      case 'estudios':
+        this.nuevosEstudiosForm.reset();
+        break;
+    }
+  }
+
+  cambiarIcono() {
+    if (this.abajo) {
+      this.abajo = false;
+    } else this.abajo = true;
   }
 }

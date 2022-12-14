@@ -87,4 +87,8 @@ export class CurriculumService {
   eliminarDatoInteres(index: number) {
     this._datosInteres.splice(index, 1);
   }
+
+  limpiarDatos() {
+    this._datos = undefined;
+  }
 }

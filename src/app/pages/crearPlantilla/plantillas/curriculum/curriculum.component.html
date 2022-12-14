@@ -3,12 +3,7 @@
   <div class="row" id="info_personal" *ngIf="datos">
     <div class="row">
       <div class="col-sm-4">
-        <img
-          src="assets/cv-ejemplo.jpg"
-          width="180px"
-          alt="persona"
-          id="foto"
-        />
+        <img src="{{ datos.imagen }}" width="180px" alt="persona" id="foto" />
       </div>
       <div class="col-sm-8">
         <h3 class="mb-4">{{ datos.nombre }}</h3>

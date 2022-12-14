@@ -9,6 +9,7 @@ export interface Datos {
   telefono: string;
   email: string;
   presentacion: string;
+  imagen: any;
 }
 
 export interface Experiencia {

@@ -2,14 +2,23 @@
   <!------------------ DATOS (Falta imagen)  ----------------------->
   <!-- Botón para ocultar y desocultar formulario -->
   <a
-    class="btn btn-primary text-start"
+    class="btn text-start"
     data-bs-toggle="collapse"
     href="#datosPersonales"
     role="button"
     aria-expanded="false"
     aria-controls="datosPersonales"
-    >Datos Personales</a
-  >
+    (click)="cambiarIcono()"
+    >Datos Personales
+    <img
+      src="{{
+        abajo
+          ? 'assets/iconos/expandir-icon.png'
+          : 'assets/iconos/arriba-icon.png'
+      }}"
+      alt="expand icon"
+      width="20px"
+  /></a>
 
   <form
     [formGroup]="datosForm"
@@ -50,6 +59,17 @@
     </div>
     <div class="row">
       <div class="col">
+        <label class="form-label">Imagen: </label>
+        <input
+          type="file"
+          class="form-control"
+          formControlName="imagen"
+          (change)="cargarImagen($event)"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
         <label class="form-label">Presentación: </label>
         <textarea
           class="form-control"
@@ -58,19 +78,33 @@
         ></textarea>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+    <div class="row">
+      <div class="rol text-end">
+        <button
+          class="btn btn-success me-2"
+          (click)="limpiar('datos')"
+          type="button"
+        >
+          Limpiar
+        </button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
   </form>
 
   <!----------- EXPERIENCIA LABORAL  ---------------->
   <a
-    class="btn btn-primary text-start"
+    class="btn text-start"
     data-bs-toggle="collapse"
     href="#experienciasLaborales"
     role="button"
     aria-expanded="false"
     aria-controls="experienciasLaborales"
-    >Agregar Experiencia Laboral</a
-  >
+    >Agregar Experiencia Laboral<img
+      src="assets/iconos/expandir-icon.png"
+      alt="expand icon"
+      width="20px"
+  /></a>
   <form
     [formGroup]="nuevaExperienciaForm"
     class="mt-5"
@@ -114,32 +148,51 @@
         <input type="text" class="form-control" formControlName="fin" />
       </div>
     </div>
-    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+    <div class="row">
+      <div class="rol text-end">
+        <div class="">
+          <button
+            class="btn btn-success me-2"
+            (click)="limpiar('experiencias')"
+            type="button"
+          >
+            Limpiar
+          </button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
 
-    <!-------- LISTA DE EXPERIENCIAS --------->
-    <div class="container-fluid mt-2" formArrayName="experiencias">
-      <div
-        class="row"
-        *ngFor="let experiencia of arrExperiencias.controls; let i = index"
-      >
-        {{ experiencia.get("empresa")?.value }}
-        <button class="btn btn-danger" (click)="eliminarExperiencia(i)">
-          Eliminar
-        </button>
+      <!-------- LISTA DE EXPERIENCIAS --------->
+      <div class="container-fluid mt-2 p-0" formArrayName="experiencias">
+        <div
+          class="container-fluid p-0 d-flex justify-content-between dato_agregado"
+          *ngFor="let experiencia of arrExperiencias.controls; let i = index"
+        >
+          <div class="d-flex align-items-center">
+            <span class="ps-4 fw-semibold">
+              {{ experiencia.get("empresa")?.value }}
+            </span>
+          </div>
+
+          <button class="btn btn-danger" (click)="eliminarExperiencia(i)">
+            Eliminar
+          </button>
+        </div>
       </div>
     </div>
   </form>
 
   <!------------- ESTUDIOS  ----------------->
   <a
-    class="btn btn-primary text-start"
+    class="btn text-start"
     data-bs-toggle="collapse"
     href="#estudios"
     role="button"
     aria-expanded="false"
     aria-controls="estudios"
-    >Agregar Estudios</a
-  >
+    >Agregar Estudios
+    <img src="assets/iconos/expandir-icon.png" alt="expand icon" width="20px"
+  /></a>
 
   <form
     [formGroup]="nuevosEstudiosForm"
@@ -176,18 +229,35 @@
         <input type="text" class="form-control" formControlName="year" />
       </div>
     </div>
-    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+    <div class="row">
+      <div class="rol text-end">
+        <button
+          class="btn btn-success me-2"
+          (click)="limpiar('estudios')"
+          type="button"
+        >
+          Limpiar
+        </button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
 
     <!-------- LISTA DE ESTUDIOS --------->
-    <div class="container-fluid mt-2" formArrayName="estudios">
+    <div class="container-fluid mt-2 p-0" formArrayName="estudios">
       <div
-        class="row"
+        class="container-fluid p-0 d-flex justify-content-between dato_agregado"
         *ngFor="let estudios of arrEstudios.controls; let i = index"
       >
-        {{ estudios.get("titulo")?.value }}
-        <button class="btn btn-danger" (click)="eliminarEstudios(i)">
-          Eliminar
-        </button>
+        <div class="d-flex align-items-center">
+          <span class="ps-4 fw-semibold">
+            {{ estudios.get("titulo")?.value }}
+          </span>
+        </div>
+        <div class="">
+          <button class="btn btn-danger" (click)="eliminarEstudios(i)">
+            Eliminar
+          </button>
+        </div>
       </div>
     </div>
   </form>
@@ -195,14 +265,15 @@
   <!--------------- CONOCIMIENTOS TECNOLÓGICOS  --------------->
 
   <a
-    class="btn btn-primary text-start"
+    class="btn text-start"
     data-bs-toggle="collapse"
     href="#conocimientosTeconologicos"
     role="button"
     aria-expanded="false"
     aria-controls="conocimientosTeconologicos"
-    >Agregar Conocimientos Tecnológicos</a
-  >
+    >Agregar Conocimientos Tecnológicos
+    <img src="assets/iconos/expandir-icon.png" alt="expand icon" width="20px"
+  /></a>
   <form
     [formGroup]="nuevoConocimientoForm"
     (submit)="guardarConocimiento()"
@@ -221,32 +292,50 @@
         />
       </div>
     </div>
-    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+    <div class="row">
+      <div class="rol text-end">
+        <button
+          class="btn btn-success me-2"
+          (click)="limpiar('conocimientos')"
+          type="button"
+        >
+          Limpiar
+        </button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
 
     <!-------- LISTA DE CONOCIMIENTOS --------->
-    <div class="container-fluid mt-2" formArrayName="conocimientos">
+    <div class="container-fluid mt-2 p-0" formArrayName="conocimientos">
       <div
-        class="row"
+        class="container-fluid p-0 d-flex justify-content-between dato_agregado"
         *ngFor="let conocimiento of arrConocimientos.controls; let i = index"
       >
-        {{ conocimiento.get("conocimiento")?.value }}
-        <button class="btn btn-danger" (click)="eliminarConocimiento(i)">
-          Eliminar
-        </button>
+        <div class="d-flex align-items-center">
+          <span class="ps-4 fw-semibold">
+            {{ conocimiento.get("conocimiento")?.value }}
+          </span>
+        </div>
+        <div class="">
+          <button class="btn btn-danger" (click)="eliminarConocimiento(i)">
+            Eliminar
+          </button>
+        </div>
       </div>
     </div>
   </form>
 
   <!----------------IDIOMAS  --------------------->
   <a
-    class="btn btn-primary text-start"
+    class="btn text-start"
     data-bs-toggle="collapse"
     href="#idiomas"
     role="button"
     aria-expanded="false"
     aria-controls="idiomas"
-    >Agregar Idiomas</a
-  >
+    >Agregar Idiomas
+    <img src="assets/iconos/expandir-icon.png" alt="expand icon" width="20px"
+  /></a>
   <form
     (ngSubmit)="guardarIdioma()"
     [formGroup]="nuevoIdiomaForm"
@@ -271,32 +360,50 @@
         <input type="text" class="form-control" formControlName="oral" />
       </div>
     </div>
-    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+    <div class="row">
+      <div class="rol text-end">
+        <button
+          class="btn btn-success me-2"
+          (click)="limpiar('idiomas')"
+          type="button"
+        >
+          Limpiar
+        </button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
 
     <!-------- LISTA DE IDIOMAS --------->
-    <div class="container-fluid mt-2" formArrayName="idiomas">
+    <div class="container-fluid mt-2 p-0" formArrayName="idiomas">
       <div
-        class="row"
+        class="container-fluid p-0 d-flex justify-content-between dato_agregado"
         *ngFor="let idioma of arrIdiomas.controls; let i = index"
       >
-        {{ idioma.get("idioma")?.value }}
-        <button class="btn btn-danger" (click)="eliminarIdioma(i)">
-          Eliminar
-        </button>
+        <div class="d-flex align-items-center">
+          <span class="ps-4 fw-semibold">
+            {{ idioma.get("idioma")?.value }}
+          </span>
+        </div>
+        <div class="">
+          <button class="btn btn-danger" (click)="eliminarIdioma(i)">
+            Eliminar
+          </button>
+        </div>
       </div>
     </div>
   </form>
 
   <!---------------- OTROS DATOS DE INTERÉS  ------------------->
   <a
-    class="btn btn-outline-primary text-start"
+    class="btn text-start"
     data-bs-toggle="collapse"
     href="#datosInteres"
     role="button"
     aria-expanded="false"
     aria-controls="datosInteres"
-    >Agregar Datos de interés</a
-  >
+    >Agregar Datos de interés
+    <img src="assets/iconos/expandir-icon.png" alt="expand icon" width="20px"
+  /></a>
   <form
     [formGroup]="datoInteresForm"
     (submit)="guardarDatoInteres()"
@@ -309,18 +416,35 @@
         <input type="text" class="form-control" formControlName="dato" />
       </div>
     </div>
-    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+    <div class="row">
+      <div class="rol text-end">
+        <button
+          class="btn btn-success me-2"
+          (click)="limpiar('datosInteres')"
+          type="button"
+        >
+          Limpiar
+        </button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
 
     <!-------- LISTA DE DATOS DE INTERÉS --------->
-    <div class="container-fluid mt-2" formArrayName="datosInteres">
+    <div class="container-fluid mt-2 p-0" formArrayName="datosInteres">
       <div
-        class="row"
+        class="container-fluid p-0 d-flex justify-content-between dato_agregado"
         *ngFor="let dato of arrDatosInteres.controls; let i = index"
       >
-        {{ dato.get("dato")?.value }}
-        <button class="btn btn-danger" (click)="eliminarDatoInteres(i)">
-          Eliminar
-        </button>
+        <div class="d-flex align-items-center">
+          <span class="ps-4 fw-semibold">
+            {{ dato.get("dato")?.value }}
+          </span>
+        </div>
+        <div class="">
+          <button class="btn btn-danger" (click)="eliminarDatoInteres(i)">
+            Eliminar
+          </button>
+        </div>
       </div>
     </div>
   </form>

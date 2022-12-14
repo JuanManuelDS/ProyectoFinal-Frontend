@@ -1,0 +1,15 @@
+input,
+textarea {
+    margin-bottom: 15px;
+}
+
+label {
+    margin-bottom: 3px;
+}
+
+div.dato_agregado {
+    margin: 10px 0px;
+    border-radius: 5px;
+    border: rgb(223, 223, 223) 1px solid;
+
+}

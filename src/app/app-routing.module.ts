@@ -24,8 +24,12 @@ const routes: Routes = [
     component: DashboardUsuarioComponent,
   },
   {
-    path: 'nueva-plantilla',
+    path: 'nueva-plantilla/:plantilla',
     component: CrearPlantillaComponent,
+  },
+  {
+    path: 'nueva-plantilla',
+    component: DashboardUsuarioComponent,
   },
   {
     path: '',
