@@ -11,5 +11,18 @@ div.dato_agregado {
     margin: 10px 0px;
     border-radius: 5px;
     border: rgb(223, 223, 223) 1px solid;
+}
 
+.descargar_guardar>div>button {
+    width: 100%;
+}
+
+.descargar_guardar>div {
+    padding: 0px
+}
+
+.descargar_button {
+    margin-left: 5px;
+    background-color: #ed6f1a;
+    color: white;
 }

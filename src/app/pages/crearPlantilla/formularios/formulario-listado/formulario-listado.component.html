@@ -28,9 +28,18 @@
         <input type="text" class="form-control" formControlName="item" />
       </div>
     </div>
-    <div class="row">
-      <div class="rol text-end">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+    <div class="row px-3 descargar_guardar">
+      <div class="col-6">
+        <button type="submit" class="btn btn-primary">Guardar item</button>
+      </div>
+      <div class="col-6">
+        <button
+          type="submit"
+          class="btn descargar_button"
+          (click)="generarPDF()"
+        >
+          Descargar PDF
+        </button>
       </div>
     </div>
 

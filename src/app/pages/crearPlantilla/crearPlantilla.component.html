@@ -8,6 +8,7 @@
       ></app-formulario-curriculum>
       <app-formulario-listado
         *ngIf="plantilla === 'listado'"
+        (formularioCompleto)="generarPDF($event)"
       ></app-formulario-listado>
     </div>
 

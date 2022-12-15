@@ -55,7 +55,9 @@ export class FormularioListadoComponent {
     this.lisService.cargarImagen(base64);
   }
 
-  
+  generarPDF() {
+    
+  }
 
   eliminarItem(index: number) {
     this.arrListado.removeAt(index);
