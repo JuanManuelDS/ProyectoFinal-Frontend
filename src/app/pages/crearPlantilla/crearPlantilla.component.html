@@ -5,16 +5,17 @@
     <div class="col-xl col-lg-12 mt-2" id="formularios">
       <app-formulario-curriculum
         *ngIf="plantilla === 'curriculum'"
+        
       ></app-formulario-curriculum>
       <app-formulario-listado
         *ngIf="plantilla === 'listado'"
-        (formularioCompleto)="generarPDF($event)"
+        (crearPDF)="generarListado($event)"
       ></app-formulario-listado>
     </div>
 
     <div class="col d-flex justify-content-center">
       <app-curriculum *ngIf="plantilla === 'curriculum'"></app-curriculum>
-      <app-listado *ngIf="plantilla === 'listado'"></app-listado>
+      <app-listado *ngIf="plantilla === 'listado'" [generarPDF]="listado"></app-listado>
     </div>
   </div>
 </div>

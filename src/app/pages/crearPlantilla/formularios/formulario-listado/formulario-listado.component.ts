@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Item } from 'src/app/models/listado.interface';
 import { ListadoService } from 'src/app/services/listado.service';
@@ -20,12 +20,13 @@ export class FormularioListadoComponent {
     listado: this.fb.array([]),
   });
 
-  get arrListado() {
-    return this.listado.controls['listado'] as FormArray;
-  }
+  @Output() crearPDF = new EventEmitter();
 
   constructor(private fb: FormBuilder, private lisService: ListadoService) {}
 
+  get arrListado() {
+    return this.listado.controls['listado'] as FormArray;
+  }
   cambiarTitulo() {
     let titulo = this.nuevoItem.get('titulo')?.value;
     this.lisService.cambiarTitulo(titulo);
@@ -56,7 +57,7 @@ export class FormularioListadoComponent {
   }
 
   generarPDF() {
-    
+    this.crearPDF.emit(true);
   }
 
   eliminarItem(index: number) {

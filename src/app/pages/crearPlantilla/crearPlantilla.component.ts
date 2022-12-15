@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Curriculum } from 'src/app/models/curriculum.interface';
+import { Listado } from 'src/app/models/listado.interface';
 
 @Component({
   selector: 'app-crearPlantilla',
@@ -9,6 +11,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CrearPlantillaComponent implements OnInit {
   plantilla: string | null = '';
 
+  curriculum: Curriculum | undefined;
+  listado: boolean = false;
+
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
@@ -17,4 +22,9 @@ export class CrearPlantillaComponent implements OnInit {
       this.router.navigateByUrl('/dashboard');
     }
   }
+
+  generarListado(valor: boolean) {
+    this.listado = valor;
+  }
+
 }

@@ -6,12 +6,3 @@
     border: 1px #D3D3D3 solid;
     border-radius: 5px;
 }
-
-/* ----- IMAGEN ----- */
-img {
-    border-radius: 50%;
-}
-
-table {
-    max-width: 500px;
-}

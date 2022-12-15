@@ -1,5 +1,6 @@
 export interface Curriculum {
   datos: Datos;
+  
 }
 
 export interface Datos {
