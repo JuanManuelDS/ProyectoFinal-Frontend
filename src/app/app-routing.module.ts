@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AboutComponent } from './components/about/about.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { CrearPlantillaComponent } from './pages/crearPlantilla/crearPlantilla.component';
 import { DashboardUsuarioComponent } from './pages/dashboardUsuario/dashboardUsuario.component';
@@ -32,9 +33,14 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
+    path: 'about-us',
+    component: AboutComponent
+  },
+  {
     path: '**',
     redirectTo: '',
   },
+
 ];
 
 @NgModule({
