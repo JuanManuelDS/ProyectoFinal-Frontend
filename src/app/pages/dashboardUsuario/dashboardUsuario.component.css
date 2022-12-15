@@ -6,6 +6,10 @@ div.carta {
     transition: box-shadow .2s;
 }
 
+a.crear_plantilla {
+    text-decoration: none;
+    color: black;
+}
 
 a:not(.crear_plantilla) {
     background-color: #ed6f1a;
@@ -29,4 +33,3 @@ div.carta:first-child:hover {
 div.carta:first-child:hover {
     cursor: pointer;
 }
-

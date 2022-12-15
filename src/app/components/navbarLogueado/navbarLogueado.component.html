@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container" id="navbar_container">
-    <a class="navbar-brand navbar_link mx-4"
+    <a class="navbar-brand navbar_link mx-4" href="/"
       ><img src="assets/logo.png" alt="logo shrimPDF" height="75px"
     /></a>
     <button
@@ -32,12 +32,18 @@
             />
           </a>
           <ul class="dropdown-menu">
+<<<<<<< HEAD
             <li><a class="dropdown-item">Mi cuenta</a></li>
             <li>
               <a class="dropdown-item" routerLink="/dashboard">Plantillas</a>
             </li>
+=======
+            <li><a class="dropdown-item" href="/user">Mi cuenta</a></li>
+            <li><a class="dropdown-item" href="/dashboard">Plantillas</a></li>
+            <li><a class="dropdown-item" href="/nueva-plantilla">Nueva plantilla</a></li>
+>>>>>>> d08f4042d5606191ca0789a63c5ce8e83b93923d
             <!-- Esta se va a mostrar únicamente si el usuario es admin -->
-            <li><a class="dropdown-item">Sección admin</a></li>
+            <li><a class="dropdown-item" href="/admin">Sección admin</a></li>
             <li><hr class="dropdown-divider" /></li>
             <li>
               <a class="dropdown-item">Cerrar Sesión</a>
