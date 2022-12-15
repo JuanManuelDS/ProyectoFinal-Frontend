@@ -5,17 +5,22 @@
     <div class="col-xl col-lg-12 mt-2" id="formularios">
       <app-formulario-curriculum
         *ngIf="plantilla === 'curriculum'"
-        
+
       ></app-formulario-curriculum>
       <app-formulario-listado
         *ngIf="plantilla === 'listado'"
         (crearPDF)="generarListado($event)"
       ></app-formulario-listado>
+
+      <app-formulario-cartaRestaurante
+        *ngIf="plantilla === 'cartaRestaurante'"
+      ></app-formulario-cartaRestaurante>
     </div>
 
     <div class="col d-flex justify-content-center">
       <app-curriculum *ngIf="plantilla === 'curriculum'"></app-curriculum>
       <app-listado *ngIf="plantilla === 'listado'" [generarPDF]="listado"></app-listado>
+      <app-cartaRestaurante *ngIf="plantilla === 'cartaRestaurante'"></app-cartaRestaurante>
     </div>
   </div>
 </div>

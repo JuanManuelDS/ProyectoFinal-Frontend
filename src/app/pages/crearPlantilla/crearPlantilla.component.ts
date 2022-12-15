@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Cartarestaurant } from 'src/app/models/cartarestaurant.interface';
 import { Curriculum } from 'src/app/models/curriculum.interface';
 import { Listado } from 'src/app/models/listado.interface';
 
@@ -13,6 +14,7 @@ export class CrearPlantillaComponent implements OnInit {
 
   curriculum: Curriculum | undefined;
   listado: boolean = false;
+  cartaRestaurante: Cartarestaurant | undefined;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 

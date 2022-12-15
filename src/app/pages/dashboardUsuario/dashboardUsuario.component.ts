@@ -18,7 +18,7 @@ export class DashboardUsuarioComponent implements OnInit {
       input: 'select',
       inputOptions: {
         CV: 'Curriculum',
-        CR: 'Carta de restaurante',
+        CR: 'Carta de Restaurante',
         LI: 'Listado',
       },
       inputPlaceholder: 'Seleccionar plantilla',
@@ -31,7 +31,7 @@ export class DashboardUsuarioComponent implements OnInit {
         });
       },
     });
-    
+
     //Redirecciono al cliente
     switch (eleccion.value) {
       case 'CV':
