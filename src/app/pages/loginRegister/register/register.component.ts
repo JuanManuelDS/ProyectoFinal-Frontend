@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NuevoUsuario } from 'src/app/models/auth.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { EmailValidatorService } from 'src/app/services/email-validator.service';
 import { UsernameValidatorService } from 'src/app/services/username-validator.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -37,11 +40,29 @@ export class RegisterComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private emailValidator: EmailValidatorService,
-    private usernameValidator: UsernameValidatorService
+    private usernameValidator: UsernameValidatorService,
+    private router: Router
   ) {}
 
   register() {
     this.registerForm.markAllAsTouched();
+    if (this.registerForm.valid) {
+      const { nombreUsuario, contrasena, email } = this.registerForm.value;
+      const usuario: NuevoUsuario = { nombreUsuario, contrasena, email };
+      let exito = this.authService.register(usuario).subscribe();
+      if (exito) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Usuario creado correctamente',
+          text: 'Logueate para finalizar el proceso de registro',
+          confirmButtonText: 'Login',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigateByUrl('/login');
+          }
+        });
+      }
+    }
   }
 
   campoInvalido(campo: string) {
@@ -66,11 +87,12 @@ export class RegisterComponent {
 
   get usernameErrors() {
     const errors = this.registerForm.get('nombreUsuario')?.errors;
+    console.log(errors);
     if (errors?.['required']) {
       return 'Este campo es obligatorio';
     } else if (errors?.['usernameTomado']) {
       return 'Este nombre de usuario ya existes';
-    } else if (errors?.['minLength']) {
+    } else if (errors?.['minlength']) {
       return 'Debe tener como mínimo 4 caracteres';
     } else return '';
   }
@@ -79,7 +101,7 @@ export class RegisterComponent {
     const errors = this.registerForm.get('contrasena')?.errors;
     if (errors?.['required']) {
       return 'Este campo es obligatorio';
-    } else if (errors?.['minLength']) {
+    } else if (errors?.['minlength']) {
       return 'Debe tener como mínimo 6 caracteres';
     } else return '';
   }

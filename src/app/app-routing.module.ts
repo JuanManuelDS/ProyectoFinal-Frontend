@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './components/about/about.component';
 import { UserpageComponent } from './components/userpage/userpage.component';
+import { ValidarTokenGuard } from './guards/validar-token.guard';
 import { AdminComponent } from './pages/admin/admin.component';
 import { CrearPlantillaComponent } from './pages/crearPlantilla/crearPlantilla.component';
 import { DashboardUsuarioComponent } from './pages/dashboardUsuario/dashboardUsuario.component';
@@ -24,14 +25,20 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardUsuarioComponent,
+    canActivate: [ValidarTokenGuard],
+    canLoad: [ValidarTokenGuard],
   },
   {
     path: 'nueva-plantilla/:plantilla',
     component: CrearPlantillaComponent,
+    canActivate: [ValidarTokenGuard],
+    canLoad: [ValidarTokenGuard],
   },
   {
     path: 'nueva-plantilla',
     component: DashboardUsuarioComponent,
+    canActivate: [ValidarTokenGuard],
+    canLoad: [ValidarTokenGuard],
   },
   {
     path: '',
@@ -43,7 +50,9 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    component: UserpageComponent
+    component: UserpageComponent,
+    canActivate: [ValidarTokenGuard],
+    canLoad: [ValidarTokenGuard],
   },
   {
     path: '**',

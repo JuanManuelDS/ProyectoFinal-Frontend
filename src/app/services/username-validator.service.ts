@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   AbstractControl,
@@ -18,10 +18,10 @@ export class UsernameValidatorService implements AsyncValidator {
   ): Observable<ValidationErrors | null> {
     const nombreUsuario = control.value;
     const url = `https://proyectofinal-backend-production.up.railway.app/api/validacion/username_tomado/${nombreUsuario}`;
-    return this.http.get<any[]>(url).pipe(
+    return this.http.get<any>(url).pipe(
       //Si devuelvo null implica que el usuario no fue tomado
       map((resp) => {
-        return resp.length === 0 ? null : { usernameTomado: true };
+        return resp === false ? null : { usernameTomado: true };
       })
     );
   }

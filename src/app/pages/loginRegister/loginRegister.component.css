@@ -55,3 +55,7 @@ button.submit_button {
 a:hover {
     cursor: pointer
 }
+
+label {
+    margin-top: 10px;
+}
