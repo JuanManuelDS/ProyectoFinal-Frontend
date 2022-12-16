@@ -7,20 +7,25 @@
     formControlName="nombreUsuario"
     aria-describedby="nombreUsuario-help"
   />
-  <div id="nombreUsuario-help" class="form-text m-0">
-    Este aviso estará escondido
-  </div>
 
-  <label for="password" class="form-label" formControlName="contrasena"
-    >Contraseña:</label
-  >
-  <input type="password" class="form-control" id="password" />
+  <label for="password" class="form-label">Contraseña:</label>
+  <input
+    type="password"
+    class="form-control"
+    id="password"
+    formControlName="contrasena"
+  />
 
-  <button type="submit" class="submit_button btn btn-primary w-100 mb-3">
+  <button type="submit" class="submit_button btn btn-primary w-100">
     Iniciar Sesión
   </button>
+  <span
+    class="form-text text-danger fw-bold w-100 text-center d-inline-block"
+    *ngIf="loginInvalido"
+    >Usuario y/o contraseña incorrecto/s</span
+  >
 
-  <div class="container-fluid text-center">
+  <div class="container-fluid text-center mt-3">
     <span class=""> ¿No tienes cuenta? </span>
 
     <a routerLink="/register" class="link"> Crear una aquí </a>

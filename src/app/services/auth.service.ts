@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { catchError, map, of, tap } from 'rxjs';
 import { AuthResponse, Usuario } from '../models/auth.interface';
 
@@ -27,9 +27,16 @@ export class AuthService {
       }),
       map((resp) => resp),
       catchError((err) => {
-        console.log('ha ocurrido un error antes del subscribe de login()');
+        console.log(
+          'ha ocurrido un error antes del subscribe de login() ' +
+            JSON.stringify(err)
+        );
         return of(err);
       })
     );
+  }
+
+  validarLogin(nombreUsuario: string, contrasena: string) {
+    
   }
 }
