@@ -1,19 +1,44 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, CanLoad, Router } from '@angular/router';
+import { catchError, map, Observable, tap, of } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ValidarAdminGuard implements CanActivate, CanLoad {
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+  constructor(private authService: AuthService, private router: Router) {}
+
+  canActivate(): Observable<boolean> | boolean {
+    return this.authService.validarToken().pipe(
+      //esto se lee antes de enviar la respuesta, lo hago para redireccionar al login en caso que validarToken retorne false
+      tap((resp) => {
+        if (resp.roles !== '[ROLE_ADMIN]') {
+          this.router.navigateByUrl('/auth');
+        }
+      }),
+      map((resp) => true),
+      catchError((err) => {
+        this.router.navigateByUrl('/auth');
+        return of(err);
+      })
+    );
   }
-  canLoad(
-    route: Route,
-    segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+
+  canLoad(): Observable<boolean> | boolean {
+    return this.authService.validarToken().pipe(
+      //esto se lee antes de enviar la respuesta, lo hago para redireccionar al login en caso que validarToken retorne false
+      tap((resp) => {
+        console.log('respuesta de validacion token: ' + JSON.stringify(resp));
+        if (!resp.username) {
+          this.router.navigateByUrl('/auth');
+        }
+      }),
+      map((resp) => true),
+      catchError((err) => {
+        this.router.navigateByUrl('/auth');
+        return of(err);
+      })
+    );
   }
 }

@@ -14,6 +14,7 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 })
 export class AuthService {
   private _usuario!: Usuario;
+  private _isAdmin: boolean = false;
   public emailRegex: string =
     '^[A-Za-z0-9._%+-]{3,}@[A-Za-z0-9.-]{2,}\\.[a-z]{2,4}$';
 
@@ -79,7 +80,6 @@ export class AuthService {
 
     //Tomo el token del local storage (en caso que lo tenga)
     const token = 'Bearer ' + localStorage.getItem('token');
-    console.log(token);
 
     //En caso que no tenga un token en el localstorage paso un string vacío
     const headers = new HttpHeaders().set('Authorization', token || '');
@@ -94,5 +94,13 @@ export class AuthService {
       }), //Siempre que haya una respuesta válida entrará aquí y por ende el token es válido
       catchError((err) => of(err)) //En caso de caer aquí no es válido
     ); */
+  }
+
+  esAdmin() {
+    this._isAdmin = true;
+  }
+
+  get isAdmin() {
+    return this._isAdmin;
   }
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './components/about/about.component';
 import { UserpageComponent } from './components/userpage/userpage.component';
+import { ValidarAdminGuard } from './guards/validar-admin.guard';
 import { ValidarTokenGuard } from './guards/validar-token.guard';
 import { AdminComponent } from './pages/admin/admin.component';
 import { CrearPlantillaComponent } from './pages/crearPlantilla/crearPlantilla.component';
@@ -21,6 +22,8 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [ValidarAdminGuard],
+    canLoad: [ValidarAdminGuard],
   },
   {
     path: 'dashboard',
@@ -41,12 +44,8 @@ const routes: Routes = [
     canLoad: [ValidarTokenGuard],
   },
   {
-    path: '',
-    component: HomeComponent,
-  },
-  {
     path: 'about-us',
-    component: AboutComponent
+    component: AboutComponent,
   },
   {
     path: 'user',
@@ -55,10 +54,13 @@ const routes: Routes = [
     canLoad: [ValidarTokenGuard],
   },
   {
+    path: '',
+    component: HomeComponent,
+  },
+  {
     path: '**',
     redirectTo: '',
   },
-
 ];
 
 @NgModule({
