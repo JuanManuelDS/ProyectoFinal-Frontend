@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Plato } from 'src/app/models/cartarestaurant.interface';
+import { Menu, Plato, Seccion } from 'src/app/models/cartarestaurant.interface';
 import { CartaRestauranteService } from 'src/app/services/cartaRestaurante.service';
 
 @Component({
@@ -61,7 +61,7 @@ export class FormularioCartaRestauranteComponent implements OnInit {
   }
 
   get platosMenu() {
-    return this.menusForm.get('menus')?.get('platosMenu') as FormArray;
+    return this.nuevoMenuForm.controls['platosMenu'] as FormArray;
   }
 
   constructor( private fb: FormBuilder, private crService: CartaRestauranteService) { }
@@ -69,22 +69,18 @@ export class FormularioCartaRestauranteComponent implements OnInit {
   ngOnInit() {
   }
 
+  // ------------------ GUARDAR OBJETOS ----------------------
+
   guardarPlatosSeccion(){
-    console.log('1');
     let plato: Plato = {
       nombre: this.nuevoPlatoForm.get('nombre')?.value,
       descripcion: this.nuevoPlatoForm.get('descripcion')?.value,
       precio: this.nuevoPlatoForm.get('precio')?.value
     };
-    console.log('2');
+
     this.crService.addPlato(plato);
-    console.log('3');
-    // TENDRE QUE HACER OTRO FUNCION PARA GUARDAR PLATOS EN MENU,
-    // AÚN ASÍ, NECESITO PODER DIFERENCIAR ENTRE LOS DIFERENTES
-    // MENUS AL IGUAL QUE LAS SECCIONES
 
     let parray = this.nuevaSeccionForm.get('platosSeccion') as FormArray;
-    console.log('4');
     parray.push(
       this.fb.group({
         nombre: [plato.nombre],
@@ -92,23 +88,99 @@ export class FormularioCartaRestauranteComponent implements OnInit {
         precio: [plato.precio]
       })
     );
-    console.log('5');
-    console.log(parray.at(0).value);
-    console.log(this.nuevaSeccionForm.controls);
 
     this.nuevoPlatoForm.reset();
   }
 
-  guardarPlatoMenu(){
+  guardarSeccion(){
+    let seccion: Seccion = {
+      nombre: this.nuevaSeccionForm.get('nombre')?.value,
+      imagen: this.nuevaSeccionForm.get('imagen')?.value,
+      platos: this.nuevaSeccionForm.get('platosSeccion')?.value,
+    }
 
+    this.crService.addSeccion(seccion);
+
+    this.arrSecciones.push(
+      this.fb.group({
+        nombre: [seccion.nombre],
+        imagen: [seccion.imagen],
+        platos: [seccion.platos]
+      })
+    );
+
+    this.nuevaSeccionForm.reset();
   }
 
-  guardarSeccion(){
+  guardarPlatoMenu(){
+    let plato: Plato = {
+      nombre: this.nuevoPlatoForm.get('nombre')?.value,
+      descripcion: this.nuevoPlatoForm.get('descripcion')?.value,
+      precio: this.nuevoPlatoForm.get('precio')?.value
+    };
 
+    this.crService.addPlato(plato);
+
+    let parray = this.nuevoMenuForm.get('platosMenu') as FormArray;
+    parray.push(
+      this.fb.group({
+        nombre: [plato.nombre],
+        descripcion: [plato.descripcion],
+        precio: [plato.precio]
+      })
+    );
+
+    this.nuevoPlatoForm.reset();
   }
 
   guardarMenu(){
+    let menu: Menu = {
+      nombre: this.nuevoMenuForm.get('nombre')?.value,
+      imagen: this.nuevoMenuForm.get('imagen')?.value,
+      precioMenu: this.nuevoMenuForm.get('precio')?.value,
+      platos: this.nuevoMenuForm.get('platosMenu')?.value
+    }
 
+    this.crService.addMenu(menu);
+
+    this.arrMenus.push(
+      this.fb.group({
+        nombre: [menu.nombre],
+        imagen: [menu.imagen],
+        precioMenu: [menu.precioMenu],
+        platos: [menu.platos]
+      })
+    );
+
+    this.nuevoMenuForm.reset();
+  }
+
+  // ---------------- ELIMINAR -------------------
+
+  eliminarPlatoSeccion(i: number) {
+    let parray = this.nuevaSeccionForm.get('platosSeccion') as FormArray;
+    parray.removeAt(i);
+
+    this.crService.eliminarPlato(i);
+  }
+
+  eliminarSeccion(i: number) {
+    this.arrSecciones.removeAt(i);
+
+    this.crService.eliminarSeccion(i);
+  }
+
+  eliminarPlatoMenu(i:number) {
+    let parray = this.nuevoMenuForm.get('platosMenu') as FormArray;
+    parray.removeAt(i);
+
+    this.crService.eliminarPlato(i);
+  }
+
+  eliminarMenu(i: number) {
+    this.arrMenus.removeAt(i);
+
+    this.crService.eliminarMenu(i);
   }
 
   guardarItem() {

@@ -107,12 +107,12 @@
 
                 <div class="d-flex align-items-center">
                   <span class="ps-4 fw-semibold">
-                    {{ platosS }}
+                    {{ platosS.get("nombre")?.value }}
                   </span>
                 </div>
 
 
-                <button class="btn btn-danger">
+                <button class="btn btn-danger " (click)="eliminarPlatoSeccion(i)">
                   Eliminar
                 </button>
               </div>
@@ -137,7 +137,7 @@
                 {{ seccion.get('nombre')?.value }}
               </span>
             </div>
-            <button class="btn btn-danger">
+            <button class="btn btn-danger" (click)="eliminarSeccion(i)">
               Eliminar
             </button>
           </div>
@@ -166,6 +166,13 @@
                     <input type="text" class="form-control" formControlName="nombre"/>
                 </div>
             </div>
+            <div class="row">
+              <div class="col">
+                  <label class="form-label">Precio del Menú:
+                  </label>
+                  <input type="text" class="form-control" formControlName="precio"/>
+              </div>
+          </div>
             <div class="row">
                 <div class="col">
                     <label class="form-label">Imagen:
@@ -226,12 +233,14 @@
           <!-- LISTA PLATOS MENU -->
           <div class="container-fluid mt-2 p-0" formArrayName="platosSeccion">
             <div class="container-fluid p-0 d-flex justify-content-between dato_agregado"
-              *ngFor="let platosM of platosMenu.controls">
+              *ngFor="let platosM of platosMenu.controls; let i = index">
               <div class="d-flex align-items-center">
                 <span class="ps-4 fw-semibold">
                   {{ platosM.get('nombre')?.value }}
                 </span>
               </div>
+
+              <button class="btn btn-danger" (click)="eliminarPlatoMenu(i)">Eliminar</button>
             </div>
           </div>
             <div class="row">
@@ -247,12 +256,14 @@
         <!-- LISTA MENUS -->
         <div class="container-fluid mt-2 p-0" formArrayName="platosSeccion">
           <div class="container-fluid p-0 d-flex justify-content-between dato_agregado"
-            *ngFor="let menu of arrMenus.controls">
+            *ngFor="let menu of arrMenus.controls; let i = index">
             <div class="d-flex align-items-center">
               <span class="ps-4 fw-semibold">
                 {{ menu.get('nombre')?.value }}
               </span>
             </div>
+
+            <button class="btn btn-danger" (click)="eliminarMenu(i)">Eliminar</button>
           </div>
         </div>
 
