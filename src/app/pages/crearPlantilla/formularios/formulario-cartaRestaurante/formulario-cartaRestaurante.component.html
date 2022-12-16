@@ -1,146 +1,268 @@
 <div class="container">
-  <form [formGroup]="nuevoItem" (submit)="guardarItem()">
-    <div class="row">
-      <div class="col">
-        <label class="form-label">Nombre del Restaurante</label>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="nombre"
-          (keyup)="cambiarNombre()"
-        />
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <label class="form-label">Imagen: </label>
-        <input
-          type="file"
-          class="form-control"
-          formControlName="imagen"
-          (change)="cargarImagen($event)"
-        />
-      </div>
-    </div>
-    <!-- ------------------- SECCIONES --------------------- -->
-    <a
-    class="btn text-start"
-    data-bs-toggle="collapse"
-    href="#secciones"
-    role="button"
-    aria-expanded="false"
-    aria-controls="secciones"
-    >Agregar Sección
-    <img
-      src="assets/iconos/expandir-icon.png"
-      alt="expand icon"
-      width="20px"
-  /></a>
+    <form [formGroup]="nuevoItem" (submit)="guardarItem()">
+        <div class="row">
+            <div class="col">
+                <label class="form-label">Nombre del Restaurante</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    formControlName="nombre"
+                    (keyup)="cambiarNombre()"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="form-label">Imagen:
+                </label>
+                <input
+                    type="file"
+                    class="form-control"
+                    formControlName="imagen"
+                    (change)="cargarImagen($event)"/>
+            </div>
+        </div>
+        <!-- ------------------- SECCIONES --------------------- -->
+        <a
+            class="btn text-start"
+            data-bs-toggle="collapse"
+            href="#secciones"
+            role="button"
+            aria-expanded="false"
+            aria-controls="secciones">Agregar Sección
+            <img src="assets/iconos/expandir-icon.png" alt="expand icon" width="20px"/></a>
 
-  <form
-    [formGroup]="seccionForm"
-    (submit)="guardarDatos()"
-    class="collapse multi-collapse"
-    id="secciones"
-  >
-    <div class="row">
-      <div class="col">
-        <label class="form-label">Nombre de la Sección: </label>
-        <input type="text" class="form-control" formControlName="nombre" />
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <label class="form-label">Imagen: </label>
-        <input
-          type="file"
-          class="form-control"
-          formControlName="imagen"
-          (change)="cargarImagen($event)"
-        />
-      </div>
-    </div>
-    <div class="row">
-      <div class="rol text-end">
-        <button
-          class="btn btn-success me-2"
-          (click)="limpiar('datos')"
-          type="button"
-        >
-          Limpiar
-        </button>
-        <button type="submit" class="btn btn-primary">Guardar</button>
-      </div>
-    </div>
-  </form>
+        <form
+            [formGroup]="nuevaSeccionForm"
+            (submit)="guardarSeccion()"
+            class="collapse multi-collapse"
+            id="secciones">
+            <div class="row">
+                <div class="col">
+                    <label class="form-label">Nombre de la Sección:
+                    </label>
+                    <input type="text" class="form-control" formControlName="nombre"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="form-label">Imagen:
+                    </label>
+                    <input
+                        type="file"
+                        class="form-control"
+                        formControlName="imagen"
+                        (change)="cargarImagen($event)"/>
+                </div>
+            </div>
+            <!-- PLATOS SECCION -->
+            <div class="row">
+                <div class="col">
+                    <a
+                        class="btn text-start"
+                        data-bs-toggle="collapse"
+                        href="#platosSeccion"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="secciones">Agregar Plato
+                        <img src="assets/iconos/expandir-icon.png" alt="expand icon" width="20px"/></a>
 
-  <!-- --------------------- MENUS ------------------------- -->
+                    <form
+                        [formGroup]="nuevoPlatoForm"
+                        (submit)="guardarPlatosSeccion()"
+                        class="collapse multi-collapse"
+                        id="platosSeccion">
+                        <div class="row">
+                            <div class="col">
+                                <label class="form-label">Nombre:
+                                </label>
+                                <input type="text" class="form-control" formControlName="nombre"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label class="form-label">Descripción:
+                                </label>
+                                <input type="text" class="form-control" formControlName="descripcion"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                              <label class="form-label">Precio:
+                              </label>
+                              <input type="text" class="form-control" formControlName="precio"/>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                      </div>
+                    </form>
+                </div>
+            </div>
+            <!-- LISTA PLATOS SECCION -->
+            <div class="container-fluid mt-2 p-0" formArrayName="platosSeccion">
+              <div class="container-fluid p-0 d-flex justify-content-between dato_agregado"
+                *ngFor="let platosS of platosSeccion.controls">
+                <div class="d-flex align-items-center">
+                  <span class="ps-4 fw-semibold">
+                    {{ platosS.get('nombre')?.value }}
+                  </span>
+                </div>
+                <button class="btn btn-danger">
+                  Eliminar
+                </button>
+              </div>
+            </div>
 
-  <a
-  class="btn text-start"
-  data-bs-toggle="collapse"
-  href="#menus"
-  role="button"
-  aria-expanded="false"
-  aria-controls="secciones"
-  >Agregar Menú
-  <img
-    src="assets/iconos/expandir-icon.png"
-    alt="expand icon"
-    width="20px"
-/></a>
+            <div class="row">
+                <div class="rol text-end">
+                    <button class="btn btn-success me-2" (click)="limpiar('datos')" type="button">
+                        Limpiar
+                    </button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </form>
 
-<form
-  [formGroup]="seccionForm"
-  (submit)="guardarDatos()"
-  class="collapse multi-collapse"
-  id="menus"
->
-  <div class="row">
-    <div class="col">
-      <label class="form-label">Nombre del Menú: </label>
-      <input type="text" class="form-control" formControlName="nombre" />
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <label class="form-label">Imagen: </label>
-      <input
-        type="file"
-        class="form-control"
-        formControlName="imagen"
-        (change)="cargarImagen($event)"
-      />
-    </div>
-  </div>
-  <div class="row">
-    <div class="rol text-end">
-      <button
-        class="btn btn-success me-2"
-        (click)="limpiar('datos')"
-        type="button"
-      >
-        Limpiar
-      </button>
-      <button type="submit" class="btn btn-primary">Guardar</button>
-    </div>
-  </div>
-</form>
+        <!-- LISTA SECCIONES -->
+        <div class="container-fluid mt-2 p-0" formArrayName="platosSeccion">
+          <div class="container-fluid p-0 d-flex justify-content-between dato_agregado"
+            *ngFor="let seccion of arrSecciones.controls; let i = index">
+            <div class="d-flex align-items-center">
+              <span class="ps-4 fw-semibold">
+                {{ seccion.get('nombre')?.value }}
+              </span>
+            </div>
+            <button class="btn btn-danger">
+              Eliminar
+            </button>
+          </div>
+        </div>
 
-      <!-- --------------- ESTO AL FINAL DEL FORM ----------------------- -->
-    <div class="row px-3 descargar_guardar">
-      <div class="col-6">
-        <button type="submit" class="btn btn-primary">Guardar item</button>
-      </div>
-      <div class="col-6">
-        <button
-          type="button"
-          class="btn descargar_button"
-          (click)="generarPDF()"
-        >
-          Descargar PDF
-        </button>
-      </div>
-    </div>
-  </form>
+        <!-- --------------------- MENUS ------------------------- -->
+
+        <a
+            class="btn text-start"
+            data-bs-toggle="collapse"
+            href="#menus"
+            role="button"
+            aria-expanded="false"
+            aria-controls="secciones">Agregar Menú
+            <img src="assets/iconos/expandir-icon.png" alt="expand icon" width="20px"/></a>
+
+        <form
+            [formGroup]="nuevoMenuForm"
+            (submit)="guardarMenu()"
+            class="collapse multi-collapse"
+            id="menus">
+            <div class="row">
+                <div class="col">
+                    <label class="form-label">Nombre del Menú:
+                    </label>
+                    <input type="text" class="form-control" formControlName="nombre"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="form-label">Imagen:
+                    </label>
+                    <input
+                        type="file"
+                        class="form-control"
+                        formControlName="imagen"
+                        (change)="cargarImagen($event)"/>
+                </div>
+            </div>
+            <!-- PLATOS MENU -->
+            <div class="row">
+              <div class="col">
+                  <a
+                      class="btn text-start"
+                      data-bs-toggle="collapse"
+                      href="#platosSeccion"
+                      role="button"
+                      aria-expanded="false"
+                      aria-controls="secciones">Agregar Plato
+                      <img src="assets/iconos/expandir-icon.png" alt="expand icon" width="20px"/></a>
+
+                  <form
+                      [formGroup]="nuevoPlatoForm"
+                      (submit)="guardarPlatoMenu()"
+                      class="collapse multi-collapse"
+                      id="platosSeccion">
+                      <div class="row">
+                          <div class="col">
+                              <label class="form-label">Nombre:
+                              </label>
+                              <input type="text" class="form-control" formControlName="nombre"/>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col">
+                              <label class="form-label">Descripción:
+                              </label>
+                              <input type="text" class="form-control" formControlName="descripcion"/>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                            <label class="form-label">Precio:
+                            </label>
+                            <input type="text" class="form-control" formControlName="precio"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                      </div>
+                    </div>
+                  </form>
+              </div>
+          </div>
+          <!-- LISTA PLATOS MENU -->
+          <div class="container-fluid mt-2 p-0" formArrayName="platosSeccion">
+            <div class="container-fluid p-0 d-flex justify-content-between dato_agregado"
+              *ngFor="let platosM of platosMenu.controls">
+              <div class="d-flex align-items-center">
+                <span class="ps-4 fw-semibold">
+                  {{ platosM.get('nombre')?.value }}
+                </span>
+              </div>
+            </div>
+          </div>
+            <div class="row">
+                <div class="rol text-end">
+                    <button class="btn btn-success me-2" (click)="limpiar('datos')" type="button">
+                        Limpiar
+                    </button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- LISTA MENUS -->
+        <div class="container-fluid mt-2 p-0" formArrayName="platosSeccion">
+          <div class="container-fluid p-0 d-flex justify-content-between dato_agregado"
+            *ngFor="let menu of arrMenus.controls">
+            <div class="d-flex align-items-center">
+              <span class="ps-4 fw-semibold">
+                {{ menu.get('nombre')?.value }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- --------------- ESTO AL FINAL DEL FORM ----------------------- -->
+        <div class="row px-3 descargar_guardar">
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary">Guardar item</button>
+            </div>
+            <div class="col-6">
+                <button type="button" class="btn descargar_button" (click)="generarPDF()">
+                    Descargar PDF
+                </button>
+            </div>
+        </div>
+    </form>
 </div>
