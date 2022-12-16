@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Menu, Plato, Seccion } from 'src/app/models/cartarestaurant.interface';
 import { CartaRestauranteService } from 'src/app/services/cartaRestaurante.service';
+import convertBase64 from 'src/app/utils/convertBase64';
 
 @Component({
   selector: 'app-formulario-cartaRestaurante',
@@ -9,6 +10,9 @@ import { CartaRestauranteService } from 'src/app/services/cartaRestaurante.servi
   styleUrls: ['./formulario-cartaRestaurante.component.css']
 })
 export class FormularioCartaRestauranteComponent implements OnInit {
+
+  imagen: any;
+
   nuevoItem: FormGroup = this.fb.group({
     nombre: [''],
     imagen: [],
@@ -191,8 +195,10 @@ export class FormularioCartaRestauranteComponent implements OnInit {
 
   }
 
-  cargarImagen(event: any) {
-
+  async cargarImagen(event: any) {
+    const file = event.target.files[0];
+    const base64 = await convertBase64(file);
+    this.imagen = base64;
   }
 
   limpiar(formulario: string){
