@@ -103,12 +103,15 @@
             <!-- LISTA PLATOS SECCION -->
             <div class="container-fluid mt-2 p-0" formArrayName="platosSeccion">
               <div class="container-fluid p-0 d-flex justify-content-between dato_agregado"
-                *ngFor="let platosS of platosSeccion.controls">
+                *ngFor="let platosS of platosSeccion.controls; let i = index">
+
                 <div class="d-flex align-items-center">
                   <span class="ps-4 fw-semibold">
-                    {{ platosS.get('nombre')?.value }}
+                    {{ platosS }}
                   </span>
                 </div>
+
+
                 <button class="btn btn-danger">
                   Eliminar
                 </button>

@@ -56,8 +56,7 @@ export class FormularioCartaRestauranteComponent implements OnInit {
   }
 
   get platosSeccion(){
-    let secc = this.nuevaSeccionForm.controls['secciones'] as FormArray;
-    return secc.get('platosSeccion') as FormArray;
+    return this.nuevaSeccionForm.controls['platosSeccion'] as FormArray;
 
   }
 
@@ -94,7 +93,8 @@ export class FormularioCartaRestauranteComponent implements OnInit {
       })
     );
     console.log('5');
-    //this.platosSeccion.push(this.nuevoPlatoForm);
+    console.log(parray.at(0).value);
+    console.log(this.nuevaSeccionForm.controls);
 
     this.nuevoPlatoForm.reset();
   }
