@@ -10,22 +10,19 @@ import { map, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AsyncValidatorsService implements AsyncValidator {
+export class EmailValidatorService implements AsyncValidator {
   constructor(private http: HttpClient) {}
 
   validate(
     control: AbstractControl<any, any>
   ): Observable<ValidationErrors | null> {
-    const nombreUsuario = control.value;
-    const url = `https://proyectofinal-backend-production.up.railway.app/api/usuarios/username_tomado/${nombreUsuario}`;
+    const email = control.value;
+    const url = `https://proyectofinal-backend-production.up.railway.app/api/validacion/email_tomado/${email}`;
     return this.http.get<any[]>(url).pipe(
       //Si devuelvo null implica que el usuario no fue tomado
       map((resp) => {
-        return resp.length === 0 ? null : { usernameTomado: true };
+        return resp.length === 0 ? null : { emailTomado: true };
       })
     );
   }
-  /* registerOnValidatorChange?(fn: () => void): void {
-    throw new Error('Method not implemented.');
-  } */
 }
