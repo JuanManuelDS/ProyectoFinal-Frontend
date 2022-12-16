@@ -1,17 +1,28 @@
-<form>
-  <label for="email" class="form-label">Email:</label>
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <label for="nombreUsuario" class="form-label">Nombre de usuario:</label>
   <input
-    type="email"
+    type="text"
     class="form-control"
-    id="email"
-    aria-describedby="emailHelp"
+    id="nombreUsuario"
+    formControlName="nombreUsuario"
+    aria-describedby="nombreUsuario-help"
   />
-  <div id="emailHelp" class="form-text m-0">Este aviso estará escondido</div>
+  <div id="nombreUsuario-help" class="form-text m-0">
+    Este aviso estará escondido
+  </div>
 
-  <label for="password" class="form-label">Contraseña:</label>
+  <label for="password" class="form-label" formControlName="contrasena"
+    >Contraseña:</label
+  >
   <input type="password" class="form-control" id="password" />
 
-  <button type="submit" class="submit_button btn btn-primary w-100">
+  <button type="submit" class="submit_button btn btn-primary w-100 mb-3">
     Iniciar Sesión
   </button>
+
+  <div class="container-fluid text-center">
+    <span class=""> ¿No tienes cuenta? </span>
+
+    <a routerLink="/register" class="link"> Crear una aquí </a>
+  </div>
 </form>

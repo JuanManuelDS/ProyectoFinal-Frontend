@@ -9,16 +9,26 @@ import { ComponentsModule } from '../components/components.module';
 import { CrearPlantillaModule } from './crearPlantilla/crearPlantilla.module';
 import { AdminModule } from './admin/admin.module';
 import { UserpageComponent } from '../components/userpage/userpage.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [CommonModule, ComponentsModule, CrearPlantillaModule, AdminModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    RouterModule,
+    ComponentsModule,
+    CrearPlantillaModule,
+    AdminModule,
+  ],
   declarations: [
     DashboardUsuarioComponent,
     HomeComponent,
     LoginRegisterComponent,
     LoginComponent,
     RegisterComponent,
-    UserpageComponent
+    UserpageComponent,
   ],
   exports: [DashboardUsuarioComponent, HomeComponent, LoginRegisterComponent],
 })

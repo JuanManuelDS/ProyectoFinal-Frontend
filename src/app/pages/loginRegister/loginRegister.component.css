@@ -51,3 +51,7 @@ button.submit_button {
     border: none;
     letter-spacing: .7px;
 }
+
+a:hover {
+    cursor: pointer
+}
