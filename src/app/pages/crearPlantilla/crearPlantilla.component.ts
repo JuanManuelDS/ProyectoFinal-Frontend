@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cartarestaurant } from 'src/app/models/cartarestaurant.interface';
-import { Curriculum } from 'src/app/models/curriculum.interface';
-import { Listado } from 'src/app/models/listado.interface';
 
 @Component({
   selector: 'app-crearPlantilla',
@@ -12,7 +10,7 @@ import { Listado } from 'src/app/models/listado.interface';
 export class CrearPlantillaComponent implements OnInit {
   plantilla: string | null = '';
 
-  curriculum: Curriculum | undefined;
+  curriculum: boolean = false;
   listado: boolean = false;
   cartaRestaurante: Cartarestaurant | undefined;
 
@@ -29,4 +27,7 @@ export class CrearPlantillaComponent implements OnInit {
     this.listado = valor;
   }
 
+  generarCV(valor: boolean) {
+    this.curriculum = true;
+  }
 }

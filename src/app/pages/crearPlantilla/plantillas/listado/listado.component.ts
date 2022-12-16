@@ -21,7 +21,7 @@ export class ListadoComponent implements OnChanges {
   @ViewChild('documento') documento!: ElementRef;
 
   constructor(private lisService: ListadoService) {}
-
+ 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['generarPDF'].currentValue === true) {
       this.guardarPDF();
@@ -30,6 +30,9 @@ export class ListadoComponent implements OnChanges {
 
   guardarPDF() {
     const data: any = document.getElementById('documento');
+    //Cambio el estilo del div para que tenga las dimensiones A4 justo antes de exportarlo
+    data.classList.remove('antes_exportar');
+    data.classList.add('exportar');
     html2canvas(data).then((canvas) => {
       const image = { type: 'jpeg', quality: 0.98 };
       const margin = [0.5, 0.5];
@@ -88,7 +91,9 @@ export class ListadoComponent implements OnChanges {
           pageHeight
         );
       }
-
+      //Cambio el estilo del div para que vuelva a su tamaño y estilos anteriores a la exportación
+      data.classList.remove('exportar');
+      data.classList.add('antes_exportar');
       pdf.save();
     });
   }

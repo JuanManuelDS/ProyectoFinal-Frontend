@@ -1,4 +1,4 @@
-#documento {
+.antes_exportar {
     width: 21cm;
     /*Le ponemos min-height por si tiene más de una página*/
     min-height: 29.7cm;
@@ -14,4 +14,42 @@ img {
 
 table {
     max-width: 500px;
+}
+
+.exportar {
+    width: 21cm;
+    min-height: 29.7cm;
+    padding: 0px;
+    border: 0px;
+    border-radius: 0px;
+}
+
+@media (max-width: 870px) {
+    .antes_exportar {
+        width: 700px;
+    }
+}
+
+@media (max-width: 750px) {
+    .antes_exportar {
+        width: 600px;
+    }
+}
+
+@media (max-width: 650px) {
+    .antes_exportar {
+        width: 500px;
+    }
+}
+
+@media (max-width: 550px) {
+    .antes_exportar {
+        width: 400px;
+    }
+}
+
+@media (max-width: 450px) {
+    .antes_exportar {
+        width: 300px;
+    }
 }

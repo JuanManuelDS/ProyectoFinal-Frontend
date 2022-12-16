@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import {
   Conocimiento,
@@ -19,6 +19,8 @@ import convertBase64 from 'src/app/utils/convertBase64';
 export class FormularioCurriculumComponent {
   abajo: boolean = true;
   imagen: any;
+
+  @Output() crearPDF = new EventEmitter();
 
   datosForm: FormGroup = this.formBuilder.group({
     nombre: [''],
@@ -103,6 +105,11 @@ export class FormularioCurriculumComponent {
     private formBuilder: FormBuilder,
     private cvService: CurriculumService
   ) {}
+
+  generarPDF() {
+    this.crearPDF.emit(true);
+  }
+
 
   guardarDatos() {
     //Paso los datos del formulario a un objeto y se lo envío al servicio para que lo agregue al documento

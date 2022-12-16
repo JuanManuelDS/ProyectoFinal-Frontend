@@ -5,6 +5,7 @@
     <div class="col-xl col-lg-12 mt-2" id="formularios">
       <app-formulario-curriculum
         *ngIf="plantilla === 'curriculum'"
+        (crearPDF)="generarCV($event)"
 
       ></app-formulario-curriculum>
       <app-formulario-listado
@@ -18,7 +19,7 @@
     </div>
 
     <div class="col d-flex justify-content-center">
-      <app-curriculum *ngIf="plantilla === 'curriculum'"></app-curriculum>
+      <app-curriculum *ngIf="plantilla === 'curriculum'" [generarPDF]="curriculum"></app-curriculum>
       <app-listado *ngIf="plantilla === 'listado'" [generarPDF]="listado"></app-listado>
       <app-cartaRestaurante *ngIf="plantilla === 'cartaRestaurante'"></app-cartaRestaurante>
     </div>

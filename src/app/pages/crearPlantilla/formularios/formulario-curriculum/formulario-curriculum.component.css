@@ -35,3 +35,13 @@ div.dato_agregado {
     border: rgb(223, 223, 223) 1px solid;
 
 }
+
+.descargar_button {
+    background-color: #ed6f1a;
+    color: white;
+}
+
+.descargar_button:hover {
+    background-color: #e75d00;
+    color: white;
+}
