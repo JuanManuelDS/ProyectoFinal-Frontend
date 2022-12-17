@@ -1,0 +1,17 @@
+button#boton_menu {
+    margin-top: 20px;
+    border: 0px;
+    width: 120px;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.label_buscar {
+    text-align: end;
+}
+
+@media (max-width: 600px) {
+    .label_buscar {
+        text-align: start;
+    }
+}

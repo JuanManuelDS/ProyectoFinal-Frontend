@@ -1,0 +1,35 @@
+div.carta {
+    width: 14rem;
+    max-width: 14rem;
+    min-width: 14rem;
+    box-shadow: 0 0 8px rgba(33, 33, 33, .2);
+    transition: box-shadow .2s;
+}
+
+a.crear_plantilla {
+    text-decoration: none;
+    color: black;
+}
+
+a:not(.crear_plantilla) {
+    background-color: #ed6f1a;
+    border: #ed6f1a;
+    color: white;
+}
+
+a {
+    font-weight: 500;
+}
+
+a:hover:not(.crear_plantilla) {
+    background-color: #e45b00;
+    color: white;
+}
+
+div.carta:first-child:hover {
+    box-shadow: 0 0 20px rgba(33, 33, 33, .2);
+}
+
+div.carta:first-child:hover {
+    cursor: pointer;
+}

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container" id="navbar_container">
-    <a class="navbar-brand navbar_link mx-4"
-      ><img src="assets/logo.png" alt="logo shrimPDF" height="50px"
+    <a class="navbar-brand navbar_link mx-4" href="/"
+      ><img src="assets/logo.png" alt="logo shrimPDF" height="70px"
     /></a>
     <button
       class="navbar-toggler"
@@ -25,18 +25,19 @@
           >
             <span class="fs-5 me-1">juanmanuelds</span>
             <img
-              src="assets/register-icon.png"
+              src="assets/iconos/register-icon.png"
               alt="login logo"
               width="20px"
               class="mb-1"
             />
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item">Mi cuenta</a></li>
-            <li><a class="dropdown-item">Plantillas</a></li>
-            <li><a class="dropdown-item">Nueva plantilla</a></li>
+            <li><a class="dropdown-item" routerLink="/user">Mi cuenta</a></li>
+            <li>
+              <a class="dropdown-item" routerLink="/dashboard">Plantillas</a>
+            </li>
             <!-- Esta se va a mostrar únicamente si el usuario es admin -->
-            <li><a class="dropdown-item">Sección admin</a></li>
+            <li><a class="dropdown-item" href="/admin">Sección admin</a></li>
             <li><hr class="dropdown-divider" /></li>
             <li>
               <a class="dropdown-item">Cerrar Sesión</a>

@@ -1,0 +1,47 @@
+a {
+    width: 100%;
+    padding: 10px 0px;
+    border-radius: 0px;
+    border: rgb(223, 223, 223) 1px solid;
+
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+form {
+    padding: 15px;
+    border: rgb(223, 223, 223) 1px solid;
+
+}
+
+input,
+textarea {
+    margin-bottom: 15px;
+}
+
+label {
+    margin-bottom: 3px;
+}
+
+a:hover {
+    color: #ed6f1a;
+    border: rgb(223, 223, 223) 1px solid;
+    background-color: rgb(249, 249, 249);
+}
+
+div.dato_agregado {
+    margin: 10px 0px;
+    border-radius: 5px;
+    border: rgb(223, 223, 223) 1px solid;
+
+}
+
+.descargar_button {
+    background-color: #ed6f1a;
+    color: white;
+}
+
+.descargar_button:hover {
+    background-color: #e75d00;
+    color: white;
+}

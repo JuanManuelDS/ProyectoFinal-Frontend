@@ -1,0 +1,29 @@
+#autores{
+    background-color: rgb(19, 19, 19);
+    text-align: center;
+    color: white;
+}
+
+.fotos{
+    width: 150px;
+}
+
+.hidden{
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+.show{
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+.autor:nth-child(2){
+    transition-delay: 200ms;
+}
+.autor:nth-child(3){
+    transition-delay: 400ms;
+}

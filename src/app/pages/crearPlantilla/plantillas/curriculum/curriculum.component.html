@@ -1,0 +1,186 @@
+<div class="bg-white antes_exportar" id="documento" #documento>
+  <!-------- INFORMACIÓN PERSONAL -------->
+  <div class="row" id="info_personal" *ngIf="datos">
+    <div class="row">
+      <div class="col-sm-4">
+        <img src="{{ datos.imagen }}" width="180px" alt="persona" id="foto" />
+      </div>
+      <div class="col-sm-8">
+        <h3 class="mb-4">{{ datos.nombre }}</h3>
+        <div class="row mb-1">
+          <div class="col">
+            <img
+              src="assets/iconos/location-icon.png"
+              alt="icono localización"
+              width="24px"
+              class="me-3"
+            />
+            <span>{{ datos.ciudad }}</span>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col">
+            <img
+              src="assets/iconos/calendar-icon.png"
+              alt="fecha email"
+              width="24px"
+              class="me-3"
+            />
+            <span>{{ datos.nacimiento }}</span>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col">
+            <img
+              src="assets/iconos/telefono-icon.png"
+              alt="ícono teléfono"
+              width="24px"
+              class="me-3"
+            />
+            <span>{{ datos.telefono }}</span>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col">
+            <img
+              src="assets/iconos/email-icon.png"
+              alt="icono email"
+              width="24px"
+              class="me-3"
+            />
+            <span>{{ datos.email }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!------- MARCA PERSONAL / INTERESES ------->
+    <div class="row mt-5">
+      <div class="col">
+        <h6 class="text-center px-3">
+          {{ datos.presentacion }}
+        </h6>
+      </div>
+    </div>
+  </div>
+
+  <!------------ EXPERIENCIA LABORAL --------------------->
+  <div
+    class="container-fluid experiencia_container"
+    *ngIf="experiencias.length > 0"
+  >
+    <h3 class="mt-5">Experiencia laboral</h3>
+    <hr />
+    <div class="row mt-4" *ngFor="let experiencia of experiencias">
+      <div class="col-sm-4 pt-1">
+        <span class="fw-bold"
+          >Desde {{ experiencia.inicio }}<br />hasta {{ experiencia.fin }}</span
+        >
+      </div>
+      <div class="col-sm-8">
+        <div class="row">
+          <div class="col">
+            <span class="nombre_empresa fs-5 fw-semibold">{{
+              experiencia.empresa
+            }}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="lugar_empresa fw-light">{{
+              experiencia.localidad
+            }}</span>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col">
+            <span class="descripcion_puesto">
+              {{ experiencia.descripcion }}</span
+            >
+          </div>
+        </div>
+      </div>
+      <hr class="mt-2" />
+    </div>
+  </div>
+
+  <!--------------- ESTUDIOS ------------------->
+  <div class="container-fluid estudios_container" *ngIf="estudios.length > 0">
+    <h3 class="mt-5">Estudios</h3>
+    <hr />
+    <div class="row mt-4" *ngFor="let estudio of estudios">
+      <div class="col-sm-4 pt-1 d-flex justify-content-center">
+        <span class="fecha_estudios fw-bold">{{ estudio.year }}</span>
+      </div>
+      <div class="col-sm-8">
+        <div class="row">
+          <div class="col">
+            <span class="titulo_estudios">{{ estudio.titulo }}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="lugar_estudios fw-light">{{
+              estudio.establecimiento
+            }}</span>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col">
+            <span class="descripcion_estudios">{{ estudio.descripcion }}</span>
+          </div>
+        </div>
+      </div>
+      <hr class="mt-3" />
+    </div>
+  </div>
+
+  <!------------ CONOCIMIENTOS TECNOLÓGICOS -------------->
+  <div class="container-fluid" *ngIf="conocimientos.length > 0">
+    <h3 class="mt-5">Conocimientos tecnológicos</h3>
+    <hr />
+    <div class="container">
+      <ul>
+        <li *ngFor="let conocimiento of conocimientos">
+          {{ conocimiento.conocimiento }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!------------ IDIOMAS -------------------->
+  <div class="container-fluid" *ngIf="idiomas.length > 0">
+    <h3 class="mt-5">Idiomas</h3>
+    <hr />
+    <div class="container mt-2 d-flex justify-content-center">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Idioma</th>
+            <th scope="col">Escrito</th>
+            <th scope="col">Oral</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let idioma of idiomas">
+            <td>{{ idioma.idioma }}</td>
+            <td>{{ idioma.escrito }}</td>
+            <td>{{ idioma.oral }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!----------- OTROS DATOS DE INTERÉS ------------- -->
+  <div class="container-fluid" *ngIf="datosInteres.length > 0">
+    <h3 class="mt-5">Otros datos de interés</h3>
+    <hr />
+    <div class="container">
+      <ul>
+        <li *ngFor="let dato of datosInteres">{{ dato.dato }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

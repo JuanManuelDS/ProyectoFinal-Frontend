@@ -1,0 +1,14 @@
+div#menu {
+    color: white
+}
+
+button.admin_menu_button {
+    display: inline-block;
+    height: 50px;
+    border-radius: 0px;
+}
+
+#offcanvasWithBothOptions {
+    width: fit-content;
+    color: white;
+}

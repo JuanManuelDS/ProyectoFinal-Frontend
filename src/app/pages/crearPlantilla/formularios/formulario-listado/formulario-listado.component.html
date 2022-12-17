@@ -1,0 +1,65 @@
+<div class="container">
+  <form [formGroup]="nuevoItem" (submit)="guardarItem()">
+    <div class="row">
+      <div class="col">
+        <label class="form-label">Título: </label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="titulo"
+          (keyup)="cambiarTitulo()"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label class="form-label">Imagen: </label>
+        <input
+          type="file"
+          class="form-control"
+          formControlName="imagen"
+          (change)="cargarImagen($event)"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label class="form-label">Ítem del listado: </label>
+        <input type="text" class="form-control" formControlName="item" />
+      </div>
+    </div>
+    <div class="row px-3 descargar_guardar">
+      <div class="col-6">
+        <button type="submit" class="btn btn-primary">Guardar item</button>
+      </div>
+      <div class="col-6">
+        <button
+          type="button"
+          class="btn descargar_button" 
+          (click)="generarPDF()"
+        >
+          Descargar PDF
+        </button>
+      </div>
+    </div>
+
+    <!-------- LISTA DE CONOCIMIENTOS --------->
+    <div class="container-fluid mt-2 p-0" formArrayName="listado">
+      <div
+        class="container-fluid p-0 d-flex justify-content-between dato_agregado"
+        *ngFor="let item of arrListado.controls; let i = index"
+      >
+        <div class="d-flex align-items-center">
+          <span class="ps-4 fw-semibold">
+            {{ item.get("item")?.value }}
+          </span>
+        </div>
+        <div class="">
+          <button class="btn btn-danger" (click)="eliminarItem(i)">
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
