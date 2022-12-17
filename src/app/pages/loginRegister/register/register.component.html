@@ -1,25 +1,57 @@
-
-<form>
-  <label for="nombreUsuario" class="form-label">Nombre de usuario:</label>
-  <input type="text" class="form-control" id="nombreUsuario" />
-
-  <label for="email" class="form-label">Email:</label>
-  <input
-    type="email"
-    class="form-control"
-    id="email"
-    aria-describedby="emailHelp"
-  />
-  <div id="emailHelp" class="form-text m-0">Este aviso estará escondido</div>
-
-  <label for="password" class="form-label">Contraseña:</label>
-  <input type="password" class="form-control" id="password" />
-
-  <label for="password_repeat" class="form-label"
-    >Vuelva a ingresar la contraseña:</label
-  >
-  <input type="text" class="form-control" id="password_repeat" />
-
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+  <div class="container-fluid p-0">
+    <label for="nombreUsuario" class="form-label">Nombre de usuario:</label>
+    <input
+      type="text"
+      class="form-control"
+      id="nombreUsuario"
+      formControlName="nombreUsuario"
+    />
+    <span
+      class="form-text text-danger"
+      *ngIf="campoInvalido('nombreUsuario')"
+      >{{ usernameErrors }}</span
+    >
+  </div>
+  <div class="container-fluid p-0">
+    <label for="email" class="form-label">Email:</label>
+    <input
+      type="email"
+      class="form-control"
+      formControlName="email"
+      id="email"
+      aria-describedby="emailHelp"
+    />
+    <span class="form-text text-danger" *ngIf="campoInvalido('email')">{{
+      emailErrors
+    }}</span>
+  </div>
+  <div class="container-fluid p-0">
+    <label for="password" class="form-label">Contraseña:</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      formControlName="contrasena"
+    />
+    <span class="form-text text-danger" *ngIf="campoInvalido('contrasena')">{{
+      contrasenaErrors
+    }}</span>
+  </div>
+  <div class="container-fluid p-0">
+    <label for="password_repeat" class="form-label"
+      >Vuelva a ingresar la contraseña:</label
+    >
+    <input
+      type="password"
+      class="form-control"
+      id="password_repeat"
+      formControlName="contrasena2"
+    />
+    <span class="form-text text-danger" *ngIf="campoInvalido('contrasena2')">{{
+      contrasena2Errors
+    }}</span>
+  </div>
   <button type="submit" class="submit_button btn btn-primary w-100">
     Registrarse
   </button>
