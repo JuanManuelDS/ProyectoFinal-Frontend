@@ -12,6 +12,10 @@ export class AdminComponent implements OnInit {
     busqueda: [''],
   });
 
+  registrosForm: FormGroup = this.fb.group({
+    registros: [this.adminService.nRegistros],
+  });
+
   constructor(private adminService: AdminService, private fb: FormBuilder) {}
 
   ngOnInit() {
@@ -25,5 +29,10 @@ export class AdminComponent implements OnInit {
   buscarUsuario() {
     const { busqueda } = this.busquedaForm.value;
     this.adminService.cargarUsuarioBuscado(busqueda);
+  }
+
+  recargarUsuarios() {
+    this.adminService.nRegistros = this.registrosForm.get('registros')?.value;
+    this.adminService.cargarUsuarios().subscribe();
   }
 }

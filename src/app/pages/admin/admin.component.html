@@ -20,9 +20,13 @@
     <div class="row mb-2">
       <div class="col">
         <div class="row">
-          <form class="col">
+          <form class="col" [formGroup]="registrosForm">
             <label class="col-form-label col me-2">N° registros: </label>
-            <select name="col-sm-8 form-control">
+            <select
+              name="col-sm-8 form-control"
+              formControlName="registros"
+              (change)="recargarUsuarios()"
+            >
               <option value="10">10</option>
               <option value="20" selected>20</option>
               <option value="50">50</option>

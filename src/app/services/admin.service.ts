@@ -1,15 +1,17 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
-import { Usuario } from '../models/auth.interface';
+import { Paginacion, Content, Rol } from '../models/paginacion.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminService {
   private _tablaSeleccionada: string = 'users';
-  private _usuarios: Usuario[] = [];
-  private _usuariosBuscados: Usuario[] = [];
+  private _usuarios: Content[] = [];
+  private _usuariosBuscados: Content[] = [];
+  private _pageIndex: number = 0;
+  public nRegistros: number = 20;
 
   constructor(private http: HttpClient) {}
 
@@ -18,12 +20,25 @@ export class AdminService {
       'https://proyectofinal-backend-production.up.railway.app/api/usuarios';
     const token = 'Bearer ' + localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', token ? token : '');
-    return this.http.get<Usuario[]>(url, { headers }).pipe(
-      tap((resp) => {
-        this._usuarios = resp;
-        this._usuariosBuscados=resp
-      })
-    );
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('pagina', this._pageIndex);
+    queryParams = queryParams.append('registros', this.nRegistros);
+    return this.http
+      .get<Paginacion>(url, { headers, params: queryParams })
+      .pipe(
+        tap((resp) => {
+          this._usuarios = resp.content;
+          this._usuariosBuscados = resp.content;
+        })
+      );
+  }
+
+  cargarUsuario(nombreUsuario: string) {
+    const token = 'Bearer ' + localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', token ? token : '');
+    const url = `https://proyectofinal-backend-production.up.railway.app/api/usuarios/buscar/nombre_usuario/${nombreUsuario}`;
+
+    return this.http.get<Content>(url, { headers });
   }
 
   cargarUsuarioBuscado(termino: string) {
