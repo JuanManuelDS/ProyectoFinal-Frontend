@@ -1,5 +1,6 @@
 export interface Cartarestaurant {
     nombre: string;
+    imagen: any;
     secciones: Seccion[];
     menus: Menu[];
 }

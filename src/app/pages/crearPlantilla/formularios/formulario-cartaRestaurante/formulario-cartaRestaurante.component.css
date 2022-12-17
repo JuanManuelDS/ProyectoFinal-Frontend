@@ -3,6 +3,12 @@
     background-color: #ed6f1a;
     color: white;
 }
+
+.descargar_button:hover {
+  background-color: #e75d00;
+  color: white;
+}
+
 .descargar_guardar>div {
     padding: 0px
 }
@@ -28,4 +34,11 @@ form {
 
 label {
     margin-bottom: 3px;
+}
+
+div.dato_agregado {
+  margin: 10px 0px;
+  border-radius: 5px;
+  border: rgb(223, 223, 223) 1px solid;
+
 }

@@ -52,10 +52,15 @@ button.submit_button {
     letter-spacing: .7px;
 }
 
+
 a:hover {
     cursor: pointer
 }
 
 label {
     margin-top: 10px;
+
+h3 {
+    font-family: 'Libre Baskerville', serif;
+
 }

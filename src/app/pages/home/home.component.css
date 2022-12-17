@@ -1,17 +1,21 @@
-.textoCarousel{
+.textoCarousel {
     color: black;
 }
-.fh{
+
+.fh {
     position: absolute;
     top: 25%;
     left: 36%;
 }
-.fh2{
+
+
+.fh2 {
     position: absolute;
     top: 30%;
     left: 46%;
 }
-.gt{
+
+.gt {
     background-color: #ed6f1a;
     color: white;
     width: 12%;
@@ -20,6 +24,80 @@
     bottom: 18%;
     left: 43.5%;
 }
-img{
+
+.get_started {
+    background-color: #ed6f1a;
+    color: white;
+    padding: 10px 30px;
+    font-size: 1.6rem;
+    transition: transform .3s;
+}
+
+.get_started:hover {
+    background-color: #e05a00;
+    transform: scale(1.08);
+    box-shadow: 1px 1px 7px rgb(78, 78, 78);
+}
+
+h1 {
+    font-size: 3.8rem;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgb(78, 78, 78);
+}
+
+div.contenedor_home {
     height: 90vh;
+    background-image: url('../../../assets/started.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center
+}
+
+div.espaciador {
+    height: 100px;
+}
+
+@media (max-width: 1380px) {
+    h1 {
+        font-size: 3.5rem;
+    }
+
+    div.espaciador {
+        height: 20px;
+    }
+}
+
+@media (max-width: 870px) {
+    h1 {
+        font-size: 3.2rem;
+        max-width: 700px;
+
+    }
+
+    .get_started {
+        font-size: 1.5rem;
+    }
+
+    div.espaciador {
+        height: 100px;
+    }
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2.8rem;
+        max-width: 500px;
+
+    }
+
+    .get_started {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-height: 700px) {
+    div.espaciador {
+        height: 0px;
+    }
 }

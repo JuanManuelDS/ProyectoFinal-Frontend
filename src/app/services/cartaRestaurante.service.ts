@@ -7,6 +7,7 @@ import { Menu, Plato, Seccion } from '../models/cartarestaurant.interface';
 export class CartaRestauranteService {
 
   private _nombre: string = '';
+  private _portada: any;
   private _secciones: Seccion[] = [];
   private _menus: Menu[] = [];
   private _platos: Plato[] = [];
@@ -29,6 +30,11 @@ get platos() {
   return this._platos;
 }
 
+get portada() {
+  return this._portada;
+}
+
+// ------------------- ADD -------------------
 addNombre(nombre: string) {
   this._nombre = nombre;
 }
@@ -45,6 +51,11 @@ addPlato(plato: Plato) {
   this._platos.push(plato);
 }
 
+addPortada(file: any){
+  this._portada = file;
+}
+
+// ----------------- ELIMINAR ----------------
 eliminarSeccion(index: number) {
   this._secciones.splice(index, 1);
 }
