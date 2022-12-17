@@ -1,49 +1,23 @@
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">Id</th>
       <th scope="col">Email</th>
       <th scope="col">Username</th>
-      <th scope="col">Roles</th>
       <th scope="col">Último ingreso</th>
       <th scope="col">Acciones</th>
     </tr>
   </thead>
-  <tbody class="table-group-divider">
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
+  <tbody class="table-group-divider" *ngIf="usuarios.length > 0">
+    <tr *ngFor="let usuario of usuarios">
+      <th scope="row">{{ usuario.id }}</th>
+      <td>{{ usuario.email }}</td>
+      <td>{{ usuario.nombreUsuario }}</td>
+      <td>{{ usuario.lastLogin }}</td>
       <td>
-        <img src="assets/delete-icon.png" width="22px" alt="" />
-        <img src="assets/visualize-icon.png" width="22px" alt="" />
-        <img src="assets/edit-icon.png" width="22px" alt="" />
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>@fat</td>
-      <td>
-        <img src="assets/delete-icon.png" width="22px" alt="" />
-        <img src="assets/visualize-icon.png" width="22px" alt="" />
-        <img src="assets/edit-icon.png" width="22px" alt="" />
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>The bird</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>
-        <img src="assets/delete-icon.png" width="22px" alt="" />
-        <img src="assets/visualize-icon.png" width="22px" alt="" />
-        <img src="assets/edit-icon.png" width="22px" alt="" />
+        <img src="assets/iconos/delete-icon.png" width="22px" alt="" />
+        <img src="assets/iconos/visualize-icon.png" width="22px" alt="" />
+        <img src="assets/iconos/edit-icon.png" width="22px" alt="" />
       </td>
     </tr>
   </tbody>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AdminService } from '../../services/admin.service';
 
 @Component({
@@ -7,11 +8,22 @@ import { AdminService } from '../../services/admin.service';
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
+  busquedaForm: FormGroup = this.fb.group({
+    busqueda: [''],
+  });
+
+  constructor(private adminService: AdminService, private fb: FormBuilder) {}
+
+  ngOnInit() {
+    this.adminService.cargarUsuarios().subscribe();
+  }
+
   get tablaSeleccionada() {
     return this.adminService.tablaSeleccionada;
   }
 
-  constructor(private adminService: AdminService) {}
-
-  ngOnInit() {}
+  buscarUsuario() {
+    const { busqueda } = this.busquedaForm.value;
+    this.adminService.cargarUsuarioBuscado(busqueda);
+  }
 }

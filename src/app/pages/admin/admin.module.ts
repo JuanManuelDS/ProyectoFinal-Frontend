@@ -5,6 +5,7 @@ import { AdminMenuComponent } from './admin-menu/admin-menu.component';
 import { PlantillasTableComponent } from './plantillas-table/plantillas-table.component';
 import { UsersTableComponent } from './users-table/users-table.component';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,6 @@ import { ComponentsModule } from 'src/app/components/components.module';
     PlantillasTableComponent,
     UsersTableComponent,
   ],
-  imports: [CommonModule, ComponentsModule],
+  imports: [CommonModule, ComponentsModule, ReactiveFormsModule],
 })
 export class AdminModule {}

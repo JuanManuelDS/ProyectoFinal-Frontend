@@ -13,7 +13,7 @@ export class ValidarAdminGuard implements CanActivate, CanLoad {
     return this.authService.validarToken().pipe(
       //esto se lee antes de enviar la respuesta, lo hago para redireccionar al login en caso que validarToken retorne false
       tap((resp) => {
-        if (resp.roles !== '[ROLE_ADMIN]') {
+        if (!resp.roles?.includes('ADMIN')) {
           this.router.navigateByUrl('/auth');
         }
       }),
@@ -29,8 +29,7 @@ export class ValidarAdminGuard implements CanActivate, CanLoad {
     return this.authService.validarToken().pipe(
       //esto se lee antes de enviar la respuesta, lo hago para redireccionar al login en caso que validarToken retorne false
       tap((resp) => {
-        console.log('respuesta de validacion token: ' + JSON.stringify(resp));
-        if (!resp.username) {
+        if (!resp.roles?.includes('ADMIN')) {
           this.router.navigateByUrl('/auth');
         }
       }),

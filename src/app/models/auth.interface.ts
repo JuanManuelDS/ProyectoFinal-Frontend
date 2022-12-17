@@ -8,8 +8,11 @@ export interface TokenValidation {
 }
 
 export interface Usuario {
+  id?: number;
   nombreUsuario: string;
   contrasena: string;
+  email?: string;
+  lastLogin?:string
 }
 
 export interface NuevoUsuario {
