@@ -30,3 +30,33 @@
 .precioPlato{
   float: right;
 }
+
+@media (max-width: 870px) {
+  .antes_exportar {
+      width: 700px;
+  }
+}
+
+@media (max-width: 750px) {
+  .antes_exportar {
+      width: 600px;
+  }
+}
+
+@media (max-width: 650px) {
+  .antes_exportar {
+      width: 500px;
+  }
+}
+
+@media (max-width: 550px) {
+  .antes_exportar {
+      width: 400px;
+  }
+}
+
+@media (max-width: 450px) {
+  .antes_exportar {
+      width: 300px;
+  }
+}
