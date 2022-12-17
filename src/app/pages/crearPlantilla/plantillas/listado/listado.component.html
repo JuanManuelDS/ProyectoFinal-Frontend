@@ -1,5 +1,5 @@
 <div class="bg-white antes_exportar" id="documento" #documento>
-  <img src="{{imagen}}" alt="">
+  <img src="{{imagen}}" alt="" id="portada">
   <h2 class="text-center mb-4">{{ titulo }}</h2>
   <ul *ngIf="listado.length > 0">
     <li *ngFor="let item of listado">{{ item.item }}</li>

@@ -15,13 +15,14 @@
 
       <app-formulario-cartaRestaurante
         *ngIf="plantilla === 'cartaRestaurante'"
+        (crearPDF)="generarCR($event)"
       ></app-formulario-cartaRestaurante>
     </div>
 
     <div class="col d-flex justify-content-center">
       <app-curriculum *ngIf="plantilla === 'curriculum'" [generarPDF]="curriculum"></app-curriculum>
       <app-listado *ngIf="plantilla === 'listado'" [generarPDF]="listado"></app-listado>
-      <app-cartaRestaurante *ngIf="plantilla === 'cartaRestaurante'"></app-cartaRestaurante>
+      <app-cartaRestaurante *ngIf="plantilla === 'cartaRestaurante'" [generarPDF]="cartaRestaurante"></app-cartaRestaurante>
     </div>
   </div>
 </div>

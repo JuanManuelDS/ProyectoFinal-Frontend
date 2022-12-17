@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Menu, Plato, Seccion } from 'src/app/models/cartarestaurant.interface';
+import { Menu, Plato, Seccion, Cartarestaurant } from 'src/app/models/cartarestaurant.interface';
 import { CartaRestauranteService } from 'src/app/services/cartaRestaurante.service';
 import convertBase64 from 'src/app/utils/convertBase64';
 
@@ -13,14 +13,16 @@ export class FormularioCartaRestauranteComponent implements OnInit {
 
   imagen: any;
 
-  nuevoItem: FormGroup = this.fb.group({
+  @Output() crearPDF = new EventEmitter();
+
+  // NUEVOS
+  nuevoRestaurante: FormGroup = this.fb.group({
     nombre: [''],
     imagen: [],
     secciones: this.fb.array([]),
     menus: this.fb.array([])
   });
 
-  // NUEVOS
   nuevaSeccionForm: FormGroup = this.fb.group({
     nombre: [''],
     imagen: [],
@@ -49,6 +51,10 @@ export class FormularioCartaRestauranteComponent implements OnInit {
     menus: this.fb.array([])
   });
 
+  restauranteForm: FormGroup = this.fb.group({
+    restaurante: this.fb.array([])
+  });
+
   // GETTERS
 
   get arrSecciones(){
@@ -68,12 +74,21 @@ export class FormularioCartaRestauranteComponent implements OnInit {
     return this.nuevoMenuForm.controls['platosMenu'] as FormArray;
   }
 
+  get arrRestaurante() {
+    return this.restauranteForm.controls['restaurante'] as FormArray;
+  }
+
   constructor( private fb: FormBuilder, private crService: CartaRestauranteService) { }
 
   ngOnInit() {
   }
 
   // ------------------ GUARDAR OBJETOS ----------------------
+
+  guardarNombre(){
+    let nombre = this.nuevoRestaurante.get('nombre')?.value;
+    this.crService.addNombre(nombre);
+  }
 
   guardarPlatosSeccion(){
     let plato: Plato = {
@@ -112,6 +127,10 @@ export class FormularioCartaRestauranteComponent implements OnInit {
         platos: [seccion.platos]
       })
     );
+
+    while(this.platosSeccion.length){
+      this.platosSeccion.removeAt(0);
+    }
 
     this.nuevaSeccionForm.reset();
   }
@@ -156,7 +175,29 @@ export class FormularioCartaRestauranteComponent implements OnInit {
       })
     );
 
+    while(this.platosMenu.length){
+      this.platosMenu.removeAt(0);
+    }
+
     this.nuevoMenuForm.reset();
+  }
+
+  guardarRestaurante() {
+    let restaurante: Cartarestaurant = {
+      nombre: this.crService.nombre,
+      imagen: this.imagen,
+      secciones: this.arrSecciones.get('secciones')?.value,
+      menus: this.arrMenus.get('menus')?.value
+    }
+
+    this.arrRestaurante.push(
+      this.fb.group({
+        nombre: [restaurante.nombre],
+        imagen: [restaurante.imagen],
+        secciones: [restaurante.secciones],
+        menus: [restaurante.menus]
+      })
+    );
   }
 
   // ---------------- ELIMINAR -------------------
@@ -187,27 +228,19 @@ export class FormularioCartaRestauranteComponent implements OnInit {
     this.crService.eliminarMenu(i);
   }
 
-  guardarItem() {
-
-  }
-
-  cambiarNombre(){
-
-  }
 
   async cargarImagen(event: any) {
     const file = event.target.files[0];
     const base64 = await convertBase64(file);
     this.imagen = base64;
+    this.crService.addPortada(base64);
   }
 
   limpiar(formulario: string){
 
   }
 
-
-
   generarPDF(){
-
+    this.crearPDF.emit(true);
   }
 }

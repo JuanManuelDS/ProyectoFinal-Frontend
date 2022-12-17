@@ -1,5 +1,5 @@
 <div class="container">
-    <form [formGroup]="nuevoItem" (submit)="guardarItem()">
+    <form [formGroup]="nuevoRestaurante" (submit)="guardarRestaurante()">
         <div class="row">
             <div class="col">
                 <label class="form-label">Nombre del Restaurante:</label>
@@ -7,7 +7,7 @@
                     type="text"
                     class="form-control mb-2"
                     formControlName="nombre"
-                    (keyup)="cambiarNombre()"/>
+                    (keyup)="guardarNombre()"/>
             </div>
         </div>
         <div class="row">
@@ -41,17 +41,6 @@
                     <label class="form-label">Nombre de la Sección:
                     </label>
                     <input type="text" class="form-control mb-2" formControlName="nombre"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <label class="form-label">Imagen:
-                    </label>
-                    <input
-                        type="file"
-                        class="form-control mb-3"
-                        formControlName="imagen"
-                        (change)="cargarImagen($event)"/>
                 </div>
             </div>
             <!-- PLATOS SECCION -->
@@ -173,24 +162,13 @@
                   <input type="text" class="form-control mb-3" formControlName="precio"/>
               </div>
           </div>
-            <div class="row">
-                <div class="col">
-                    <label class="form-label">Imagen:
-                    </label>
-                    <input
-                        type="file"
-                        class="form-control mb-3"
-                        formControlName="imagen"
-                        (change)="cargarImagen($event)"/>
-                </div>
-            </div>
             <!-- PLATOS MENU -->
             <div class="row">
               <div class="col">
                   <a
                       class="btn text-start"
                       data-bs-toggle="collapse"
-                      href="#platosSeccion"
+                      href="#platosMenu"
                       role="button"
                       aria-expanded="false"
                       aria-controls="secciones">Agregar Plato
@@ -200,7 +178,7 @@
                       [formGroup]="nuevoPlatoForm"
                       (submit)="guardarPlatoMenu()"
                       class="collapse multi-collapse"
-                      id="platosSeccion">
+                      id="platosMenu">
                       <div class="row">
                           <div class="col">
                               <label class="form-label">Nombre:
@@ -215,16 +193,9 @@
                               <input type="text" class="form-control mb-3" formControlName="descripcion"/>
                           </div>
                       </div>
-                      <div class="row">
-                        <div class="col">
-                            <label class="form-label">Precio:
-                            </label>
-                            <input type="text" class="form-control mb-3" formControlName="precio"/>
-                        </div>
-                    </div>
                     <div class="row">
                       <div class="col">
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Plato</button>
                       </div>
                     </div>
                   </form>
@@ -243,6 +214,7 @@
               <button class="btn btn-danger" (click)="eliminarPlatoMenu(i)">Eliminar</button>
             </div>
           </div>
+
             <div class="row">
                 <div class="rol text-end">
                     <button class="btn btn-success me-2" (click)="limpiar('datos')" type="button">

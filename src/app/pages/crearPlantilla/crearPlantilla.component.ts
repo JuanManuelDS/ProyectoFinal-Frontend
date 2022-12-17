@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Cartarestaurant } from 'src/app/models/cartarestaurant.interface';
+
 
 @Component({
   selector: 'app-crearPlantilla',
@@ -12,7 +12,7 @@ export class CrearPlantillaComponent implements OnInit {
 
   curriculum: boolean = false;
   listado: boolean = false;
-  cartaRestaurante: Cartarestaurant | undefined;
+  cartaRestaurante: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
@@ -29,5 +29,9 @@ export class CrearPlantillaComponent implements OnInit {
 
   generarCV(valor: boolean) {
     this.curriculum = true;
+  }
+
+  generarCR(valor:boolean) {
+    this.cartaRestaurante = true;
   }
 }
