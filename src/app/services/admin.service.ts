@@ -53,6 +53,16 @@ export class AdminService {
     return this.http.delete(url);
   }
 
+  editarRol(username: string, roleName: string) {
+    const url =
+      'https://proyectofinal-backend-production.up.railway.app/api/roles/usuarios';
+    const body = { username, roleName };
+    const token = 'Bearer ' + localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', token ? token : '');
+
+    return this.http.post(url, body, { headers });
+  }
+
   cambiarTabla(tabla: string) {
     this._tablaSeleccionada = tabla;
   }

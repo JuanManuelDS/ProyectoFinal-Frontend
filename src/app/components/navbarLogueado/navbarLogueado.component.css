@@ -14,6 +14,11 @@ nav.nav_bar {
     padding-right: 40px;
 }
 
+.menu_desplegable {
+    position: absolute;
+    right: 70px;
+}
+
 @media (max-width:600px) {
     nav.nav_bar {
         padding-right: 10px;

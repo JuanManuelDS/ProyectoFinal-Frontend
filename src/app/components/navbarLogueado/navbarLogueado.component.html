@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm bg-light nav_bar">
   <div class="container" id="navbar_container">
-    <a class="navbar-brand navbar_link mx-4" href="/"
+    <a class="navbar-brand navbar_link mx-4" routerLink="/"
       ><img src="assets/logo.png" alt="logo shrimPDF" height="70px"
     /></a>
     <button
@@ -31,16 +31,14 @@
               class="mb-1"
             />
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu menu_desplegable">
             <li><a class="dropdown-item" routerLink="/user">Mi cuenta</a></li>
             <li>
               <a class="dropdown-item" routerLink="/dashboard">Plantillas</a>
             </li>
             <!-- Esta se va a mostrar únicamente si el usuario es admin -->
-            <li>
-              <a class="dropdown-item" routerLink="/admin" *ngIf="isAdmin"
-                >Sección admin</a
-              >
+            <li *ngIf="isAdmin">
+              <a class="dropdown-item" routerLink="/admin">Sección admin</a>
             </li>
             <li><hr class="dropdown-divider" /></li>
             <li>

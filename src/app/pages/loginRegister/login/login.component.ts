@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
 
   login() {
     const { nombreUsuario, contrasena } = this.loginForm.value;
-    console.log(nombreUsuario, contrasena);
     this.authService.login(nombreUsuario, contrasena).subscribe((resp) => {
       if (resp.token) {
         this.router.navigateByUrl('/dashboard');
@@ -35,5 +34,4 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-
 }

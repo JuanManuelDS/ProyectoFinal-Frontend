@@ -33,6 +33,34 @@ export class UsersTableComponent implements OnInit {
     });
   }
 
+  async editarRol(nombreUsuario: string) {
+    const roleName = await Swal.fire({
+      title: 'Seleccione el rol que desea agregar',
+      input: 'select',
+      inputOptions: {
+        ADMIN: 'Admin',
+        USER: 'User',
+      },
+      inputPlaceholder: 'Seleccionar rol',
+      showCancelButton: true,
+      inputValidator: function (value) {
+        return new Promise((resolve: any) => {
+          if (value === '') {
+            resolve('Por favor, selecciona una opción');
+          } else resolve();
+        });
+      },
+    });
+    this.adminService
+      .editarRol(nombreUsuario, roleName.value)
+      .subscribe((resp) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Rol agregado correctamente!',
+        });
+      });
+  }
+
   detallesUsuario(nombreUsuario: string) {
     this.adminService.cargarUsuario(nombreUsuario).subscribe((resp) => {
       Swal.fire({

@@ -4,9 +4,10 @@ import { FooterComponent } from './footer/footer.component';
 import { NavbarLogueadoComponent } from './navbarLogueado/navbarLogueado.component';
 import { AboutComponent } from './about/about.component';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
-  imports: [RouterModule],
+  imports: [CommonModule, RouterModule],
   declarations: [
     NavbarLandingComponent,
     NavbarLogueadoComponent,

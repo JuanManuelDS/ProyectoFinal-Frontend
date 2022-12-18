@@ -27,7 +27,12 @@
           (click)="detallesUsuario(usuario.nombreUsuario)"
           alt="eye icon"
         />
-        <img src="assets/iconos/edit-icon.png" width="22px" alt="edit icon" />
+        <img
+          src="assets/iconos/edit-icon.png"
+          width="22px"
+          alt="edit icon"
+          (click)="editarRol(usuario.nombreUsuario)"
+        />
       </td>
     </tr>
   </tbody>

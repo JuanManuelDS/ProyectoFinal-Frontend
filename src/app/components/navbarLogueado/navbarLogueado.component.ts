@@ -14,6 +14,7 @@ export class NavbarLogueadoComponent implements OnInit {
 
   ngOnInit() {
     this.nombreUsuario = localStorage.getItem('nombreUsuario');
+    console.log('en componente ', this.isAdmin);
   }
 
   logout() {
