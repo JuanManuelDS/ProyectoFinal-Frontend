@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-sm bg-light nav_bar">
   <div class="container" id="navbar_container">
     <a class="navbar-brand navbar_link mx-4" href="/"
       ><img src="assets/logo.png" alt="logo shrimPDF" height="70px"
@@ -23,7 +23,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <span class="fs-5 me-1">juanmanuelds</span>
+            <span class="fs-5 me-1">{{ nombreUsuario }}</span>
             <img
               src="assets/iconos/register-icon.png"
               alt="login logo"
@@ -37,10 +37,14 @@
               <a class="dropdown-item" routerLink="/dashboard">Plantillas</a>
             </li>
             <!-- Esta se va a mostrar únicamente si el usuario es admin -->
-            <li><a class="dropdown-item" href="/admin">Sección admin</a></li>
+            <li>
+              <a class="dropdown-item" routerLink="/admin" *ngIf="isAdmin"
+                >Sección admin</a
+              >
+            </li>
             <li><hr class="dropdown-divider" /></li>
             <li>
-              <a class="dropdown-item">Cerrar Sesión</a>
+              <a class="dropdown-item" (click)="logout()">Cerrar Sesión</a>
             </li>
           </ul>
         </li>

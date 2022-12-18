@@ -13,11 +13,12 @@ export class ValidarTokenGuard implements CanActivate, CanLoad {
     return this.authService.validarToken().pipe(
       //esto se lee antes de enviar la respuesta, lo hago para redireccionar al login en caso que validarToken retorne false
       tap((resp) => {
-        if (!resp.username) {
-          this.router.navigateByUrl('/auth');
-        } else if (resp.roles === '[ROLE_ADMIN]') {
+        if (resp.roles?.includes('ROLE_ADMIN')) {
           //En caso que tenga el rol de admin lo seteo como tal
           this.authService.esAdmin();
+        }
+        if (!resp.username) {
+          this.router.navigateByUrl('/auth');
         }
       }),
       map((resp) => true),

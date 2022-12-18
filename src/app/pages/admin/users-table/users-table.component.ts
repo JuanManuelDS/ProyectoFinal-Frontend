@@ -18,6 +18,21 @@ export class UsersTableComponent implements OnInit {
     this.adminService.cargarUsuarios().subscribe();
   }
 
+  eliminarUsuario(nombreUsuario: string) {
+    Swal.fire({
+      title: '¿Estas seguro que quieres eliminar el usuario?',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Sí',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.adminService.eliminarUsuario(nombreUsuario).subscribe((resp) => {
+          Swal.fire('Usuario eliminado', '', 'success');
+        });
+      }
+    });
+  }
+
   detallesUsuario(nombreUsuario: string) {
     this.adminService.cargarUsuario(nombreUsuario).subscribe((resp) => {
       Swal.fire({
@@ -39,7 +54,6 @@ export class UsersTableComponent implements OnInit {
         </div>
         `,
       });
-      console.log(resp);
     });
   }
 

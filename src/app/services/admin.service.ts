@@ -48,6 +48,11 @@ export class AdminService {
     this._usuariosBuscados = usuarios;
   }
 
+  eliminarUsuario(nombreUsuario: string) {
+    const url = `https://proyectofinal-backend-production.up.railway.app/api/usuarios/${nombreUsuario}`;
+    return this.http.delete(url);
+  }
+
   cambiarTabla(tabla: string) {
     this._tablaSeleccionada = tabla;
   }

@@ -59,8 +59,27 @@ a:hover {
 
 label {
     margin-top: 10px;
+}
 
 h3 {
     font-family: 'Libre Baskerville', serif;
+
+}
+
+@media (max-width:1000px) {
+    main {
+        padding-top: 50px;
+    }
+}
+
+@media(max-width:370px) {
+    img {
+        width: 250px
+    }
+
+    div.formulario_container {
+        width: 100%;
+        margin: 30px 10px !important;
+    }
 
 }

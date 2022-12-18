@@ -15,23 +15,20 @@
       <td>{{ usuario.nombreUsuario }}</td>
       <td>{{ usuario.lastLogin }}</td>
       <td>
-        <img src="assets/iconos/delete-icon.png" width="22px" alt="" />
+        <img
+          src="assets/iconos/delete-icon.png"
+          width="22px"
+          alt="delete icon"
+          (click)="eliminarUsuario(usuario.nombreUsuario)"
+        />
         <img
           src="assets/iconos/visualize-icon.png"
           width="22px"
           (click)="detallesUsuario(usuario.nombreUsuario)"
-          alt=""
+          alt="eye icon"
         />
-        <img src="assets/iconos/edit-icon.png" width="22px" alt="" />
+        <img src="assets/iconos/edit-icon.png" width="22px" alt="edit icon" />
       </td>
     </tr>
   </tbody>
 </table>
-<!-- <ul>
-  <li>Nombre de usuario: {{resp.nombreUsuario}}</li>
-  <li>email: {{resp.email}}</li>
-  <li>Última actividad: {{resp.lastLogin}}</li>
-  <li>Roles: {{resp.nombreUsuario}}</li>
-  <li>Nombre de usuario: {{resp.nombreUsuario}}</li>
-
-</ul> -->

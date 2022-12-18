@@ -1,1 +1,8 @@
+<div class="container-fluid p-0" *ngIf="notLoginRegister">
+  <app-navbarLogueado *ngIf="isLogged; else landing"></app-navbarLogueado>
+  <ng-template #landing>
+    <app-navbarLanding></app-navbarLanding>
+  </ng-template>
+</div>
+
 <router-outlet></router-outlet>

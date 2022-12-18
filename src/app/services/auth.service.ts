@@ -15,6 +15,7 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 export class AuthService {
   private _usuario!: Usuario;
   private _isAdmin: boolean = false;
+  private _isLogged: boolean = false;
   public emailRegex: string =
     '^[A-Za-z0-9._%+-]{3,}@[A-Za-z0-9.-]{2,}\\.[a-z]{2,4}$';
 
@@ -30,8 +31,10 @@ export class AuthService {
         if (resp.token) {
           //Guardo el token en el localStorage
           localStorage.setItem('token', resp.token);
+          localStorage.setItem('nombreUsuario', nombreUsuario);
           //Seteo el usuario con los datos correctos
           this._usuario = { ...body };
+          this._isLogged = true;
         }
       }),
       map((resp) => resp),
@@ -52,6 +55,13 @@ export class AuthService {
       map((resp) => true),
       catchError((err) => of(err))
     );
+  }
+
+  logout() {
+    //Elimino los datos del localStorage relacionados con la autentificación así deberá volver a loguearse
+    localStorage.removeItem('token');
+    localStorage.removeItem('nombreUsuario');
+    this._isLogged = false;
   }
 
   camposIguales(campo1: string, campo2: string) {
@@ -84,16 +94,16 @@ export class AuthService {
     //En caso que no tenga un token en el localstorage paso un string vacío
     const headers = new HttpHeaders().set('Authorization', token || '');
 
-    return this.http.get<TokenValidation>(url, { headers }); /* .pipe(
-      map((resp) => {
-        console.log(
-          'Esta es la respuesta desde validarToken : ',
-          JSON.stringify(resp)
-        );
-        return resp;
-      }), //Siempre que haya una respuesta válida entrará aquí y por ende el token es válido
-      catchError((err) => of(err)) //En caso de caer aquí no es válido
-    ); */
+    return this.http.get<TokenValidation>(url, { headers }).pipe(
+      tap((resp) => {
+        //Si los roles incluidos en el token incluye ROLE_ADMIN entonces seteo al usuario como admin
+        if (resp.roles?.includes('ADMIN')) {
+          this._isAdmin = true;
+        } else this._isAdmin = false;
+        //seteo el estado isLogged a true
+        this._isLogged = true;
+      })
+    );
   }
 
   esAdmin() {
@@ -102,5 +112,13 @@ export class AuthService {
 
   get isAdmin() {
     return this._isAdmin;
+  }
+
+  get isLogged() {
+    return this._isLogged;
+  }
+
+  get usuario() {
+    return this._usuario;
   }
 }
