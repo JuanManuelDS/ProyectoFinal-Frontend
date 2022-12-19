@@ -23,6 +23,7 @@ export class DashboardUsuarioComponent implements OnInit {
       this.plantillas = resp;
     });
   }
+  
 
   abrirPlantilla(id: number, tipo: string) {
     let ruta = '/nueva-plantilla/';

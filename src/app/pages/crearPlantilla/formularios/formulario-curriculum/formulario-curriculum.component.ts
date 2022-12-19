@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -19,7 +25,7 @@ import Swal from 'sweetalert2';
   templateUrl: './formulario-curriculum.component.html',
   styleUrls: ['./formulario-curriculum.component.css'],
 })
-export class FormularioCurriculumComponent implements OnInit {
+export class FormularioCurriculumComponent implements OnInit, OnDestroy {
   abajo: boolean = true;
   imagen: any;
   plantilla: Plantilla | undefined;
@@ -93,9 +99,11 @@ export class FormularioCurriculumComponent implements OnInit {
     private plantillaService: PlantillasService,
     private router: Router
   ) {}
+  ngOnDestroy() {
+    this.cvService.resetearDatos();
+  }
 
   ngOnInit() {
-    
     let id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id !== null && id !== undefined) {
       this.plantillaService.getPlantilla(Number(id)).subscribe((resp) => {
@@ -104,7 +112,6 @@ export class FormularioCurriculumComponent implements OnInit {
       });
     }
   }
-
 
   rellenarDatos() {
     let data: Curriculum = JSON.parse(this.plantilla!.datos);
