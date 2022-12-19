@@ -24,10 +24,6 @@ export class CurriculumService {
   private _datosInteres: DatosInteres[] = [];
   nombreArchivo: string = '';
 
-  /* datoI: FormGroup = this.fb.group({
-    datos: this.fb.array([]),
-  }); */
-
   constructor(
     private fb: FormBuilder,
     private plantillaService: PlantillasService

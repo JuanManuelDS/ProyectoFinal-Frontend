@@ -97,7 +97,6 @@ export class FormularioCurriculumComponent implements OnInit {
     if (id !== null && id !== undefined) {
       this.plantillaService.getPlantilla(Number(id)).subscribe((resp) => {
         this.plantilla = resp;
-        console.log(resp);
         this.rellenarDatos();
       });
     }
@@ -109,6 +108,44 @@ export class FormularioCurriculumComponent implements OnInit {
     this.nombreArchivo = this.plantilla?.nombreArchivo;
     if (data.datos !== null && data.datos !== undefined) {
       this.datosForm.setValue(data.datos);
+      this.guardarDatos();
+    }
+    if (data.experiencias !== null && data.experiencias !== undefined) {
+      for (let i = 0; i < data.experiencias.length; i++) {
+        this.arrExperiencias.push(
+          this.formBuilder.group({ ...data.experiencias[i] })
+        );
+        this.cvService.agregarExperiencia(data.experiencias[i]);
+      }
+    }
+    if (data.conocimientos !== null && data.conocimientos !== undefined) {
+      for (let i = 0; i < data.conocimientos.length; i++) {
+        this.arrConocimientos.push(
+          this.formBuilder.group({ ...data.conocimientos[i] })
+        );
+        this.cvService.agregarConocimiento(data.conocimientos[i]);
+      }
+    }
+    if (data.estudios !== null && data.estudios !== undefined) {
+      for (let i = 0; i < data.estudios.length; i++) {
+        this.arrEstudios.push(this.formBuilder.group({ ...data.estudios[i] }));
+        this.cvService.agregarEstudio(data.estudios[i]);
+      }
+    }
+
+    if (data.idiomas !== null && data.idiomas !== undefined) {
+      for (let i = 0; i < data.idiomas.length; i++) {
+        this.arrIdiomas.push(this.formBuilder.group({ ...data.idiomas[i] }));
+        this.cvService.agregarIdioma(data.idiomas[i]);
+      }
+    }
+    if (data.datosInteres !== null && data.datosInteres !== undefined) {
+      for (let i = 0; i < data.datosInteres.length; i++) {
+        this.arrDatosInteres.push(
+          this.formBuilder.group({ ...data.datosInteres[i] })
+        );
+        this.cvService.agregarDatoInteres(data.datosInteres[i]);
+      }
     }
   }
 
