@@ -53,6 +53,16 @@ export class CurriculumService {
     return this._datosInteres;
   }
 
+  resetearDatos() {
+    this._datos = undefined;
+    this._experiencias = [];
+    this._estudios = [];
+    this._conocimientos = [];
+    this._idiomas = [];
+    this._datosInteres = [];
+    this.nombreArchivo = '';
+  }
+
   guardarCv() {
     const cv: Curriculum = {
       datos: this._datos,

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   Conocimiento,
   Curriculum,
@@ -89,7 +89,8 @@ export class FormularioCurriculumComponent implements OnInit {
     private formBuilder: FormBuilder,
     private cvService: CurriculumService,
     private activatedRoute: ActivatedRoute,
-    private plantillaService: PlantillasService
+    private plantillaService: PlantillasService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -104,7 +105,7 @@ export class FormularioCurriculumComponent implements OnInit {
 
   rellenarDatos() {
     let data: Curriculum = JSON.parse(this.plantilla!.datos);
-    console.log(data);
+    this.cvService.resetearDatos();
     this.nombreArchivo = this.plantilla?.nombreArchivo;
     if (data.datos !== null && data.datos !== undefined) {
       this.datosForm.setValue(data.datos);
@@ -187,6 +188,8 @@ export class FormularioCurriculumComponent implements OnInit {
       this.cvService.nombreArchivo = nombre_archivo;
       this.cvService.guardarCv();
       this.crearPDF.emit(true);
+
+      this.router.navigateByUrl('/dashboard');
     }
   }
 
