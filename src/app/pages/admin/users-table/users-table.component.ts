@@ -51,14 +51,16 @@ export class UsersTableComponent implements OnInit {
         });
       },
     });
-    this.adminService
-      .editarRol(nombreUsuario, roleName.value)
-      .subscribe((resp) => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Rol agregado correctamente!',
+    if (roleName.value !== undefined) {
+      this.adminService
+        .editarRol(nombreUsuario, roleName.value)
+        .subscribe((resp) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Rol agregado correctamente!',
+          });
         });
-      });
+    }
   }
 
   detallesUsuario(nombreUsuario: string) {

@@ -98,8 +98,8 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private plantillaService: PlantillasService,
     private router: Router
-  ) { }
-  
+  ) {}
+
   ngOnDestroy() {
     this.cvService.resetearDatos();
   }
@@ -119,7 +119,18 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     this.cvService.resetearDatos();
     this.nombreArchivo = this.plantilla?.nombreArchivo;
     if (data.datos !== null && data.datos !== undefined) {
-      this.datosForm.setValue(data.datos);
+      const { nombre, ciudad, nacimiento, email, telefono, presentacion } =
+        data.datos;
+      this.datosForm.setValue({
+        nombre,
+        ciudad,
+        nacimiento,
+        email,
+        telefono,
+        presentacion,
+        imagen: '',
+      });
+      this.imagen = data.datos.imagen;
       this.guardarDatos();
     }
     if (data.experiencias !== null && data.experiencias !== undefined) {
@@ -181,7 +192,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     return this.datosInteresForms.controls['datosInteres'] as FormArray;
   }
 
-  async guardarCV(){
+  async guardarCV() {
     if (this.nombreArchivo === '') {
       const { value: nombre_archivo } = await Swal.fire({
         title: 'Nombre del archivo',
@@ -211,6 +222,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
   guardarDatos() {
     //Paso los datos del formulario a un objeto y se lo envío al servicio para que lo agregue al documento
     let { ...datos } = this.datosForm.value;
+    datos.imagen = this.imagen;
     this.cvService.agregarDatos(datos);
   }
 
