@@ -1,25 +1,29 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import {
   Conocimiento,
-  Datos,
+  Curriculum,
   DatosInteres,
-  Estudio,
   Experiencia,
   Idioma,
 } from 'src/app/models/curriculum.interface';
+import { Plantilla } from 'src/app/models/plantillas.interface';
 import { CurriculumService } from 'src/app/services/curriculum.service';
+import { PlantillasService } from 'src/app/services/plantillas.service';
 import convertBase64 from 'src/app/utils/convertBase64';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-formulario-curriculum',
   templateUrl: './formulario-curriculum.component.html',
   styleUrls: ['./formulario-curriculum.component.css'],
 })
-export class FormularioCurriculumComponent {
+export class FormularioCurriculumComponent implements OnInit {
   abajo: boolean = true;
   imagen: any;
-
+  plantilla: Plantilla | undefined;
+  nombreArchivo: string | undefined = '';
   @Output() crearPDF = new EventEmitter();
 
   datosForm: FormGroup = this.formBuilder.group({
@@ -81,6 +85,33 @@ export class FormularioCurriculumComponent {
     datosInteres: this.formBuilder.array([]),
   });
 
+  constructor(
+    private formBuilder: FormBuilder,
+    private cvService: CurriculumService,
+    private activatedRoute: ActivatedRoute,
+    private plantillaService: PlantillasService
+  ) {}
+
+  ngOnInit() {
+    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (id !== null && id !== undefined) {
+      this.plantillaService.getPlantilla(Number(id)).subscribe((resp) => {
+        this.plantilla = resp;
+        console.log(resp);
+        this.rellenarDatos();
+      });
+    }
+  }
+
+  rellenarDatos() {
+    let data: Curriculum = JSON.parse(this.plantilla!.datos);
+    console.log(data);
+    this.nombreArchivo = this.plantilla?.nombreArchivo;
+    if (data.datos !== null && data.datos !== undefined) {
+      this.datosForm.setValue(data.datos);
+    }
+  }
+
   get arrExperiencias() {
     return this.experienciasForms.controls['experiencias'] as FormArray;
   }
@@ -101,16 +132,26 @@ export class FormularioCurriculumComponent {
     return this.datosInteresForms.controls['datosInteres'] as FormArray;
   }
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private cvService: CurriculumService
-  ) {}
-
-  generarPDF() {
-    this.crearPDF.emit(true);
+  async generarPDF() {
+    if (this.nombreArchivo === '') {
+      const { value: nombre_archivo } = await Swal.fire({
+        title: 'Nombre del archivo',
+        input: 'text',
+        inputValue: '',
+        showCancelButton: true,
+        inputValidator: (value) => {
+          return new Promise((resolve: any) => {
+            if (value === '') {
+              resolve('Por favor, ingresa un nombre de archivo');
+            } else resolve();
+          });
+        },
+      });
+      this.cvService.nombreArchivo = nombre_archivo;
+      this.cvService.guardarCv();
+      this.crearPDF.emit(true);
+    }
   }
-
-  /* guardarInfo(){} */
 
   guardarDatos() {
     //Paso los datos del formulario a un objeto y se lo envío al servicio para que lo agregue al documento

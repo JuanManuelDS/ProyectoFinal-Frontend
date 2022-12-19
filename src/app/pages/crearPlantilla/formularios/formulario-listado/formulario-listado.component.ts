@@ -44,7 +44,7 @@ export class FormularioListadoComponent implements OnInit {
         this.plantilla = resp;
         this.rellenarDatos();
       });
-    }
+    } 
   }
 
   rellenarDatos() {

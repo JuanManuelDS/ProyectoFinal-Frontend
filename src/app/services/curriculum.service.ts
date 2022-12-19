@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import {
   Conocimiento,
+  Curriculum,
   Datos,
   DatosInteres,
   Estudio,
   Experiencia,
   Idioma,
 } from '../models/curriculum.interface';
+import { Plantilla } from '../models/plantillas.interface';
+import { PlantillasService } from './plantillas.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,12 +22,16 @@ export class CurriculumService {
   private _conocimientos: Conocimiento[] = [];
   private _idiomas: Idioma[] = [];
   private _datosInteres: DatosInteres[] = [];
+  nombreArchivo: string = '';
 
   /* datoI: FormGroup = this.fb.group({
     datos: this.fb.array([]),
   }); */
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private plantillaService: PlantillasService
+  ) {}
 
   get datos() {
     return this._datos;
@@ -50,16 +57,26 @@ export class CurriculumService {
     return this._datosInteres;
   }
 
-  /* get di() {
-    return this.datoI.controls['dato'] as FormArray;
-  } */
-
-  /* eliminarInfo(formArr: FormArray, index: number) {
-    this.datoI.get('datos')?.setValue(formArr);
-  } */
+  guardarCv() {
+    const cv: Curriculum = {
+      datos: this._datos,
+      datosInteres: this._datosInteres,
+      idiomas: this._idiomas,
+      experiencias: this._experiencias,
+      estudios: this._estudios,
+      conocimientos: this._conocimientos,
+    };
+    const plantilla: Plantilla = {
+      nombreArchivo: this.nombreArchivo,
+      tipo: 'curriculum',
+      datos: JSON.stringify(cv),
+    };
+    this.plantillaService.guardarPlantilla(plantilla).subscribe((resp) => {
+      console.log(resp);
+    });
+  }
 
   agregarDatoInteres(datoInteres: DatosInteres) {
-    /* this.di.push(this.fb.group({ ...datoInteres })); */
     this._datosInteres.push(datoInteres);
   }
 

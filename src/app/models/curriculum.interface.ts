@@ -1,5 +1,5 @@
 export interface Curriculum {
-  datos: Datos;
+  datos?: Datos;
   experiencias: Experiencia[];
   estudios: Estudio[];
   conocimientos: Conocimiento[];
