@@ -33,7 +33,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
 
   @Output() crearPDF = new EventEmitter();
 
-  // NUEVOS
+  /* --------- FORMULARIOS PARA AGREGAR NUEVOS DATOS -------------------*/
   datosForm: FormGroup = this.formBuilder.group({
     nombre: [''],
     ciudad: [''],
@@ -69,7 +69,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     oral: [''],
   });
 
-  // TODOS
+  /* ----------- ARRAYS DE FORMULARIOS ----------------------*/
   datoInteresForm: FormGroup = this.formBuilder.group({
     dato: [''],
   });
@@ -102,10 +102,12 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
+  //Reseteo los datos de plantilla service
   ngOnDestroy() {
     this.cvService.resetearDatos();
   }
 
+  //Al cargarse el componente me fijo si la ruta tiene un id, lo que indica que debo cargar una plantilla existente
   ngOnInit() {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id !== null && id !== undefined) {
@@ -121,6 +123,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     }
   }
 
+  /* - RELLENA TANTO EL FORMULARIO COMO EL NOMBRE DEL ARCHIVO Y LA PLANTILLA (EL DOCUMENTO) ------------ */
   rellenarDatos() {
     let data: Curriculum = JSON.parse(this.plantilla!.datos);
     this.cvService.resetearDatos();
@@ -179,6 +182,8 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     }
   }
 
+  /*-------------- GETTERS DE LOS ARRAYS DE FORMULARIOS --------------------------*/
+
   get arrExperiencias() {
     return this.experienciasForms.controls['experiencias'] as FormArray;
   }
@@ -199,6 +204,8 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     return this.datosInteresForms.controls['datosInteres'] as FormArray;
   }
 
+  //Pido el nombre del archivo en caso de no tenerlo y llamo al método de cvService que guarda la plantilla en la
+  //base de datos
   async guardarCV() {
     if (this.nombreArchivo === '') {
       const { value: nombre_archivo } = await Swal.fire({
@@ -214,17 +221,23 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
           });
         },
       });
-      this.cvService.nombreArchivo = nombre_archivo;
-      this.cvService.guardarCv();
+      //Me fijo que efectivamente tenga un nombre el archivo
+      if (nombre_archivo.length > 0) {
+        this.cvService.nombreArchivo = nombre_archivo;
+        this.cvService.guardarCv();
+      }
     }
   }
 
+  //Método que dispara el generador de pdf en plantilla/curriculum
   generarPDF() {
     this.guardarCV();
     this.crearPDF.emit(true);
 
     //this.router.navigateByUrl('/dashboard');
   }
+
+  /*---------------- MÉTODOS PARA GUARDAR DATOS ------------------------*/
 
   guardarDatos() {
     //Paso los datos del formulario a un objeto y se lo envío al servicio para que lo agregue al documento
@@ -300,10 +313,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     this.nuevaExperienciaForm.reset();
   }
 
-  /* eliminarFormulario(arrForm: FormArray, index: number) {
-    this.cvService.eliminarInfo(arrForm, index);
-    arrForm.removeAt(index);
-  } */
+  /*----------------- MÉTODOS PARA ELIMINAR DATOS --------------------------*/
 
   eliminarExperiencia(index: number) {
     //Lo elimino del arrayForm de experiencias
@@ -334,6 +344,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     this.cvService.eliminarDatoInteres(index);
   }
 
+  /* CONVERSOR DE IMAGENES A BASE64 */
   async cargarImagen(event: any) {
     const file = event.target.files[0];
     const base64 = await convertBase64(file);
