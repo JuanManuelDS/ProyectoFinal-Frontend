@@ -22,7 +22,11 @@ div.dato_agregado {
 }
 
 .descargar_button {
-    margin-left: 5px;
     background-color: #ed6f1a;
     color: white;
+}
+
+.descargar_button:hover {
+  background-color: #e75d00;
+  color: white;
 }

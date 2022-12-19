@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserpageComponent implements OnInit {
 
+  nombreUsuario: string | null = '';
+
   constructor() { }
 
   ngOnInit() {
+    this.nombreUsuario = localStorage.getItem('nombreUsuario');
   }
 
 }

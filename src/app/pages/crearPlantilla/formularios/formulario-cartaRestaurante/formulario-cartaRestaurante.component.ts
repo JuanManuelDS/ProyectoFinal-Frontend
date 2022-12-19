@@ -58,7 +58,7 @@ export class FormularioCartaRestauranteComponent implements OnInit {
   // GETTERS
 
   get arrSecciones(){
-    return this.seccionesForm.get('secciones') as FormArray;
+    return this.seccionesForm.controls['secciones'] as FormArray;
   }
 
   get arrMenus(){

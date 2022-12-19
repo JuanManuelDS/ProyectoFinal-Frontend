@@ -20,6 +20,18 @@
   height: 950px;
 }
 
+.unidades{
+  float: left;
+}
+
+.item{
+  text-align: center;
+}
+
+.precio{
+  float: right;
+}
+
 @media (max-width: 870px) {
     .antes_exportar {
         width: 700px;

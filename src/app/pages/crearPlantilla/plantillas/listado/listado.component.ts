@@ -16,12 +16,13 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./listado.component.css'],
 })
 export class ListadoComponent implements OnChanges {
+
   @Input() generarPDF!: boolean;
 
   @ViewChild('documento') documento!: ElementRef;
 
   constructor(private lisService: ListadoService) {}
- 
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['generarPDF'].currentValue === true) {
       this.guardarPDF();
@@ -109,4 +110,5 @@ export class ListadoComponent implements OnChanges {
   get listado() {
     return this.lisService.listado;
   }
+
 }
