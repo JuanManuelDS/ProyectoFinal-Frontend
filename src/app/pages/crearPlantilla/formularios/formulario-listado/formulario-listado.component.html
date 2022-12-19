@@ -50,8 +50,12 @@
         <div class="col">
             <button type="submit" class="btn btn-primary">Guardar item</button>
         </div>
-
     </div>
+    <div class="row px-3 descargar_guardar mt-2">
+      <div class="col">
+          <button type="button" class="btn btn-success" (click)="guardarArchivo()">Guardar Listado</button>
+      </div>
+  </div>
     <div class="row px-3 descargar_guardar mt-2">
       <div class="col">
         <button type="button" class="btn descargar_button" (click)="generarPDF()">
@@ -60,7 +64,7 @@
       </div>
     </div>
 
-    <!-------- LISTA DE CONOCIMIENTOS --------->
+    <!-------- LISTA DE ITEMS --------->
     <div class="container-fluid mt-2 p-0" formArrayName="listado">
         <div
             class="container-fluid p-0 d-flex justify-content-between dato_agregado"

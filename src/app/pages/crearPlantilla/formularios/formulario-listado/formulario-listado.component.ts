@@ -1,17 +1,23 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Item, Listado } from 'src/app/models/listado.interface';
+import { Plantilla } from 'src/app/models/plantillas.interface';
 import { ListadoService } from 'src/app/services/listado.service';
+import { PlantillasService } from 'src/app/services/plantillas.service';
 import convertBase64 from 'src/app/utils/convertBase64';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-formulario-listado',
   templateUrl: './formulario-listado.component.html',
   styleUrls: ['./formulario-listado.component.css'],
 })
-export class FormularioListadoComponent {
+export class FormularioListadoComponent implements OnInit, OnDestroy {
 
   imagen: any;
+  plantilla: Plantilla | undefined;
+  nombreArchivo: string | undefined = '';
 
   // NUEVOS
   nuevoListado: FormGroup = this.fb.group({
@@ -43,8 +49,47 @@ export class FormularioListadoComponent {
 
   @Output() crearPDF = new EventEmitter();
 
-  constructor(private fb: FormBuilder, private lisService: ListadoService) {}
+  constructor(private fb: FormBuilder,
+    private lisService: ListadoService,
+    private plantillaService: PlantillasService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {}
 
+  ngOnDestroy(): void {
+    this.lisService.resetearListado();
+  }
+
+  ngOnInit(): void {
+    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    if(id !== null && id !== undefined) {
+      this.plantillaService.getPlantilla(Number(id)).subscribe((resp) => {
+        this.plantilla = resp;
+        this.rellenarDatos();
+      });
+    }
+  }
+
+  rellenarDatos() {
+    let data: Listado = JSON.parse(this.plantilla!.datos);
+    this.lisService.resetearListado();
+    this.nombreArchivo = this.plantilla?.nombreArchivo;
+
+    if(data.titulo !== null && data.titulo !== undefined) {
+      this.nuevoListado.controls['titulo'].setValue(data.titulo);
+    }
+
+    // GUARDAR IMAGEN
+
+    if(data.items !== null && data.items !== undefined) {
+      for(let i = 0; i < data.items.length; i++) {
+        let it = this.arrItems;
+        it.push(
+          this.fb.group({ ...data.items[i]})
+        );
+        this.lisService.guardarItem(data.items[i]);
+      }
+    }
+  }
 
   cambiarTitulo() {
     let titulo = this.nuevoListado.get('titulo')?.value;
@@ -88,6 +133,12 @@ export class FormularioListadoComponent {
     );
   }
 
+  eliminarItem(index: number) {
+    let item = this.nuevoListado.get('items') as FormArray;
+    item.removeAt(index);
+    this.lisService.eliminarItem(index);
+  }
+
   async cargarImagen(event: any) {
     console.log('me disparo');
 
@@ -98,14 +149,29 @@ export class FormularioListadoComponent {
     this.lisService.cargarImagen(base64);
   }
 
+  async guardarArchivo(){
+    if (this.lisService.nombreArchivo === '') {
+      const { value: nombre_archivo } = await Swal.fire({
+        title: 'Nombre del archivo',
+        input: 'text',
+        inputValue: '',
+        showCancelButton: true,
+        inputValidator: (value) => {
+          return new Promise((resolve: any) => {
+            if (value === '') {
+              resolve('Por favor, ingresa un nombre de archivo');
+            } else resolve();
+          });
+        },
+      });
+      this.lisService.nombreArchivo = nombre_archivo;
+    }
+    this.lisService.guardarListado();
+  }
+
   generarPDF() {
+    this.guardarArchivo();
     this.crearPDF.emit(true);
   }
 
-
-  eliminarItem(index: number) {
-    let item = this.nuevoListado.get('items') as FormArray;
-    item.removeAt(index);
-    this.lisService.eliminarItem(index);
-  }
 }

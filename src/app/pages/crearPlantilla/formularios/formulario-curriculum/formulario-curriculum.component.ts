@@ -33,6 +33,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
 
   @Output() crearPDF = new EventEmitter();
 
+  // NUEVOS
   datosForm: FormGroup = this.formBuilder.group({
     nombre: [''],
     ciudad: [''],
@@ -62,14 +63,15 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     conocimiento: [''],
   });
 
-  datoInteresForm: FormGroup = this.formBuilder.group({
-    dato: [''],
-  });
-
   nuevoIdiomaForm: FormGroup = this.formBuilder.group({
     idioma: [''],
     escrito: [''],
     oral: [''],
+  });
+
+  // TODOS
+  datoInteresForm: FormGroup = this.formBuilder.group({
+    dato: [''],
   });
 
   conocimientosForms: FormGroup = this.formBuilder.group({
@@ -200,7 +202,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     }
   }
 
-  async generarPDF() {
+  generarPDF() {
     this.guardarCV();
     this.crearPDF.emit(true);
 
