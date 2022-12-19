@@ -109,10 +109,15 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id !== null && id !== undefined) {
-      this.plantillaService.getPlantilla(Number(id)).subscribe((resp) => {
-        this.plantilla = resp;
-        this.rellenarDatos();
-      });
+      this.plantillaService.getPlantilla(Number(id)).subscribe(
+        (resp) => {
+          this.plantilla = resp;
+          this.rellenarDatos();
+        },
+        (err) => {
+          this.router.navigateByUrl('/dashboard');
+        }
+      );
     }
   }
 
