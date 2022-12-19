@@ -95,7 +95,7 @@ export class FormularioCurriculumComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    
+
     let id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id !== null && id !== undefined) {
       this.plantillaService.getPlantilla(Number(id)).subscribe((resp) => {
@@ -173,7 +173,7 @@ export class FormularioCurriculumComponent implements OnInit {
     return this.datosInteresForms.controls['datosInteres'] as FormArray;
   }
 
-  async generarPDF() {
+  async guardarCV(){
     if (this.nombreArchivo === '') {
       const { value: nombre_archivo } = await Swal.fire({
         title: 'Nombre del archivo',
@@ -190,10 +190,14 @@ export class FormularioCurriculumComponent implements OnInit {
       });
       this.cvService.nombreArchivo = nombre_archivo;
       this.cvService.guardarCv();
-      this.crearPDF.emit(true);
-
-      this.router.navigateByUrl('/dashboard');
     }
+  }
+
+  async generarPDF() {
+    this.guardarCV();
+    this.crearPDF.emit(true);
+
+    //this.router.navigateByUrl('/dashboard');
   }
 
   guardarDatos() {
