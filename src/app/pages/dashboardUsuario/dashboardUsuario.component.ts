@@ -73,4 +73,9 @@ export class DashboardUsuarioComponent implements OnInit {
         break;
     }
   }
+
+  borrarPlantilla(id: number) {
+    this.plantillasService.deletePlantilla(id);
+  }
+
 }
