@@ -49,8 +49,10 @@ export class AdminService {
   }
 
   eliminarUsuario(nombreUsuario: string) {
+    const token = 'Bearer ' + localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', token ? token : '');
     const url = `https://proyectofinal-backend-production-8cff.up.railway.app/api/usuarios/${nombreUsuario}`;
-    return this.http.delete(url);
+    return this.http.delete(url, { headers });
   }
 
   editarRol(username: string, roleName: string) {

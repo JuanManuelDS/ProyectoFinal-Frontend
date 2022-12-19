@@ -1,37 +1,25 @@
-<div
-  class="container-fluid mt-4 d-flex flex-wrap justify-content-center"
-  (click)="nuevaPlantilla()"
->
-  <div class="card carta m-3 p-4 float-start">
+<div class="container-fluid mt-4 d-flex flex-wrap justify-content-center">
+  <div class="card carta m-3 p-4 float-start" (click)="nuevaPlantilla()">
     <img src="assets/createPlus.png" class="card-img-top" />
     <h5 class="card-title my-4 text-center">Nueva plantilla</h5>
   </div>
 
   <!-------------- LISTA DE TARJETAS DE PLANTILLAS  ---------------->
-  <div class="card carta m-3 p-0 float-start">
+  <div
+    class="card carta m-3 p-0 float-start"
+    *ngFor="let plantilla of plantillas"
+    id="{{ plantilla.datos }}"
+  >
     <img src="assets/cvpdf.png" class="card-img-top" />
     <div class="card-body">
-      <h5 class="card-title mb-3">Nombre del archivo</h5>
-      <div class="row">
-        <a class="btn btn-warning col mx-4">Ver plantilla</a>
-      </div>
-    </div>
-  </div>
-  <div class="card carta m-3 p-0 float-start">
-    <img src="assets/cvpdf.png" class="card-img-top" />
-    <div class="card-body">
-      <h5 class="card-title mb-3">Nombre del archivo</h5>
-      <div class="row">
-        <a class="btn btn-warning col mx-4">Ver plantilla</a>
-      </div>
-    </div>
-  </div>
-  <div class="card carta m-3 p-0 float-start">
-    <img src="assets/cvpdf.png" class="card-img-top" />
-    <div class="card-body">
-      <h5 class="card-title mb-3">Nombre del archivo</h5>
-      <div class="row">
-        <a class="btn btn-warning col mx-4">Ver plantilla</a>
+      <h5 class="card-title mb-3">{{ plantilla.nombreArchivo }}</h5>
+      <div class="row" *ngIf="plantilla.id">
+        <a
+          type="button"
+          class="btn btn-warning col mx-4"
+          (click)="abrirPlantilla(plantilla.id, plantilla.tipo)"
+          >Ver plantilla</a
+        >
       </div>
     </div>
   </div>

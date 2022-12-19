@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Item } from '../models/listado.interface';
+import { Item, Listado } from '../models/listado.interface';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-
+import { PlantillasService } from './plantillas.service';
+import { Plantilla } from '../models/plantillas.interface';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +13,14 @@ export class ListadoService {
   private _listado: Item[] = [];
   private _titulo: string = '';
   private _imagen: any;
+  private _nombreArchivo: string = '';
+
+  private _listadoForm: FormGroup = this.fb.group({
+    titulo: '',
+    items: this.fb.array([]),
+  });
+
+  constructor(private ps: PlantillasService, private fb: FormBuilder) {}
 
   guardarPDF() {
     const data: any = document.getElementById('documento');
@@ -43,6 +53,10 @@ export class ListadoService {
     });
   }
 
+  get arrItems() {
+    return this._listadoForm.controls['items'] as FormArray;
+  }
+
   get listado() {
     return this._listado;
   }
@@ -55,7 +69,24 @@ export class ListadoService {
     return this._imagen;
   }
 
+  guardarListado() {
+    const listado: Listado = { titulo: this._titulo, items: this._listado };
+    const plantilla: Plantilla = {
+      nombreArchivo: this._nombreArchivo,
+      tipo: 'listado',
+      datos: JSON.stringify(listado),
+    };
+    this.ps.guardarPlantilla(plantilla).subscribe((resp) => {
+      console.log(resp);
+    });
+  }
+
+  nombreArchivo(nombre: string) {
+    this._nombreArchivo = nombre;
+  }
+
   guardarItem(item: Item) {
+    this.arrItems.push(this.fb.group({ ...item }));
     this._listado.push(item);
   }
 
@@ -71,6 +102,4 @@ export class ListadoService {
     console.log(file);
     this._imagen = file;
   }
-
-  constructor() {}
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Plantilla } from 'src/app/models/plantillas.interface';
+import { PlantillasService } from 'src/app/services/plantillas.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -8,9 +10,35 @@ import Swal from 'sweetalert2';
   styleUrls: ['./dashboardUsuario.component.css'],
 })
 export class DashboardUsuarioComponent implements OnInit {
-  constructor(private router: Router) {}
+  plantillas: Plantilla[] = [];
 
-  ngOnInit() {}
+  constructor(
+    private router: Router,
+    private plantillasService: PlantillasService
+  ) {}
+
+  ngOnInit() {
+    this.plantillasService.getPlantillas().subscribe((resp) => {
+      console.log(resp);
+      this.plantillas = resp;
+    });
+  }
+
+  abrirPlantilla(id: number, tipo: string) {
+    let ruta = '/nueva-plantilla/';
+    switch (tipo) {
+      case 'listado':
+        ruta += 'listado/';
+        break;
+      case 'curriculum':
+        ruta += 'curriculum/';
+        break;
+      case 'cartaRestaurante':
+        ruta += 'cartaRestaurante/';
+        break;
+    }
+    this.router.navigateByUrl(ruta + id);
+  }
 
   async nuevaPlantilla() {
     const eleccion = await Swal.fire({

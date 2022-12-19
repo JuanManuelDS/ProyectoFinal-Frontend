@@ -1,6 +1,10 @@
 export interface Curriculum {
   datos: Datos;
-  
+  experiencias: Experiencia[];
+  estudios: Estudio[];
+  conocimientos: Conocimiento[];
+  idiomas: Idioma[];
+  datosInteres: DatosInteres[];
 }
 
 export interface Datos {

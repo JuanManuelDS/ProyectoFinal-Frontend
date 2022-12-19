@@ -11,7 +11,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
 @Component({
-  selector: 'app-listado',
+  selector: 'app-listado', 
   templateUrl: './listado.component.html',
   styleUrls: ['./listado.component.css'],
 })

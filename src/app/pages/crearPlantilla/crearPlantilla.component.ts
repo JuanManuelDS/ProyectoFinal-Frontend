@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { Plantilla } from 'src/app/models/plantillas.interface';
+import { PlantillasService } from 'src/app/services/plantillas.service';
 
 @Component({
   selector: 'app-crearPlantilla',
@@ -14,10 +15,17 @@ export class CrearPlantillaComponent implements OnInit {
   listado: boolean = false;
   cartaRestaurante: boolean = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+  plantillaDoc: Plantilla | undefined;
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private plantillaService: PlantillasService
+  ) {}
 
   ngOnInit() {
     this.plantilla = this.activatedRoute.snapshot.paramMap.get('plantilla');
+
     if (this.plantilla === '') {
       this.router.navigateByUrl('/dashboard');
     }
@@ -31,7 +39,7 @@ export class CrearPlantillaComponent implements OnInit {
     this.curriculum = true;
   }
 
-  generarCR(valor:boolean) {
+  generarCR(valor: boolean) {
     this.cartaRestaurante = true;
   }
 }

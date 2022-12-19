@@ -15,10 +15,10 @@
     border-radius: 0px;
 }
 
-#portada{
+/* #portada{
   width: 100%;
   height: 950px;
-}
+} */
 
 @media (max-width: 870px) {
     .antes_exportar {

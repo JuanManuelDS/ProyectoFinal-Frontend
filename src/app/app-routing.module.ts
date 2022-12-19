@@ -32,6 +32,12 @@ const routes: Routes = [
     canLoad: [ValidarTokenGuard],
   },
   {
+    path: 'nueva-plantilla/:plantilla/:id',
+    component: CrearPlantillaComponent,
+    canActivate: [ValidarTokenGuard],
+    canLoad: [ValidarTokenGuard],
+  },
+  {
     path: 'nueva-plantilla/:plantilla',
     component: CrearPlantillaComponent,
     canActivate: [ValidarTokenGuard],
