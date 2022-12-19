@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Item } from '../models/listado.interface';
+import { Item, Listado } from '../models/listado.interface';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { Plantilla } from '../models/plantillas.interface';
+import { PlantillasService } from './plantillas.service';
 
 
 @Injectable({
@@ -11,6 +13,7 @@ export class ListadoService {
   private _listado: Item[] = [];
   private _titulo: string = '';
   private _imagen: any;
+  nombreArchivo: string = '';
 
   guardarPDF() {
     const data: any = document.getElementById('documento');
@@ -57,6 +60,7 @@ export class ListadoService {
 
   guardarItem(item: Item) {
     this._listado.push(item);
+    console.log(item);
   }
 
   eliminarItem(index: number) {
@@ -72,5 +76,31 @@ export class ListadoService {
     this._imagen = file;
   }
 
-  constructor() {}
+  resetearListado() {
+    this._titulo = '';
+    this._imagen = undefined;
+    this._listado = [];
+    this.nombreArchivo = '';
+  }
+
+  guardarListado() {
+    console.log("1")
+    const list: Listado = {
+      titulo: this._titulo,
+      imagen: this._imagen,
+      items: this._listado
+    };
+
+    const plantilla: Plantilla = {
+      nombreArchivo: this.nombreArchivo,
+      tipo: 'listado',
+      datos: JSON.stringify(list)
+    };
+
+    this.plantillaService.guardarPlantilla(plantilla).subscribe((res) => {
+      console.log(res);
+    });
+  }
+
+  constructor(private plantillaService: PlantillasService) {}
 }
