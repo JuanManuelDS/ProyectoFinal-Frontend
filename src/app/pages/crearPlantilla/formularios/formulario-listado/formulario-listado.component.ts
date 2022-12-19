@@ -1,116 +1,111 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Item, Listado } from 'src/app/models/listado.interface';
-import { Plantilla } from 'src/app/models/plantillas.interface';
 import { ListadoService } from 'src/app/services/listado.service';
-import { PlantillasService } from 'src/app/services/plantillas.service';
 import convertBase64 from 'src/app/utils/convertBase64';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-formulario-listado',
   templateUrl: './formulario-listado.component.html',
   styleUrls: ['./formulario-listado.component.css'],
 })
-export class FormularioListadoComponent implements OnInit {
-  nombreArchivo: string = '';
+export class FormularioListadoComponent {
 
-  listadoData: Listado | undefined;
-  plantilla: Plantilla | undefined;
-  @Output() crearPDF = new EventEmitter();
+  imagen: any;
 
-  nuevoItem: FormGroup = this.fb.group({
-    titulo: [''],
-    item: [''],
-    imagen: [''],
+  // NUEVOS
+  nuevoListado: FormGroup = this.fb.group({
+    titulo: ['', [Validators.required]],
+    imagen: [],
+    items: this.fb.array([])
+
   });
 
+  nuevoItem: FormGroup = this.fb.group({
+    unidades: [0],
+    item: [''],
+    precio: [0]
+  });
+
+  // TODOS
   listado: FormGroup = this.fb.group({
     listado: this.fb.array([]),
   });
 
-  constructor(
-    private fb: FormBuilder,
-    private lisService: ListadoService,
-    private activatedRoute: ActivatedRoute,
-    private plantillaService: PlantillasService
-  ) {}
-
-  ngOnInit() {
-    let id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (id !== null && id !== undefined) {
-      this.plantillaService.getPlantilla(Number(id)).subscribe((resp) => {
-        this.plantilla = resp;
-        this.rellenarDatos();
-      });
-    } 
-  }
-
-  rellenarDatos() {
-    let data: Listado = JSON.parse(this.plantilla!.datos);
-    this.nuevoItem.get('titulo')?.setValue(data.titulo);
-    this.lisService.cambiarTitulo(data.titulo);
-    for (let i = 0; i < data.items.length; i++) {
-      this.arrListado.push(this.fb.group({ ...data.items[i] }));
-      this.lisService.guardarItem(data.items[i]);
-    }
-  }
-
+  // GETTERS
   get arrListado() {
     return this.listado.controls['listado'] as FormArray;
   }
 
+  get arrItems() {
+    return this.nuevoListado.controls['items'] as FormArray;
+  }
+
+  @Output() crearPDF = new EventEmitter();
+
+  constructor(private fb: FormBuilder, private lisService: ListadoService) {}
+
+
   cambiarTitulo() {
-    let titulo = this.nuevoItem.get('titulo')?.value;
+    let titulo = this.nuevoListado.get('titulo')?.value;
     this.lisService.cambiarTitulo(titulo);
   }
 
   guardarItem() {
     let item: Item = {
+      unidades: this.nuevoItem.get('unidades')?.value,
       item: this.nuevoItem.get('item')?.value,
+      precio: this.nuevoItem.get('precio')?.value
     };
     this.lisService.guardarItem(item);
 
-    this.arrListado.push(
+    let list = this.nuevoListado.get('items') as FormArray;
+    list.push(
       this.fb.group({
+        unidades: [item.unidades],
         item: [item.item],
+        precio: [item.precio]
       })
     );
 
-    this.nuevoItem.get('item')?.reset();
+    this.guardarListado();
+    this.nuevoItem.reset();
+  }
+
+  guardarListado() {
+    let listado: Listado = {
+      titulo: this.nuevoListado.get('titulo')?.value,
+      imagen: this.imagen,
+      items: this.nuevoListado.get('items')?.value
+    }
+
+    this.arrListado.push(
+      this.fb.group({
+        titulo: [listado.titulo],
+        imagen: [listado.imagen],
+        items: [listado.items]
+      })
+    );
   }
 
   async cargarImagen(event: any) {
-    console.log('me ejecuto');
+    console.log('me disparo');
+
     const file = event.target.files[0];
     const base64 = await convertBase64(file);
+    console.log('me disparo');
+    this.imagen = base64;
     this.lisService.cargarImagen(base64);
   }
 
-  async generarPDF() {
-    if (this.nombreArchivo === '') {
-      const { value: nombre_archivo } = await Swal.fire({
-        title: 'Nombre del archivo',
-        input: 'text',
-        inputValue: '',
-        showCancelButton: true,
-        inputValidator: (value) => {
-          return new Promise((resolve: any) => {
-            if (value === '') {
-              resolve('Por favor, ingresa un nombre de archivo');
-            } else resolve();
-          });
-        },
-      });
-      this.lisService.nombreArchivo(nombre_archivo);
-      this.lisService.guardarListado();
-      this.crearPDF.emit(true);
-    }
+  generarPDF() {
+    this.crearPDF.emit(true);
   }
 
+
   eliminarItem(index: number) {
-    this.arrListado.removeAt(index);
+    let item = this.nuevoListado.get('items') as FormArray;
+    item.removeAt(index);
     this.lisService.eliminarItem(index);
   }
 }
