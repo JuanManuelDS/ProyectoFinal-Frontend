@@ -24,6 +24,7 @@ export class FormularioCurriculumComponent implements OnInit {
   imagen: any;
   plantilla: Plantilla | undefined;
   nombreArchivo: string | undefined = '';
+
   @Output() crearPDF = new EventEmitter();
 
   datosForm: FormGroup = this.formBuilder.group({
@@ -94,6 +95,7 @@ export class FormularioCurriculumComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    
     let id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id !== null && id !== undefined) {
       this.plantillaService.getPlantilla(Number(id)).subscribe((resp) => {
@@ -102,6 +104,7 @@ export class FormularioCurriculumComponent implements OnInit {
       });
     }
   }
+
 
   rellenarDatos() {
     let data: Curriculum = JSON.parse(this.plantilla!.datos);
