@@ -181,7 +181,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     return this.datosInteresForms.controls['datosInteres'] as FormArray;
   }
 
-  async generarPDF() {
+  async guardarCV(){
     if (this.nombreArchivo === '') {
       const { value: nombre_archivo } = await Swal.fire({
         title: 'Nombre del archivo',
@@ -198,10 +198,14 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
       });
       this.cvService.nombreArchivo = nombre_archivo;
       this.cvService.guardarCv();
-      this.crearPDF.emit(true);
-
-      this.router.navigateByUrl('/dashboard');
     }
+  }
+
+  async generarPDF() {
+    this.guardarCV();
+    this.crearPDF.emit(true);
+
+    //this.router.navigateByUrl('/dashboard');
   }
 
   guardarDatos() {
