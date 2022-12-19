@@ -53,10 +53,8 @@ export class PlantillasService {
 
     //En caso que no tenga un token en el localstorage paso un string vacío
     const headers = new HttpHeaders().set('Authorization', token || '');
-
     const url = `https://proyectofinal-backend-production-8cff.up.railway.app/api/plantillas/${id}`;
     return this.http.delete<Plantilla>(url, { headers });
-
   }
 
   get usuario() {
