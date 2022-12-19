@@ -100,7 +100,8 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private plantillaService: PlantillasService,
     private router: Router
-  ) {}
+  ) { }
+  
   ngOnDestroy() {
     this.cvService.resetearDatos();
   }

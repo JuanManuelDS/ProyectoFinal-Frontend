@@ -19,11 +19,9 @@ export class DashboardUsuarioComponent implements OnInit {
 
   ngOnInit() {
     this.plantillasService.getPlantillas().subscribe((resp) => {
-      console.log(resp);
       this.plantillas = resp;
     });
   }
-  
 
   abrirPlantilla(id: number, tipo: string) {
     let ruta = '/nueva-plantilla/';
@@ -76,7 +74,6 @@ export class DashboardUsuarioComponent implements OnInit {
   }
 
   borrarPlantilla(id: number) {
-    this.plantillasService.deletePlantilla(id);
+    this.plantillasService.deletePlantilla(id).subscribe();
   }
-
 }
