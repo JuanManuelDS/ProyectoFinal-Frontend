@@ -17,7 +17,7 @@ export class AdminService {
 
   cargarUsuarios() {
     const url =
-      'https://proyectofinal-backend-production.up.railway.app/api/usuarios';
+      'https://proyectofinal-backend-production-8cff.up.railway.app/api/usuarios';
     const token = 'Bearer ' + localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', token ? token : '');
     let queryParams = new HttpParams();
@@ -36,7 +36,7 @@ export class AdminService {
   cargarUsuario(nombreUsuario: string) {
     const token = 'Bearer ' + localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', token ? token : '');
-    const url = `https://proyectofinal-backend-production.up.railway.app/api/usuarios/buscar/nombre_usuario/${nombreUsuario}`;
+    const url = `https://proyectofinal-backend-production-8cff.up.railway.app/api/usuarios/buscar/nombre_usuario/${nombreUsuario}`;
 
     return this.http.get<Content>(url, { headers });
   }
@@ -49,13 +49,13 @@ export class AdminService {
   }
 
   eliminarUsuario(nombreUsuario: string) {
-    const url = `https://proyectofinal-backend-production.up.railway.app/api/usuarios/${nombreUsuario}`;
+    const url = `https://proyectofinal-backend-production-8cff.up.railway.app/api/usuarios/${nombreUsuario}`;
     return this.http.delete(url);
   }
 
   editarRol(username: string, roleName: string) {
     const url =
-      'https://proyectofinal-backend-production.up.railway.app/api/roles/usuarios';
+      'https://proyectofinal-backend-production-8cff.up.railway.app/api/roles/usuarios';
     const body = { username, roleName };
     const token = 'Bearer ' + localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', token ? token : '');

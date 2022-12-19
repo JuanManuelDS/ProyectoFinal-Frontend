@@ -110,32 +110,21 @@ export class FormularioCurriculumComponent {
     this.crearPDF.emit(true);
   }
 
+  /* guardarInfo(){} */
 
   guardarDatos() {
     //Paso los datos del formulario a un objeto y se lo envío al servicio para que lo agregue al documento
-    let datos: Datos = {
-      nombre: this.datosForm.get('nombre')?.value,
-      ciudad: this.datosForm.get('ciudad')?.value,
-      nacimiento: this.datosForm.get('nacimiento')?.value,
-      telefono: this.datosForm.get('telefono')?.value,
-      email: this.datosForm.get('email')?.value,
-      presentacion: this.datosForm.get('presentacion')?.value,
-      imagen: this.imagen,
-    };
-    let img = this.datosForm.get('imagen')?.value;
-    console.log(img);
+    let { ...datos } = this.datosForm.value;
     this.cvService.agregarDatos(datos);
   }
 
   guardarConocimiento() {
-    let conocimiento: Conocimiento = {
-      conocimiento: this.nuevoConocimientoForm.get('conocimiento')?.value,
-    };
+    let { ...conocimiento }: Conocimiento = this.nuevoConocimientoForm.value;
     this.cvService.agregarConocimiento(conocimiento);
 
     this.arrConocimientos.push(
       this.formBuilder.group({
-        conocimiento: [conocimiento.conocimiento],
+        ...conocimiento,
       })
     );
 
@@ -143,15 +132,13 @@ export class FormularioCurriculumComponent {
   }
 
   guardarDatoInteres() {
-    let datoInteres: DatosInteres = {
-      dato: this.datoInteresForm.get('dato')?.value,
-    };
+    let { ...datoInteres }: DatosInteres = this.datoInteresForm.value;
 
     this.cvService.agregarDatoInteres(datoInteres);
 
     this.arrDatosInteres.push(
       this.formBuilder.group({
-        dato: [datoInteres.dato],
+        ...datoInteres,
       })
     );
 
@@ -159,40 +146,22 @@ export class FormularioCurriculumComponent {
   }
 
   guardarIdioma() {
-    let idioma: Idioma = {
-      idioma: this.nuevoIdiomaForm.get('idioma')?.value,
-      escrito: this.nuevoIdiomaForm.get('escrito')?.value,
-      oral: this.nuevoIdiomaForm.get('oral')?.value,
-    };
+    let { ...idioma }: Idioma = this.nuevoIdiomaForm.value;
     this.cvService.agregarIdioma(idioma);
 
-    this.arrIdiomas.push(
-      this.formBuilder.group({
-        idioma: [idioma.idioma],
-        escrito: [idioma.escrito],
-        oral: [idioma.oral],
-      })
-    );
+    this.arrIdiomas.push(this.formBuilder.group({ ...idioma }));
 
     this.nuevoIdiomaForm.reset();
   }
 
   guardarEstudios() {
-    let estudio: Estudio = {
-      year: this.nuevosEstudiosForm.get('year')?.value,
-      establecimiento: this.nuevosEstudiosForm.get('establecimiento')?.value,
-      titulo: this.nuevosEstudiosForm.get('titulo')?.value,
-      descripcion: this.nuevosEstudiosForm.get('descripcion')?.value,
-    };
+    let { ...estudio } = this.nuevosEstudiosForm.value;
 
     this.cvService.agregarEstudio(estudio);
 
     this.arrEstudios.push(
       this.formBuilder.group({
-        year: [estudio.year],
-        establecimiento: [estudio.establecimiento],
-        titulo: [estudio.titulo],
-        descripcion: [estudio.descripcion],
+        ...estudio,
       })
     );
 
@@ -201,30 +170,25 @@ export class FormularioCurriculumComponent {
 
   guardarExperiencia() {
     //Creo un objeto de tipo Experiencia y se lo paso al service para que lo agregue al documento
-    let experiencia: Experiencia = {
-      empresa: this.nuevaExperienciaForm.get('empresa')?.value,
-      localidad: this.nuevaExperienciaForm.get('localidad')?.value,
-      descripcion: this.nuevaExperienciaForm.get('descripcion')?.value,
-      inicio: this.nuevaExperienciaForm.get('inicio')?.value,
-      fin: this.nuevaExperienciaForm.get('fin')?.value,
-    };
+    let { ...experiencia }: Experiencia = this.nuevaExperienciaForm.value;
     this.cvService.agregarExperiencia(experiencia);
 
     //Creo y envío un nuevo form group con la información del objeto enviado y lo
     //agrego al formArray en experiencias
     this.arrExperiencias.push(
       this.formBuilder.group({
-        empresa: [experiencia.empresa],
-        localidad: [experiencia.localidad],
-        descripcion: [experiencia.descripcion],
-        inicio: [experiencia.inicio],
-        fin: [experiencia.fin],
+        ...experiencia,
       })
     );
 
     //reseteo los valores del formulario para agregar una nueva experiencia
     this.nuevaExperienciaForm.reset();
   }
+
+  /* eliminarFormulario(arrForm: FormArray, index: number) {
+    this.cvService.eliminarInfo(arrForm, index);
+    arrForm.removeAt(index);
+  } */
 
   eliminarExperiencia(index: number) {
     //Lo elimino del arrayForm de experiencias

@@ -112,4 +112,8 @@ export class CurriculumComponent implements OnChanges {
   get datosInteres() {
     return this.cvService.datosInteres;
   }
+
+  /* get di() {
+    return this.cvService.di;
+  } */
 }

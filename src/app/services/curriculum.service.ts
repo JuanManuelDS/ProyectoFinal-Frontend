@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import {
   Conocimiento,
   Datos,
@@ -18,7 +19,12 @@ export class CurriculumService {
   private _conocimientos: Conocimiento[] = [];
   private _idiomas: Idioma[] = [];
   private _datosInteres: DatosInteres[] = [];
-  constructor() {}
+
+  /* datoI: FormGroup = this.fb.group({
+    datos: this.fb.array([]),
+  }); */
+
+  constructor(private fb: FormBuilder) {}
 
   get datos() {
     return this._datos;
@@ -44,7 +50,16 @@ export class CurriculumService {
     return this._datosInteres;
   }
 
+  /* get di() {
+    return this.datoI.controls['dato'] as FormArray;
+  } */
+
+  /* eliminarInfo(formArr: FormArray, index: number) {
+    this.datoI.get('datos')?.setValue(formArr);
+  } */
+
   agregarDatoInteres(datoInteres: DatosInteres) {
+    /* this.di.push(this.fb.group({ ...datoInteres })); */
     this._datosInteres.push(datoInteres);
   }
 

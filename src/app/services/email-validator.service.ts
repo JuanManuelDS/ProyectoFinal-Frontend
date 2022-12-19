@@ -17,7 +17,7 @@ export class EmailValidatorService implements AsyncValidator {
     control: AbstractControl<any, any>
   ): Observable<ValidationErrors | null> {
     const email = control.value;
-    const url = `https://proyectofinal-backend-production.up.railway.app/api/validacion/email_tomado/${email}`;
+    const url = `https://proyectofinal-backend-production-8cff.up.railway.app/api/validacion/email_tomado/${email}`;
     return this.http.get<any>(url).pipe(
       //Si devuelvo null implica que el usuario no fue tomado
       map((resp) => {

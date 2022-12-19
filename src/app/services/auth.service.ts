@@ -22,7 +22,8 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(nombreUsuario: string, password: string) {
-    const url = 'https://proyectofinal-backend-production.up.railway.app/login';
+    const url =
+      'https://proyectofinal-backend-production-8cff.up.railway.app/login';
     const body = { nombreUsuario, contrasena: password };
 
     return this.http.post<AuthResponse>(url, body).pipe(
@@ -50,7 +51,7 @@ export class AuthService {
 
   register(usuario: NuevoUsuario) {
     const url =
-      'https://proyectofinal-backend-production.up.railway.app/api/register';
+      'https://proyectofinal-backend-production-8cff.up.railway.app/api/register';
     return this.http.post(url, usuario).pipe(
       map((resp) => true),
       catchError((err) => of(err))
@@ -86,7 +87,7 @@ export class AuthService {
 
   validarToken() {
     const url =
-      'https://proyectofinal-backend-production.up.railway.app/api/token/validar';
+      'https://proyectofinal-backend-production-8cff.up.railway.app/api/token/validar';
 
     //Tomo el token del local storage (en caso que lo tenga)
     const token = 'Bearer ' + localStorage.getItem('token');
