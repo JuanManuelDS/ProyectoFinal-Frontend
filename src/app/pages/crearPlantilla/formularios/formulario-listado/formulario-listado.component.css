@@ -26,3 +26,8 @@ div.dato_agregado {
     background-color: #ed6f1a;
     color: white;
 }
+
+.descargar_button:hover {
+  background-color: #e75d00;
+  color: white;
+}
