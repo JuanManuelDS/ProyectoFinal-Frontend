@@ -10,7 +10,7 @@
     *ngFor="let plantilla of plantillas"
     id="{{ plantilla.datos }}"
   >
-    <img src="assets/cvpdf.png" class="card-img-top" />
+    <img src="{{plantilla.tipo === 'listado' ? imagenListado : plantilla.tipo === 'curriculum' ? imagenCv : imagenCr}}" class="card-img-top" />
     <div class="card-body">
       <h5 class="card-title mb-3">{{ plantilla.nombreArchivo }}</h5>
       <div class="row d-flex justify-content-center" *ngIf="plantilla.id">

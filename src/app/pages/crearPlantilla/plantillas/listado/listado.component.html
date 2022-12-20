@@ -1,12 +1,27 @@
 <div class="bg-white antes_exportar" id="documento" #documento>
-  <img src="{{imagen}}" alt="" id="portada" *ngIf="imagen !== undefined">
-  <h2 class="text-center mb-4">{{ titulo }}</h2>
+  <img
+    src="{{ imagen }}"
+    alt=""
+    id="portada"
+    *ngIf="imagen !== undefined"
+    height="200px"
+    class="d-block mb-4"
+  />
+  <h2 class="text-center my-3">{{ titulo }}</h2>
+  <hr *ngIf="titulo" class="mb-5" />
   <ul *ngIf="listado.length > 0">
+    <li>
+      <p class="item">
+        <span class="unidades fs-5 fw-semibold">Unidades</span>
+        <span class="fs-5 fw-semibold">Item</span>
+        <span class="precio fs-5 fw-semibold">Precio</span>
+      </p>
+    </li>
     <li *ngFor="let item of listado">
       <p class="item">
-        <span class="unidades">{{item.unidades}} uds.</span>
+        <span class="unidades">{{ item.unidades }} uds.</span>
         <span>{{ item.item }}</span>
-        <span class="precio">{{item.precio}} €</span>
+        <span class="precio">{{ item.precio }} €</span>
       </p>
     </li>
   </ul>

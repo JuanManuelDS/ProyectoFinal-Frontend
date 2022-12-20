@@ -20,16 +20,23 @@
   height: 950px;
 } */
 
-.unidades{
-  float: left;
+img {
+    margin-right: auto;
+    margin-left: auto;
+    max-width:630px;
+
 }
 
-.item{
-  text-align: center;
+.unidades {
+    float: left;
 }
 
-.precio{
-  float: right;
+.item {
+    text-align: center;
+}
+
+.precio {
+    float: right;
 }
 
 @media (max-width: 870px) {

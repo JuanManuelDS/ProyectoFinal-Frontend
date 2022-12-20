@@ -11,6 +11,9 @@ import Swal from 'sweetalert2';
 })
 export class DashboardUsuarioComponent implements OnInit {
   plantillas: Plantilla[] = [];
+  imagenListado: string = 'assets/ejemplo-listado.jpg';
+  imagenCv: string = 'assets/ejemplo-cv.jpg';
+  imagenCr: string = 'assets/ejemplo-cr.jpg';
 
   constructor(
     private router: Router,
