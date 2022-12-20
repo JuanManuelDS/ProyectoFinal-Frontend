@@ -1,35 +1,49 @@
 <div class="bg-white antes_exportar" id="documento" #documento>
-  <div class="row" id="restaurante">
-    <div class="col text-center">
-      <h1>{{ nombreRestaurante }}</h1>
-    </div>
+  <div
+    class="row d-flex align-items-center mb-5"
+    id="restaurante"
+    *ngIf="nombreRestaurante != ''"
+    style="background-image: url('{{ portadaRestaurante }}')"
+  >
+    <h1 class="text-center">{{ nombreRestaurante }}</h1>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col">
       <img src="{{portadaRestaurante}}" id="portada" *ngIf="portadaRestaurante !== undefined"/>
     </div>
-  </div>
+  </div> -->
   <!-- MENUS -->
   <div class="container-fluid" *ngIf="menus.length > 0">
     <div class="row" *ngFor="let menu of menus">
       <div class="col">
-        <h4>{{menu.nombre}}</h4><br>
+        <h4>{{ menu.nombre }}</h4>
+        <hr />
         <div *ngFor="let plato of menu.platos">
-          <span><strong>{{plato.nombre}}</strong></span><br>
-          <span>{{plato.descripcion}}</span><br><br>
+          <span
+            ><strong>{{ plato.nombre }}</strong></span
+          ><br />
+          <span>{{ plato.descripcion }}</span
+          ><br /><br />
         </div>
-        <h4 class="precioMenu">{{menu.precioMenu}} €</h4><br>
+        <h4 class="precioMenu">{{ menu.precioMenu }} €</h4>
+        <br />
       </div>
     </div>
   </div>
   <!-- SECCIONES -->
   <div class="container-fluid" *ngIf="secciones.length > 0">
-    <div class="row" *ngFor="let seccion of secciones">
+    <div class="row my-3" *ngFor="let seccion of secciones">
       <div class="col">
-        <h4>{{seccion.nombre}}</h4>
+        <h4>{{ seccion.nombre }}</h4>
+        <hr />
         <div *ngFor="let plato of seccion.platos">
-          <span><strong>{{plato.nombre}}</strong></span><span class="precioPlato"><strong>{{plato.precio}} €</strong></span><br>
-          <span>{{plato.descripcion}}</span><br><br>
+          <span
+            ><strong>{{ plato.nombre }}</strong></span
+          ><span class="precioPlato"
+            ><strong>{{ plato.precio }} €</strong></span
+          ><br />
+          <span>{{ plato.descripcion }}</span
+          ><br /><br />
         </div>
       </div>
     </div>

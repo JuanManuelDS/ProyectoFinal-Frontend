@@ -1,4 +1,7 @@
-<div class="container-fluid mt-4 d-flex flex-wrap justify-content-center">
+<div
+  class="container-fluid mt-4 d-flex flex-wrap justify-content-center"
+  *ngIf="plantillas.length > 0; else loading"
+>
   <div class="card carta m-3 p-4 float-start" (click)="nuevaPlantilla()">
     <img src="assets/createPlus.png" class="card-img-top" />
     <h5 class="card-title my-4 text-center">Nueva plantilla</h5>
@@ -10,7 +13,16 @@
     *ngFor="let plantilla of plantillas"
     id="{{ plantilla.datos }}"
   >
-    <img src="{{plantilla.tipo === 'listado' ? imagenListado : plantilla.tipo === 'curriculum' ? imagenCv : imagenCr}}" class="card-img-top" />
+    <img
+      src="{{
+        plantilla.tipo === 'listado'
+          ? imagenListado
+          : plantilla.tipo === 'curriculum'
+          ? imagenCv
+          : imagenCr
+      }}"
+      class="card-img-top"
+    />
     <div class="card-body">
       <h5 class="card-title mb-3">{{ plantilla.nombreArchivo }}</h5>
       <div class="row d-flex justify-content-center" *ngIf="plantilla.id">
@@ -30,3 +42,11 @@
     </div>
   </div>
 </div>
+
+<ng-template #loading>
+  <div
+    class="container d-flex justify-content-center align-items-center loading_container"
+  >
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
