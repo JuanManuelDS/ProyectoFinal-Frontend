@@ -215,6 +215,8 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
         input: 'text',
         inputValue: '',
         showCancelButton: true,
+        cancelButtonColor: "#CF1414",
+        confirmButtonColor: "#1CC464",
         inputValidator: (value) => {
           return new Promise((resolve: any) => {
             if (value === '') {
