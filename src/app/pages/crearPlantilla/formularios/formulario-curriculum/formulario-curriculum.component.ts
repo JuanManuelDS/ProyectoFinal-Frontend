@@ -103,7 +103,6 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
-  //Reseteo los datos de plantilla service
   ngOnDestroy() {
     this.cvService.resetearDatos();
   }

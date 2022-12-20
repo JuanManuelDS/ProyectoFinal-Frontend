@@ -18,6 +18,7 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
   imagen: any;
   plantilla: Plantilla | undefined;
   nombreArchivo: string | undefined = '';
+  idActual: any;
 
   // NUEVOS
   nuevoListado: FormGroup = this.fb.group({
@@ -60,9 +61,9 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    let id = this.activatedRoute.snapshot.paramMap.get('id');
-    if(id !== null && id !== undefined) {
-      this.plantillaService.getPlantilla(Number(id)).subscribe((resp) => {
+    this.idActual = this.activatedRoute.snapshot.paramMap.get('id');
+    if(this.idActual !== null && this.idActual !== undefined) {
+      this.plantillaService.getPlantilla(Number(this.idActual)).subscribe((resp) => {
         this.plantilla = resp;
         this.rellenarDatos();
       });
@@ -77,9 +78,9 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
     if(data.titulo !== null && data.titulo !== undefined) {
       this.nuevoListado.controls['titulo'].setValue(data.titulo);
     }
-
-    // GUARDAR IMAGEN
-
+    if(data.imagen !== null && data.imagen !== undefined) {
+      this.nuevoListado.controls['imagen'].setValue(data.imagen);
+    }
     if(data.items !== null && data.items !== undefined) {
       for(let i = 0; i < data.items.length; i++) {
         let it = this.arrItems;
@@ -149,29 +150,42 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
     this.lisService.cargarImagen(base64);
   }
 
-  async guardarArchivo(){
-    if (this.lisService.nombreArchivo === '') {
-      const { value: nombre_archivo } = await Swal.fire({
-        title: 'Nombre del archivo',
-        input: 'text',
-        inputValue: '',
-        showCancelButton: true,
-        inputValidator: (value) => {
-          return new Promise((resolve: any) => {
-            if (value === '') {
-              resolve('Por favor, ingresa un nombre de archivo');
-            } else resolve();
-          });
-        },
-      });
-      this.lisService.nombreArchivo = nombre_archivo;
-    }
-    this.lisService.guardarListado();
+ async guardarArchivo() {
+    console.log(this.idActual);
+    if (this.idActual === null || this.idActual === undefined) {
+        console.log("NA " + this.nombreArchivo);
+        if (this.nombreArchivo === '') {
+            const {value: nombre_archivo} = await Swal.fire({
+                title: 'Nombre del archivo',
+                input: 'text',
+                inputValue: '',
+                showCancelButton: true,
+                inputValidator: (value) => {
+                    return new Promise((resolve : any) => {
+                        if (value === '') {
+                            resolve('Por favor, ingresa un nombre de archivo');
+                        } else
+                            resolve();
+                        }
+                    );
+                }
+            });
+            this.lisService.nombreArchivo = nombre_archivo;
+            this.lisService.guardarListado();
+        }
+    }else {
+      console.log("1");
+      this.lisService.nombreArchivo = String(this.nombreArchivo);
+      this.lisService.actualizarListado(Number(this.idActual));
   }
+}
 
   generarPDF() {
     this.guardarArchivo();
     this.crearPDF.emit(true);
   }
-
 }
+
+
+
+
