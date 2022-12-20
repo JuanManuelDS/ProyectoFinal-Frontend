@@ -3,7 +3,10 @@
   <div class="row" id="info_personal" *ngIf="datos">
     <div class="row">
       <div class="col-sm-4">
-        <img src="{{ datos.imagen }}" width="180px" alt="persona" id="foto" />
+        <img src="{{ datos.imagen }}" width="180px" alt="persona" id="foto" *ngIf="datos.imagen !== undefined; else fotoDefecto"/>
+        <ng-template #fotoDefecto>
+          <img src="assets/cv-defecto.png" width="180px" alt="persona" id="foto"/>
+        </ng-template>
       </div>
       <div class="col-sm-8">
         <h3 class="mb-4">{{ datos.nombre }}</h3>

@@ -87,8 +87,9 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
       this.nuevoListado.controls['titulo'].setValue(data.titulo);
       this.lisService.cambiarTitulo(data.titulo);
     }
-    if (data.items !== null && data.items !== undefined) {
-      for (let i = 0; i < data.items.length; i++) {
+
+    if(data.items !== null && data.items !== undefined) {
+      for(let i = 0; i < data.items.length; i++) {
         let it = this.arrItems;
         it.push(this.fb.group({ ...data.items[i] }));
         this.lisService.guardarItem(data.items[i]);
@@ -97,6 +98,7 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
     if (data.imagen !== null && data.imagen !== undefined) {
       this.lisService.cargarImagen(data.imagen);
     }
+
   }
 
   cambiarTitulo() {
@@ -148,17 +150,13 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
   }
 
   async cargarImagen(event: any) {
-    console.log('me disparo');
-
     const file = event.target.files[0];
     const base64 = await convertBase64(file);
-    console.log('me disparo');
     this.imagen = base64;
-    this.lisService.cargarImagen(base64);
+    this.lisService.cargarImagen(this.imagen);
   }
 
   async guardarArchivo() {
-    console.log(this.idActual);
     if (this.idActual === null || this.idActual === undefined) {
       console.log('NA ' + this.nombreArchivo);
       if (this.nombreArchivo === '') {
@@ -179,7 +177,6 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
         this.lisService.guardarListado();
       }
     } else {
-      console.log('1');
       this.lisService.nombreArchivo = String(this.nombreArchivo);
       this.lisService.actualizarListado(Number(this.idActual));
     }
