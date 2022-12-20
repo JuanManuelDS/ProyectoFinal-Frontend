@@ -74,6 +74,10 @@ export class DashboardUsuarioComponent implements OnInit {
   }
 
   borrarPlantilla(id: number) {
-    this.plantillasService.deletePlantilla(id).subscribe();
+    this.plantillasService.deletePlantilla(id).subscribe((resp) => {
+      this.plantillasService.getPlantillas().subscribe((resp) => {
+        this.plantillas = resp;
+      });
+    });
   }
 }

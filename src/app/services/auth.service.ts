@@ -25,6 +25,10 @@ export class AuthService {
     const url =
       'https://proyectofinal-backend-production-8cff.up.railway.app/login';
     const body = { nombreUsuario, contrasena: password };
+    const headers = new HttpHeaders().set(
+      'Access-Control-Allow-Origin',
+      'shrimPDF'
+    );
 
     return this.http.post<AuthResponse>(url, body).pipe(
       tap((resp) => {

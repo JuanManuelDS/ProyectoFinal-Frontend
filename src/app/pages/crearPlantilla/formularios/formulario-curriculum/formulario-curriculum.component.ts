@@ -30,6 +30,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
   imagen: any;
   plantilla: Plantilla | undefined;
   nombreArchivo: string | undefined = '';
+  idPlantilla: number | undefined;
 
   @Output() crearPDF = new EventEmitter();
 
@@ -111,9 +112,11 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id !== null && id !== undefined) {
-      this.plantillaService.getPlantilla(Number(id)).subscribe(
+      this.idPlantilla = Number(id);
+      this.plantillaService.getPlantilla(this.idPlantilla).subscribe(
         (resp) => {
           this.plantilla = resp;
+          this.nombreArchivo = resp.nombreArchivo;
           this.rellenarDatos();
         },
         (err) => {
@@ -208,7 +211,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
   //base de datos
   async guardarCV() {
     if (this.nombreArchivo === '') {
-      const { value: nombre_archivo } = await Swal.fire({
+      const { value } = await Swal.fire({
         title: 'Nombre del archivo',
         input: 'text',
         inputValue: '',
@@ -221,11 +224,19 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
           });
         },
       });
-      //Me fijo que efectivamente tenga un nombre el archivo
-      if (nombre_archivo.length > 0) {
-        this.cvService.nombreArchivo = nombre_archivo;
-        this.cvService.guardarCv();
-      }
+      this.nombreArchivo = value;
+    }
+    //Me fijo que efectivamente tenga un nombre el archivo
+    if (
+      this.nombreArchivo!.length > 0 &&
+      (this.idPlantilla === undefined || this.idPlantilla === null)
+    ) {
+      this.cvService.guardarCv(this.nombreArchivo!);
+    } else if (
+      this.nombreArchivo!.length > 0 &&
+      (this.idPlantilla !== undefined || this.idPlantilla !== null)
+    ) {
+      this.cvService.actualizarCv(this.idPlantilla!, this.nombreArchivo!);
     }
   }
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   Conocimiento,
   Curriculum,
@@ -22,11 +23,12 @@ export class CurriculumService {
   private _conocimientos: Conocimiento[] = [];
   private _idiomas: Idioma[] = [];
   private _datosInteres: DatosInteres[] = [];
-  nombreArchivo: string = '';
+  private _idPlantilla: number | undefined;
 
   constructor(
     private fb: FormBuilder,
-    private plantillaService: PlantillasService
+    private plantillaService: PlantillasService,
+    private router: Router
   ) {}
 
   get datos() {
@@ -53,6 +55,10 @@ export class CurriculumService {
     return this._datosInteres;
   }
 
+  get idPlantilla() {
+    return this._idPlantilla;
+  }
+
   resetearDatos() {
     this._datos = undefined;
     this._experiencias = [];
@@ -60,10 +66,9 @@ export class CurriculumService {
     this._conocimientos = [];
     this._idiomas = [];
     this._datosInteres = [];
-    this.nombreArchivo = '';
   }
 
-  guardarCv() {
+  actualizarCv(id: number, nombreArchivo:string) {
     const cv: Curriculum = {
       datos: this._datos,
       datosInteres: this._datosInteres,
@@ -73,12 +78,40 @@ export class CurriculumService {
       conocimientos: this._conocimientos,
     };
     const plantilla: Plantilla = {
-      nombreArchivo: this.nombreArchivo,
+      id: id,
+      nombreArchivo,
+      tipo: 'curriculum',
+      datos: JSON.stringify(cv),
+    };
+    this.plantillaService
+      .actualizarPlantilla(id, plantilla)
+      .subscribe((resp) => {
+        console.log('plantilla actualizada con éxito');
+        this.router.navigateByUrl(
+          '/nueva-plantilla/curriculum/' + this._idPlantilla
+        );
+      });
+  }
+
+  guardarCv(nombreArchivo: string) {
+    const cv: Curriculum = {
+      datos: this._datos,
+      datosInteres: this._datosInteres,
+      idiomas: this._idiomas,
+      experiencias: this._experiencias,
+      estudios: this._estudios,
+      conocimientos: this._conocimientos,
+    };
+    const plantilla: Plantilla = {
+      nombreArchivo,
       tipo: 'curriculum',
       datos: JSON.stringify(cv),
     };
     this.plantillaService.guardarPlantilla(plantilla).subscribe((resp) => {
-      console.log(resp);
+      this._idPlantilla = resp.id;
+      this.router.navigateByUrl(
+        '/nueva-plantilla/curriculum/' + this._idPlantilla
+      );
     });
   }
 

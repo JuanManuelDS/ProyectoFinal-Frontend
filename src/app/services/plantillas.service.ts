@@ -19,7 +19,18 @@ export class PlantillasService {
     const headers = new HttpHeaders().set('Authorization', token || '');
 
     const url = `https://proyectofinal-backend-production-8cff.up.railway.app/api/plantillas/${nombreUsuario}`;
-    return this.http.post(url, plantilla, { headers });
+    return this.http.post<Plantilla>(url, plantilla, { headers });
+  }
+
+  actualizarPlantilla(id: number, plantilla: Plantilla) {
+    //Tomo el token del local storage (en caso que lo tenga)
+    const token = 'Bearer ' + localStorage.getItem('token');
+    const username = localStorage.getItem('nombreUsuario');
+    //En caso que no tenga un token en el localstorage paso un string vacío
+    const headers = new HttpHeaders().set('Authorization', token || '');
+
+    const url = `https://proyectofinal-backend-production-8cff.up.railway.app/api/plantillas/${id}/${username}`;
+    return this.http.put<Plantilla>(url, plantilla, { headers });
   }
 
   getPlantillas() {
