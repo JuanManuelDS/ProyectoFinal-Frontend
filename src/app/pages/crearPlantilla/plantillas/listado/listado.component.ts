@@ -16,7 +16,6 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./listado.component.css'],
 })
 export class ListadoComponent implements OnChanges {
-
   @Input() generarPDF!: boolean;
 
   @ViewChild('documento') documento!: ElementRef;
@@ -48,7 +47,7 @@ export class ListadoComponent implements OnChanges {
       // Calculate the number of pages.
       var pxFullHeight = canvas.height;
       var pxPageHeight = Math.floor(canvas.width * (pageHeight / imgWidth));
-      var nPages = Math.ceil(pxFullHeight / pxPageHeight);
+      var nPages = Math.ceil(pxFullHeight / pxPageHeight - 0.1);
 
       // Define pageHeight separately so it can be trimmed on the final page.
       var pageHeight = innerPageHeight;
@@ -110,5 +109,4 @@ export class ListadoComponent implements OnChanges {
   get listado() {
     return this.lisService.listado;
   }
-
 }

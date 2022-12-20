@@ -6,13 +6,12 @@ import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-cartaRestaurante',
   templateUrl: './cartaRestaurante.component.html',
-  styleUrls: ['./cartaRestaurante.component.css']
+  styleUrls: ['./cartaRestaurante.component.css'],
 })
 export class CartaRestauranteComponent implements OnChanges {
-
   @Input() generarPDF!: boolean;
 
-  constructor(private crService:CartaRestauranteService) { }
+  constructor(private crService: CartaRestauranteService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['generarPDF'].currentValue === true) {
@@ -39,7 +38,7 @@ export class CartaRestauranteComponent implements OnChanges {
       // Calculate the number of pages.
       var pxFullHeight = canvas.height;
       var pxPageHeight = Math.floor(canvas.width * (pageHeight / imgWidth));
-      var nPages = Math.ceil(pxFullHeight / pxPageHeight);
+      var nPages = Math.ceil(pxFullHeight / pxPageHeight - 0.1);
 
       // Define pageHeight separately so it can be trimmed on the final page.
       var pageHeight = innerPageHeight;
@@ -98,12 +97,11 @@ export class CartaRestauranteComponent implements OnChanges {
     return this.crService.portada;
   }
 
-  get menus(){
+  get menus() {
     return this.crService.menus;
   }
 
   get secciones() {
     return this.crService.secciones;
   }
-
 }

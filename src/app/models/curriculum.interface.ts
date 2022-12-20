@@ -14,7 +14,7 @@ export interface Datos {
   telefono: string;
   email: string;
   presentacion: string;
-  imagen: any;
+  imagen: string;
 }
 
 export interface Experiencia {

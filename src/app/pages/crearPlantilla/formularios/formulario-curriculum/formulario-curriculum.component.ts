@@ -33,7 +33,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
 
   @Output() crearPDF = new EventEmitter();
 
-  // NUEVOS
+  /* --------- FORMULARIOS PARA AGREGAR NUEVOS DATOS -------------------*/
   datosForm: FormGroup = this.formBuilder.group({
     nombre: [''],
     ciudad: [''],
@@ -69,7 +69,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     oral: [''],
   });
 
-  // TODOS
+  /* ----------- ARRAYS DE FORMULARIOS ----------------------*/
   datoInteresForm: FormGroup = this.formBuilder.group({
     dato: [''],
   });
@@ -106,22 +106,40 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     this.cvService.resetearDatos();
   }
 
+  //Al cargarse el componente me fijo si la ruta tiene un id, lo que indica que debo cargar una plantilla existente
   ngOnInit() {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id !== null && id !== undefined) {
-      this.plantillaService.getPlantilla(Number(id)).subscribe((resp) => {
-        this.plantilla = resp;
-        this.rellenarDatos();
-      });
+      this.plantillaService.getPlantilla(Number(id)).subscribe(
+        (resp) => {
+          this.plantilla = resp;
+          this.rellenarDatos();
+        },
+        (err) => {
+          this.router.navigateByUrl('/dashboard');
+        }
+      );
     }
   }
 
+  /* - RELLENA TANTO EL FORMULARIO COMO EL NOMBRE DEL ARCHIVO Y LA PLANTILLA (EL DOCUMENTO) ------------ */
   rellenarDatos() {
     let data: Curriculum = JSON.parse(this.plantilla!.datos);
     this.cvService.resetearDatos();
     this.nombreArchivo = this.plantilla?.nombreArchivo;
     if (data.datos !== null && data.datos !== undefined) {
-      this.datosForm.setValue(data.datos);
+      const { nombre, ciudad, nacimiento, email, telefono, presentacion } =
+        data.datos;
+      this.datosForm.setValue({
+        nombre,
+        ciudad,
+        nacimiento,
+        email,
+        telefono,
+        presentacion,
+        imagen: '',
+      });
+      this.imagen = data.datos.imagen;
       this.guardarDatos();
     }
     if (data.experiencias !== null && data.experiencias !== undefined) {
@@ -163,6 +181,8 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     }
   }
 
+  /*-------------- GETTERS DE LOS ARRAYS DE FORMULARIOS --------------------------*/
+
   get arrExperiencias() {
     return this.experienciasForms.controls['experiencias'] as FormArray;
   }
@@ -183,7 +203,9 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     return this.datosInteresForms.controls['datosInteres'] as FormArray;
   }
 
-  async guardarCV(){
+  //Pido el nombre del archivo en caso de no tenerlo y llamo al método de cvService que guarda la plantilla en la
+  //base de datos
+  async guardarCV() {
     if (this.nombreArchivo === '') {
       const { value: nombre_archivo } = await Swal.fire({
         title: 'Nombre del archivo',
@@ -204,6 +226,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     this.cvService.guardarCv();
   }
 
+  //Método que dispara el generador de pdf en plantilla/curriculum
   generarPDF() {
     this.guardarCV();
     this.crearPDF.emit(true);
@@ -211,9 +234,12 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     //this.router.navigateByUrl('/dashboard');
   }
 
+  /*---------------- MÉTODOS PARA GUARDAR DATOS ------------------------*/
+
   guardarDatos() {
     //Paso los datos del formulario a un objeto y se lo envío al servicio para que lo agregue al documento
     let { ...datos } = this.datosForm.value;
+    datos.imagen = this.imagen;
     this.cvService.agregarDatos(datos);
   }
 
@@ -284,10 +310,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     this.nuevaExperienciaForm.reset();
   }
 
-  /* eliminarFormulario(arrForm: FormArray, index: number) {
-    this.cvService.eliminarInfo(arrForm, index);
-    arrForm.removeAt(index);
-  } */
+  /*----------------- MÉTODOS PARA ELIMINAR DATOS --------------------------*/
 
   eliminarExperiencia(index: number) {
     //Lo elimino del arrayForm de experiencias
@@ -318,6 +341,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     this.cvService.eliminarDatoInteres(index);
   }
 
+  /* CONVERSOR DE IMAGENES A BASE64 */
   async cargarImagen(event: any) {
     const file = event.target.files[0];
     const base64 = await convertBase64(file);

@@ -3,7 +3,7 @@
     <img src="assets/createPlus.png" class="card-img-top" />
     <h5 class="card-title my-4 text-center">Nueva plantilla</h5>
   </div>
- 
+
   <!-------------- LISTA DE TARJETAS DE PLANTILLAS  ---------------->
   <div
     class="card carta m-3 p-0 float-start"
@@ -13,17 +13,18 @@
     <img src="assets/cvpdf.png" class="card-img-top" />
     <div class="card-body">
       <h5 class="card-title mb-3">{{ plantilla.nombreArchivo }}</h5>
-      <div class="row" *ngIf="plantilla.id">
+      <div class="row d-flex justify-content-center" *ngIf="plantilla.id">
         <a
           type="button"
-          class="btn btn-warning col mx-4"
+          class="btn btn-warning col-5 me-2"
           (click)="abrirPlantilla(plantilla.id, plantilla.tipo)"
-          >Ver plantilla</a
+          >Ver</a
         >
         <button
-          class="btn btn-danger col mx-4 mt-2"
-          (click)="borrarPlantilla(plantilla.id)">
-        Borrar Plantilla
+          class="btn btn-danger col-5 fw-semibold"
+          (click)="borrarPlantilla(plantilla.id)"
+        >
+          Borrar
         </button>
       </div>
     </div>
