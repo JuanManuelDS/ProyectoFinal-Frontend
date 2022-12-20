@@ -57,6 +57,8 @@ export class DashboardUsuarioComponent implements OnInit {
       },
       inputPlaceholder: 'Seleccionar plantilla',
       showCancelButton: true,
+      cancelButtonColor: "#CF1414",
+      confirmButtonColor: "#1CC464",
       inputValidator: function (value) {
         return new Promise((resolve: any) => {
           if (value === '') {
@@ -85,6 +87,8 @@ export class DashboardUsuarioComponent implements OnInit {
       title: '¿Estas seguro que quieres eliminar la plantilla?',
       showCancelButton: true,
       cancelButtonText: 'Cancelar',
+      cancelButtonColor: "#1CC464",
+      confirmButtonColor: "#CF1414",
       confirmButtonText: 'Sí',
     }).then((result) => {
       if (result.isConfirmed) {
