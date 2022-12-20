@@ -77,10 +77,20 @@ export class DashboardUsuarioComponent implements OnInit {
   }
 
   borrarPlantilla(id: number) {
-    this.plantillasService.deletePlantilla(id).subscribe((resp) => {
-      this.plantillasService.getPlantillas().subscribe((resp) => {
-        this.plantillas = resp;
-      });
+    Swal.fire({
+      title: '¿Estas seguro que quieres eliminar la plantilla?',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Sí',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.plantillasService.deletePlantilla(id).subscribe((resp) => {
+          Swal.fire('Usuario eliminado', '', 'success');
+          this.plantillasService.getPlantillas().subscribe((resp) => {
+            this.plantillas = resp;
+          });
+        });
+      }
     });
   }
 }
