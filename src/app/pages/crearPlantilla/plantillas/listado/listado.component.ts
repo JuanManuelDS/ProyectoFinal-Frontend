@@ -47,7 +47,8 @@ export class ListadoComponent implements OnChanges {
       // Calculate the number of pages.
       var pxFullHeight = canvas.height;
       var pxPageHeight = Math.floor(canvas.width * (pageHeight / imgWidth));
-      var nPages = Math.ceil(pxFullHeight / pxPageHeight - 0.1);
+
+      var nPages = Math.round(pxFullHeight / pxPageHeight);
 
       // Define pageHeight separately so it can be trimmed on the final page.
       var pageHeight = innerPageHeight;
@@ -91,10 +92,10 @@ export class ListadoComponent implements OnChanges {
           pageHeight
         );
       }
+      pdf.save();
       //Cambio el estilo del div para que vuelva a su tamaño y estilos anteriores a la exportación
       data.classList.remove('exportar');
       data.classList.add('antes_exportar');
-      pdf.save();
     });
   }
 
