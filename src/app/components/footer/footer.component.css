@@ -20,3 +20,7 @@ a {
 span {
     font-size: .9rem;
 }
+
+.linkedins {
+    border-bottom: 1px gray solid;
+}
