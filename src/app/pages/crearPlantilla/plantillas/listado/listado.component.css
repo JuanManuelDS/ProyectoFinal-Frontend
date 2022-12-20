@@ -23,7 +23,7 @@
 img {
     margin-right: auto;
     margin-left: auto;
-    max-width:630px;
+    max-width: 630px;
 
 }
 
@@ -31,12 +31,18 @@ img {
     float: left;
 }
 
+
 .item {
     text-align: center;
 }
 
 .precio {
     float: right;
+}
+
+.cabecera,
+li {
+    list-style: none;
 }
 
 @media (max-width: 870px) {
