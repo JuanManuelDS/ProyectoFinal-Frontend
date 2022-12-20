@@ -98,6 +98,7 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
     if (data.imagen !== null && data.imagen !== undefined) {
       this.lisService.cargarImagen(data.imagen);
     }
+
   }
 
   cambiarTitulo() {
@@ -156,7 +157,6 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
   }
 
   async guardarArchivo() {
-    console.log(this.idActual);
     if (this.idActual === null || this.idActual === undefined) {
       console.log('NA ' + this.nombreArchivo);
       if (this.nombreArchivo === '') {
@@ -177,7 +177,6 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
         this.lisService.guardarListado();
       }
     } else {
-      console.log('1');
       this.lisService.nombreArchivo = String(this.nombreArchivo);
       this.lisService.actualizarListado(Number(this.idActual));
     }

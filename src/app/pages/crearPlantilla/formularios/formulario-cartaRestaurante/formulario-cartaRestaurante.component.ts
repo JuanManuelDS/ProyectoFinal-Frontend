@@ -11,6 +11,7 @@ import { Plantilla } from 'src/app/models/plantillas.interface';
 import { CartaRestauranteService } from 'src/app/services/cartaRestaurante.service';
 import { PlantillasService } from 'src/app/services/plantillas.service';
 import convertBase64 from 'src/app/utils/convertBase64';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-formulario-cartaRestaurante',
@@ -108,13 +109,30 @@ export class FormularioCartaRestauranteComponent implements OnInit {
     let data: Cartarestaurant = JSON.parse(this.plantilla!.datos);
     this.crService.resetearCarta();
     this.nombreArchivo = this.plantilla?.nombreArchivo;
-
+    // Nombre Restaurante
     if(data.nombre !== null && data.nombre !== undefined){
       this.nuevoRestaurante.controls['nombre'].setValue(data.nombre);
     }
-
-
-
+    // Portada Restaurante
+    if (data.imagen !== null && data.imagen !== undefined) {
+      this.crService.addPortada(data.imagen);
+    }
+    // Menus Restaurante
+    if(data.menus !== null && data.menus !== undefined) {
+      for (let i = 0; i < data.menus.length; i++) {
+        let it = this.arrMenus;
+        it.push(this.fb.group({ ...data.menus[i] }));
+        this.crService.addMenu(data.menus[i]);
+      }
+    }
+    // Secciones Restaurante
+    if(data.secciones !== null && data.secciones !== undefined) {
+      for (let i = 0; i < data.secciones.length; i++) {
+        let it = this.arrSecciones;
+        it.push(this.fb.group({ ...data.secciones[i] }));
+        this.crService.addSeccion(data.secciones[i]);
+      }
+    }
   }
 
   // ------------------ GUARDAR OBJETOS ----------------------
@@ -232,6 +250,32 @@ export class FormularioCartaRestauranteComponent implements OnInit {
         menus: [restaurante.menus],
       })
     );
+  }
+
+  async guardarArchivo() {
+    if (this.idActual === null || this.idActual === undefined) {
+      console.log('NA ' + this.nombreArchivo);
+      if (this.nombreArchivo === '') {
+        const { value: nombre_archivo } = await Swal.fire({
+          title: 'Nombre del archivo',
+          input: 'text',
+          inputValue: '',
+          showCancelButton: true,
+          inputValidator: (value) => {
+            return new Promise((resolve: any) => {
+              if (value === '') {
+                resolve('Por favor, ingresa un nombre de archivo');
+              } else resolve();
+            });
+          },
+        });
+        this.crService.nombreArchivo = nombre_archivo;
+        this.crService.guardarCR();
+      }
+    } else {
+      this.crService.nombreArchivo = String(this.nombreArchivo);
+      this.crService.actualizarCR(Number(this.idActual));
+    }
   }
 
   // ---------------- ELIMINAR -------------------
