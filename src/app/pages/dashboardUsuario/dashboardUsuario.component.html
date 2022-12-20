@@ -1,6 +1,6 @@
 <div
   class="container-fluid mt-4 d-flex flex-wrap justify-content-center"
-  *ngIf="plantillas.length > 0; else loading"
+  *ngIf="!loading; else cargando"
 >
   <div class="card carta m-3 p-4 float-start" (click)="nuevaPlantilla()">
     <img src="assets/createPlus.png" class="card-img-top" />
@@ -43,7 +43,7 @@
   </div>
 </div>
 
-<ng-template #loading>
+<ng-template #cargando>
   <div
     class="container d-flex justify-content-center align-items-center loading_container"
   >

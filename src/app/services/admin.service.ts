@@ -12,6 +12,7 @@ export class AdminService {
   private _usuariosBuscados: Content[] = [];
   private _pageIndex: number = 0;
   public nRegistros: number = 20;
+  private _paginas: number = 0;
 
   constructor(private http: HttpClient) {}
 
@@ -27,8 +28,10 @@ export class AdminService {
       .get<Paginacion>(url, { headers, params: queryParams })
       .pipe(
         tap((resp) => {
+          console.log('me ejecuto');
           this._usuarios = resp.content;
           this._usuariosBuscados = resp.content;
+          this._paginas = resp.totalPages;
         })
       );
   }
@@ -65,8 +68,26 @@ export class AdminService {
     return this.http.post(url, body, { headers });
   }
 
+  siguientePagina() {
+    this._pageIndex++;
+    return this.cargarUsuarios();
+  }
+
+  paginaAnterior() {
+    this._pageIndex--;
+    return this.cargarUsuarios();
+  }
+
   cambiarTabla(tabla: string) {
     this._tablaSeleccionada = tabla;
+  }
+
+  resetearIndexPagina() {
+    this._pageIndex = 0;
+  }
+
+  get paginas() {
+    return this._paginas;
   }
 
   get usuariosBuscados() {
@@ -75,5 +96,9 @@ export class AdminService {
 
   get tablaSeleccionada() {
     return this._tablaSeleccionada;
+  }
+
+  get pageIndex() {
+    return this._pageIndex;
   }
 }
