@@ -1,7 +1,5 @@
 <div class="container-fluid">
   <div class="container mt-3">
-    <app-admin-menu tablaSeleccionada="tablaSeleccionada"></app-admin-menu>
-
     <div class="row my-3 px-4">
       <div class="col">
         <div class="row">
@@ -41,11 +39,24 @@
     </div>
 
     <!-- Tabla de usuarios o de plantillas -->
-    <app-users-table
-      *ngIf="tablaSeleccionada === 'users'; else tablaPlantillas"
-    ></app-users-table>
-    <ng-template #tablaPlantillas>
-      <app-plantillas-table></app-plantillas-table>
-    </ng-template>
+    <app-users-table></app-users-table>
+
+    <div class="row my-4 paginacion" *ngIf="paginas > 1">
+      <div class="col d-flex justify-content-center">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link a_funcional" (click)="paginaAnterior()"
+              >Anterior</a
+            >
+          </li>
+          <li class="page-item">
+            <a class="page-link">{{ indexPagina + 1 }}</a>
+          </li>
+          <li class="page-item" (click)="paginaSiguiente()">
+            <a class="page-link a_funcional">Siguiente</a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>

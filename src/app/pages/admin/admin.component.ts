@@ -8,6 +8,14 @@ import { AdminService } from '../../services/admin.service';
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
+  get paginas() {
+    return this.adminService.paginas;
+  }
+
+  get indexPagina() {
+    return this.adminService.pageIndex;
+  }
+
   busquedaForm: FormGroup = this.fb.group({
     busqueda: [''],
   });
@@ -22,6 +30,18 @@ export class AdminComponent implements OnInit {
     this.adminService.cargarUsuarios().subscribe();
   }
 
+  paginaSiguiente() {
+    if (this.indexPagina + 1 < this.paginas) {
+      this.adminService.siguientePagina().subscribe();
+    }
+  }
+
+  paginaAnterior() {
+    if (this.indexPagina + 1 >= this.paginas) {
+      this.adminService.paginaAnterior().subscribe();
+    }
+  }
+
   get tablaSeleccionada() {
     return this.adminService.tablaSeleccionada;
   }
@@ -33,6 +53,7 @@ export class AdminComponent implements OnInit {
 
   recargarUsuarios() {
     this.adminService.nRegistros = this.registrosForm.get('registros')?.value;
+    this.adminService.resetearIndexPagina();
     this.adminService.cargarUsuarios().subscribe();
   }
 }

@@ -10,6 +10,10 @@ button#boton_menu {
     text-align: end;
 }
 
+.a_funcional:hover {
+    cursor: pointer;
+}
+
 @media (max-width: 600px) {
     .label_buscar {
         text-align: start;
