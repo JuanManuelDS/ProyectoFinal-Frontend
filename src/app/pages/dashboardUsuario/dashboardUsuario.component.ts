@@ -14,6 +14,7 @@ export class DashboardUsuarioComponent implements OnInit {
   imagenListado: string = 'assets/ejemplo-listado.jpg';
   imagenCv: string = 'assets/ejemplo-cv.jpg';
   imagenCr: string = 'assets/ejemplo-cr.jpg';
+  loading: boolean = true;
 
   constructor(
     private router: Router,
@@ -23,6 +24,9 @@ export class DashboardUsuarioComponent implements OnInit {
   ngOnInit() {
     this.plantillasService.getPlantillas().subscribe((resp) => {
       this.plantillas = resp;
+      setTimeout(() => {
+        this.loading = false;
+      }, 500);
     });
   }
 

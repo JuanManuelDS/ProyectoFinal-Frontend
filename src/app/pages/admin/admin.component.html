@@ -1,26 +1,14 @@
 <div class="container-fluid">
   <div class="container mt-3">
-    <!-- Botón para desplegar menú escondido -->
-    <div class="col-12 my-3">
-      <button
-        class="btn btn-dark"
-        type="button"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#offcanvasWithBothOptions"
-        aria-controls="offcanvasWithBothOptions"
-        id="boton_menu"
-      >
-        Opciones
-      </button>
-    </div>
-    <!-- Menú escondido -->
     <app-admin-menu tablaSeleccionada="tablaSeleccionada"></app-admin-menu>
 
-    <div class="row mb-2">
+    <div class="row my-3 px-4">
       <div class="col">
         <div class="row">
           <form class="col" [formGroup]="registrosForm">
-            <label class="col-form-label col me-2">N° registros: </label>
+            <label class="col-form-label col me-2 fw-semibold"
+              >N° registros:
+            </label>
             <select
               name="col-sm-8 form-control"
               formControlName="registros"
@@ -36,7 +24,7 @@
       <div class="col d-flex justify-content-end">
         <form [formGroup]="busquedaForm">
           <div class="row">
-            <label class="col-form-label col me-2 pe-0 label_buscar"
+            <label class="col-form-label col me-2 pe-0 label_buscar fw-semibold"
               >Buscar:
             </label>
             <div class="col-sm-8">
