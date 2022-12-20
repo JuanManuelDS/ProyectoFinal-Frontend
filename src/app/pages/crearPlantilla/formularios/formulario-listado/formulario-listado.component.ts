@@ -150,30 +150,33 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
     this.lisService.cargarImagen(base64);
   }
 
-  async guardarArchivo(){
+ async guardarArchivo() {
+    console.log(this.idActual);
     if (this.idActual === null || this.idActual === undefined) {
-    console.log("NA " + this.nombreArchivo);
-    if (this.nombreArchivo === '') {
-        const {value: nombre_archivo} = await Swal.fire({
-            title: 'Nombre del archivo',
-            input: 'text',
-            inputValue: '',
-            showCancelButton: true,
-            inputValidator: (value) => {
-                return new Promise((resolve : any) => {
-                    if (value === '') {
-                        resolve('Por favor, ingresa un nombre de archivo');
-                    } else
-                        resolve();
-                    }
-                );
-            }
-        });
-        this.lisService.nombreArchivo = nombre_archivo;
-        this.lisService.guardarListado();
-    }else{
-      this.lisService.guardarListado();
-    }
+        console.log("NA " + this.nombreArchivo);
+        if (this.nombreArchivo === '') {
+            const {value: nombre_archivo} = await Swal.fire({
+                title: 'Nombre del archivo',
+                input: 'text',
+                inputValue: '',
+                showCancelButton: true,
+                inputValidator: (value) => {
+                    return new Promise((resolve : any) => {
+                        if (value === '') {
+                            resolve('Por favor, ingresa un nombre de archivo');
+                        } else
+                            resolve();
+                        }
+                    );
+                }
+            });
+            this.lisService.nombreArchivo = nombre_archivo;
+            this.lisService.guardarListado();
+        }
+    }else {
+      console.log("1");
+      this.lisService.nombreArchivo = String(this.nombreArchivo);
+      this.lisService.actualizarListado(Number(this.idActual));
   }
 }
 

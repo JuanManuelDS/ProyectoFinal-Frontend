@@ -8,10 +8,6 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class PlantillasService {
-
-  plantillaActualID: number = -1;
-  parray: Plantilla[] = [];
-
   constructor(private http: HttpClient, private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router) {}
 
   guardarPlantilla(plantilla: Plantilla) {
@@ -25,6 +21,16 @@ export class PlantillasService {
 
     const url = `https://proyectofinal-backend-production-8cff.up.railway.app/api/plantillas/${nombreUsuario}`;
     return this.http.post<Plantilla>(url, plantilla, { headers });
+  }
+  actualizarPlantilla(id: number, plantilla: Plantilla) {
+    //Tomo el token del local storage (en caso que lo tenga)
+    const token = 'Bearer ' + localStorage.getItem('token');
+    const username = localStorage.getItem('nombreUsuario');
+    //En caso que no tenga un token en el localstorage paso un string vacío
+    const headers = new HttpHeaders().set('Authorization', token || '');
+
+    const url = `https://proyectofinal-backend-production-8cff.up.railway.app/api/plantillas/${id}/${username}`;
+    return this.http.put<Plantilla>(url, plantilla, { headers });
   }
 
   getPlantillas() {

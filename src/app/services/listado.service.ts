@@ -102,5 +102,23 @@ export class ListadoService {
     });
   }
 
+  actualizarListado(id: number){
+    const list: Listado = {
+      titulo: this._titulo,
+      imagen: this._imagen,
+      items: this._listado
+    };
+
+    const plantilla: Plantilla = {
+      nombreArchivo: this.nombreArchivo,
+      tipo: 'listado',
+      datos: JSON.stringify(list)
+    };
+
+    this.plantillaService.actualizarPlantilla(id, plantilla).subscribe((res) => {
+      console.log(res);
+    });
+  }
+
   constructor(private plantillaService: PlantillasService, private router: Router) {}
 }
