@@ -22,64 +22,71 @@
         />
       </div>
     </div>
-    </form>
-    <form [formGroup]="nuevoItem" (submit)="guardarItem()">
+  </form>
+  <form [formGroup]="nuevoItem" (submit)="guardarItem()">
     <div class="row">
-        <div class="col">
-            <label class="form-label">Ítem del listado:
-            </label>
-            <input type="text" class="form-control" formControlName="item"/>
-        </div>
+      <div class="col">
+        <label class="form-label">Ítem del listado: </label>
+        <input type="text" class="form-control" formControlName="item" />
+      </div>
     </div>
     <div class="row">
       <div class="col">
-          <label class="form-label">Unidades:
-          </label>
-          <input type="text" class="form-control" formControlName="unidades"/>
+        <label class="form-label">Unidades: </label>
+        <input type="text" class="form-control" formControlName="unidades" />
       </div>
-  </div>
-  <div class="row">
-    <div class="col">
-        <label class="form-label">Precio:
-        </label>
-        <input type="text" class="form-control" formControlName="precio"/>
     </div>
-</div>
+    <div class="row">
+      <div class="col">
+        <label class="form-label">Precio: </label>
+        <input type="text" class="form-control" formControlName="precio" />
+      </div>
+    </div>
 
     <div class="row px-3 descargar_guardar">
-        <div class="col">
-            <button type="submit" class="btn btn-primary">Guardar item</button>
-        </div>
-    </div>
-    <div class="row px-3 descargar_guardar mt-2">
       <div class="col">
-          <button type="button" class="btn btn-success" (click)="guardarArchivo()">Guardar Listado</button>
+        <button type="submit" class="btn btn-primary">Guardar item</button>
+      </div>
+    </div>
+    <!-------- LISTA DE ITEMS --------->
+    <div class="container-fluid mt-2 p-0" formArrayName="listado">
+      <div
+        class="container-fluid p-0 d-flex justify-content-between dato_agregado"
+        *ngFor="let item of arrItems.controls; let i = index"
+      >
+        <div class="d-flex align-items-center">
+          <span class="ps-4 fw-semibold">
+            {{ item.get("item")?.value }}
+          </span>
+        </div>
+        <div class="">
+          <button class="btn btn-danger" (click)="eliminarItem(i)">
+            Eliminar
+          </button>
+        </div>
       </div>
     </div>
     <div class="row px-3 descargar_guardar mt-2">
       <div class="col">
-        <button type="button" class="btn descargar_button" (click)="generarPDF()">
-            Descargar PDF
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="guardarArchivo()"
+        >
+          Guardar Listado
         </button>
       </div>
     </div>
-
-    <!-------- LISTA DE ITEMS --------->
-    <div class="container-fluid mt-2 p-0" formArrayName="listado">
-        <div
-            class="container-fluid p-0 d-flex justify-content-between dato_agregado"
-            *ngFor="let item of arrItems.controls; let i = index">
-            <div class="d-flex align-items-center">
-                <span class="ps-4 fw-semibold">
-                    {{ item.get("item")?.value }}
-                </span>
-            </div>
-            <div class="">
-                <button class="btn btn-danger" (click)="eliminarItem(i)">
-                    Eliminar
-                </button>
-            </div>
-        </div>
+    <div class="row px-3 descargar_guardar mt-2">
+      <div class="col">
+        <button
+          type="button"
+          class="btn descargar_button"
+          (click)="generarPDF()"
+        >
+          Descargar PDF
+        </button>
+      </div>
     </div>
-</form>
+  </form>
 </div>

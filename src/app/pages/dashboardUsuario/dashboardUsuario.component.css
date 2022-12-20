@@ -33,3 +33,7 @@ div.carta:first-child:hover {
 div.carta:first-child:hover {
     cursor: pointer;
 }
+
+.loading_container {
+    min-height: 70vh;
+}

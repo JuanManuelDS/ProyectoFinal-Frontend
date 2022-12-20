@@ -11,6 +11,7 @@ import { AdminModule } from './admin/admin.module';
 import { UserpageComponent } from '../components/userpage/userpage.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { RouterModule } from '@angular/router';
     ComponentsModule,
     CrearPlantillaModule,
     AdminModule,
+    MaterialModule
   ],
   declarations: [
     DashboardUsuarioComponent,
