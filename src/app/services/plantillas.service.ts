@@ -22,10 +22,6 @@ export class PlantillasService {
     const url = `https://proyectofinal-backend-production-8cff.up.railway.app/api/plantillas/${nombreUsuario}`;
     return this.http.post<Plantilla>(url, plantilla, { headers });
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> 9648c0c83e22c44872594a186d9ab37a2db9b965
   actualizarPlantilla(id: number, plantilla: Plantilla) {
     //Tomo el token del local storage (en caso que lo tenga)
     const token = 'Bearer ' + localStorage.getItem('token');

@@ -57,7 +57,7 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
     private router: Router) {}
 
   ngOnDestroy(): void {
-    this.lisService.resetearListado(); 
+    this.lisService.resetearListado();
   }
 
   ngOnInit(): void {
@@ -78,9 +78,9 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
     if(data.titulo !== null && data.titulo !== undefined) {
       this.nuevoListado.controls['titulo'].setValue(data.titulo);
     }
-    if(data.imagen !== null && data.imagen !== undefined) {
-      this.nuevoListado.controls['imagen'].setValue(data.imagen);
-    }
+    console.log("AAA "+data.imagen)
+    this.imagen = data.imagen;
+
     if(data.items !== null && data.items !== undefined) {
       for(let i = 0; i < data.items.length; i++) {
         let it = this.arrItems;
@@ -141,13 +141,10 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
   }
 
   async cargarImagen(event: any) {
-    console.log('me disparo');
-
     const file = event.target.files[0];
     const base64 = await convertBase64(file);
-    console.log('me disparo');
     this.imagen = base64;
-    this.lisService.cargarImagen(base64);
+    this.lisService.cargarImagen(this.imagen);
   }
 
  async guardarArchivo() {

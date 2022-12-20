@@ -1,12 +1,15 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import {
   Menu,
   Plato,
   Seccion,
   Cartarestaurant,
 } from 'src/app/models/cartarestaurant.interface';
+import { Plantilla } from 'src/app/models/plantillas.interface';
 import { CartaRestauranteService } from 'src/app/services/cartaRestaurante.service';
+import { PlantillasService } from 'src/app/services/plantillas.service';
 import convertBase64 from 'src/app/utils/convertBase64';
 
 @Component({
@@ -16,7 +19,9 @@ import convertBase64 from 'src/app/utils/convertBase64';
 })
 export class FormularioCartaRestauranteComponent implements OnInit {
   imagen: any;
-  nombreArchivo: string = '';
+  nombreArchivo: string | undefined = '';
+  plantilla: Plantilla | undefined;
+  idActual: any;
 
   @Output() crearPDF = new EventEmitter();
 
@@ -84,10 +89,33 @@ export class FormularioCartaRestauranteComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private crService: CartaRestauranteService
+    private crService: CartaRestauranteService,
+    private plantillaService: PlantillasService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.idActual = this.activatedRoute.snapshot.paramMap.get('id');
+    if(this.idActual !== null && this.idActual !== undefined) {
+      this.plantillaService.getPlantilla(Number(this.idActual)).subscribe((resp) => {
+        this.plantilla = resp;
+        this.rellenarDatos();
+      });
+    }
+  }
+
+  rellenarDatos() {
+    let data: Cartarestaurant = JSON.parse(this.plantilla!.datos);
+    this.crService.resetearCarta();
+    this.nombreArchivo = this.plantilla?.nombreArchivo;
+
+    if(data.nombre !== null && data.nombre !== undefined){
+      this.nuevoRestaurante.controls['nombre'].setValue(data.nombre);
+    }
+
+
+
+  }
 
   // ------------------ GUARDAR OBJETOS ----------------------
 

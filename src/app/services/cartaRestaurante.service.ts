@@ -68,4 +68,12 @@ eliminarPlato(index: number) {
   this._platos.splice(index, 1);
 }
 
+resetearCarta() {
+  this._nombre = '';
+  this._portada = undefined;
+  this._menus = [];
+  this._secciones = [];
+  this._platos = [];
+}
+
 }
