@@ -6,7 +6,6 @@ import { Plantilla } from '../models/plantillas.interface';
 import { PlantillasService } from './plantillas.service';
 import { Router } from '@angular/router';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -87,38 +86,41 @@ export class ListadoService {
     const list: Listado = {
       titulo: this._titulo,
       imagen: this._imagen,
-      items: this._listado
+      items: this._listado,
     };
-
     const plantilla: Plantilla = {
       nombreArchivo: this.nombreArchivo,
       tipo: 'listado',
-      datos: JSON.stringify(list)
+      datos: JSON.stringify(list),
     };
 
     this.plantillaService.guardarPlantilla(plantilla).subscribe((res) => {
-      console.log(res);
-      this.router.navigateByUrl('/nueva-plantilla/listado/'+res.id);
+      this.router.navigateByUrl('/nueva-plantilla/listado/' + res.id);
     });
   }
 
-  actualizarListado(id: number){
+  actualizarListado(id: number) {
     const list: Listado = {
       titulo: this._titulo,
       imagen: this._imagen,
-      items: this._listado
+      items: this._listado,
     };
 
     const plantilla: Plantilla = {
       nombreArchivo: this.nombreArchivo,
       tipo: 'listado',
-      datos: JSON.stringify(list)
+      datos: JSON.stringify(list),
     };
 
-    this.plantillaService.actualizarPlantilla(id, plantilla).subscribe((res) => {
-      console.log(res);
-    });
+    this.plantillaService
+      .actualizarPlantilla(id, plantilla)
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 
-  constructor(private plantillaService: PlantillasService, private router: Router) {}
+  constructor(
+    private plantillaService: PlantillasService,
+    private router: Router
+  ) {}
 }

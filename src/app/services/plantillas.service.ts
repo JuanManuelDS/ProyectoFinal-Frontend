@@ -8,7 +8,12 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class PlantillasService {
-  constructor(private http: HttpClient, private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {}
 
   guardarPlantilla(plantilla: Plantilla) {
     const nombreUsuario = localStorage.getItem('nombreUsuario');

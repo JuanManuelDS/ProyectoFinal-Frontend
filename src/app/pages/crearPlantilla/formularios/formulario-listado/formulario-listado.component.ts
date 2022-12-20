@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Item, Listado } from 'src/app/models/listado.interface';
@@ -14,7 +20,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./formulario-listado.component.css'],
 })
 export class FormularioListadoComponent implements OnInit, OnDestroy {
-
   imagen: any;
   plantilla: Plantilla | undefined;
   nombreArchivo: string | undefined = '';
@@ -24,14 +29,13 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
   nuevoListado: FormGroup = this.fb.group({
     titulo: ['', [Validators.required]],
     imagen: [],
-    items: this.fb.array([])
-
+    items: this.fb.array([]),
   });
 
   nuevoItem: FormGroup = this.fb.group({
     unidades: [0],
     item: [''],
-    precio: [0]
+    precio: [0],
   });
 
   // TODOS
@@ -50,11 +54,13 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
 
   @Output() crearPDF = new EventEmitter();
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private lisService: ListadoService,
     private plantillaService: PlantillasService,
     private activatedRoute: ActivatedRoute,
-    private router: Router) {}
+    private router: Router
+  ) {}
 
   ngOnDestroy(): void {
     this.lisService.resetearListado();
@@ -62,11 +68,13 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.idActual = this.activatedRoute.snapshot.paramMap.get('id');
-    if(this.idActual !== null && this.idActual !== undefined) {
-      this.plantillaService.getPlantilla(Number(this.idActual)).subscribe((resp) => {
-        this.plantilla = resp;
-        this.rellenarDatos();
-      });
+    if (this.idActual !== null && this.idActual !== undefined) {
+      this.plantillaService
+        .getPlantilla(Number(this.idActual))
+        .subscribe((resp) => {
+          this.plantilla = resp;
+          this.rellenarDatos();
+        });
     }
   }
 
@@ -75,20 +83,20 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
     this.lisService.resetearListado();
     this.nombreArchivo = this.plantilla?.nombreArchivo;
 
-    if(data.titulo !== null && data.titulo !== undefined) {
+    if (data.titulo !== null && data.titulo !== undefined) {
       this.nuevoListado.controls['titulo'].setValue(data.titulo);
+      this.lisService.cambiarTitulo(data.titulo);
     }
-    console.log("AAA "+data.imagen)
-    this.imagen = data.imagen;
 
     if(data.items !== null && data.items !== undefined) {
       for(let i = 0; i < data.items.length; i++) {
         let it = this.arrItems;
-        it.push(
-          this.fb.group({ ...data.items[i]})
-        );
+        it.push(this.fb.group({ ...data.items[i] }));
         this.lisService.guardarItem(data.items[i]);
       }
+    }
+    if (data.imagen !== null && data.imagen !== undefined) {
+      this.lisService.cargarImagen(data.imagen);
     }
   }
 
@@ -101,7 +109,7 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
     let item: Item = {
       unidades: this.nuevoItem.get('unidades')?.value,
       item: this.nuevoItem.get('item')?.value,
-      precio: this.nuevoItem.get('precio')?.value
+      precio: this.nuevoItem.get('precio')?.value,
     };
     this.lisService.guardarItem(item);
 
@@ -110,7 +118,7 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
       this.fb.group({
         unidades: [item.unidades],
         item: [item.item],
-        precio: [item.precio]
+        precio: [item.precio],
       })
     );
 
@@ -122,14 +130,14 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
     let listado: Listado = {
       titulo: this.nuevoListado.get('titulo')?.value,
       imagen: this.imagen,
-      items: this.nuevoListado.get('items')?.value
-    }
+      items: this.nuevoListado.get('items')?.value,
+    };
 
     this.arrListado.push(
       this.fb.group({
         titulo: [listado.titulo],
         imagen: [listado.imagen],
-        items: [listado.items]
+        items: [listado.items],
       })
     );
   }
@@ -147,42 +155,36 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
     this.lisService.cargarImagen(this.imagen);
   }
 
- async guardarArchivo() {
+  async guardarArchivo() {
     console.log(this.idActual);
     if (this.idActual === null || this.idActual === undefined) {
-        console.log("NA " + this.nombreArchivo);
-        if (this.nombreArchivo === '') {
-            const {value: nombre_archivo} = await Swal.fire({
-                title: 'Nombre del archivo',
-                input: 'text',
-                inputValue: '',
-                showCancelButton: true,
-                inputValidator: (value) => {
-                    return new Promise((resolve : any) => {
-                        if (value === '') {
-                            resolve('Por favor, ingresa un nombre de archivo');
-                        } else
-                            resolve();
-                        }
-                    );
-                }
+      console.log('NA ' + this.nombreArchivo);
+      if (this.nombreArchivo === '') {
+        const { value: nombre_archivo } = await Swal.fire({
+          title: 'Nombre del archivo',
+          input: 'text',
+          inputValue: '',
+          showCancelButton: true,
+          inputValidator: (value) => {
+            return new Promise((resolve: any) => {
+              if (value === '') {
+                resolve('Por favor, ingresa un nombre de archivo');
+              } else resolve();
             });
-            this.lisService.nombreArchivo = nombre_archivo;
-            this.lisService.guardarListado();
-        }
-    }else {
-      console.log("1");
+          },
+        });
+        this.lisService.nombreArchivo = nombre_archivo;
+        this.lisService.guardarListado();
+      }
+    } else {
+      console.log('1');
       this.lisService.nombreArchivo = String(this.nombreArchivo);
       this.lisService.actualizarListado(Number(this.idActual));
+    }
   }
-}
 
   generarPDF() {
     this.guardarArchivo();
     this.crearPDF.emit(true);
   }
 }
-
-
-
-
