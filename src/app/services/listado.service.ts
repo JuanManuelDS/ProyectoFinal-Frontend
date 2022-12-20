@@ -4,6 +4,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Plantilla } from '../models/plantillas.interface';
 import { PlantillasService } from './plantillas.service';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -60,7 +61,6 @@ export class ListadoService {
 
   guardarItem(item: Item) {
     this._listado.push(item);
-    console.log(item);
   }
 
   eliminarItem(index: number) {
@@ -84,7 +84,6 @@ export class ListadoService {
   }
 
   guardarListado() {
-    console.log("1")
     const list: Listado = {
       titulo: this._titulo,
       imagen: this._imagen,
@@ -99,8 +98,9 @@ export class ListadoService {
 
     this.plantillaService.guardarPlantilla(plantilla).subscribe((res) => {
       console.log(res);
+      this.router.navigateByUrl('/nueva-plantilla/listado/'+res.id);
     });
   }
 
-  constructor(private plantillaService: PlantillasService) {}
+  constructor(private plantillaService: PlantillasService, private router: Router) {}
 }

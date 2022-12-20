@@ -101,7 +101,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     private plantillaService: PlantillasService,
     private router: Router
   ) { }
-  
+
   ngOnDestroy() {
     this.cvService.resetearDatos();
   }
@@ -199,8 +199,9 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
         },
       });
       this.cvService.nombreArchivo = nombre_archivo;
-      this.cvService.guardarCv();
+
     }
+    this.cvService.guardarCv();
   }
 
   generarPDF() {

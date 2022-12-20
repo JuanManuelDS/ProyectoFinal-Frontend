@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Plantilla } from '../models/plantillas.interface';
 import { AuthService } from './auth.service';
 
@@ -7,7 +8,11 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class PlantillasService {
-  constructor(private http: HttpClient, private authService: AuthService) {}
+
+  plantillaActualID: number = -1;
+  parray: Plantilla[] = [];
+
+  constructor(private http: HttpClient, private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router) {}
 
   guardarPlantilla(plantilla: Plantilla) {
     const nombreUsuario = localStorage.getItem('nombreUsuario');
@@ -19,7 +24,7 @@ export class PlantillasService {
     const headers = new HttpHeaders().set('Authorization', token || '');
 
     const url = `https://proyectofinal-backend-production-8cff.up.railway.app/api/plantillas/${nombreUsuario}`;
-    return this.http.post(url, plantilla, { headers });
+    return this.http.post<Plantilla>(url, plantilla, { headers });
   }
 
   getPlantillas() {
