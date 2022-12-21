@@ -23,6 +23,7 @@ export class CurriculumService {
   private _conocimientos: Conocimiento[] = [];
   private _idiomas: Idioma[] = [];
   private _datosInteres: DatosInteres[] = [];
+  private _imprimirPlantilla: boolean = false;
   private _idPlantilla: number | undefined;
 
   constructor(
@@ -59,6 +60,10 @@ export class CurriculumService {
     return this._idPlantilla;
   }
 
+  get imprimirPlantilla() {
+    return this._imprimirPlantilla;
+  }
+
   resetearDatos() {
     this._datos = undefined;
     this._experiencias = [];
@@ -68,7 +73,7 @@ export class CurriculumService {
     this._datosInteres = [];
   }
 
-  actualizarCv(id: number, nombreArchivo:string) {
+  actualizarCv(id: number, nombreArchivo: string) {
     const cv: Curriculum = {
       datos: this._datos,
       datosInteres: this._datosInteres,
@@ -113,6 +118,10 @@ export class CurriculumService {
         '/nueva-plantilla/curriculum/' + this._idPlantilla
       );
     });
+  }
+
+  imprimir() {
+    this._imprimirPlantilla = true;
   }
 
   agregarDatoInteres(datoInteres: DatosInteres) {

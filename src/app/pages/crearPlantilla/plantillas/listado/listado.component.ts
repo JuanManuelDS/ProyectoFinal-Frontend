@@ -48,7 +48,7 @@ export class ListadoComponent implements OnChanges {
       var pxFullHeight = canvas.height;
       var pxPageHeight = Math.floor(canvas.width * (pageHeight / imgWidth));
 
-      var nPages = Math.round(pxFullHeight / pxPageHeight);
+      var nPages = Math.ceil(pxFullHeight / pxPageHeight);
 
       // Define pageHeight separately so it can be trimmed on the final page.
       var pageHeight = innerPageHeight;

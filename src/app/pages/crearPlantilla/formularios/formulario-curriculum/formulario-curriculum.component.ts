@@ -33,7 +33,6 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
   idPlantilla: number | undefined;
 
   @Output() crearPDF = new EventEmitter();
-  @Output() imprimirPlantilla = new EventEmitter();
 
   /* --------- FORMULARIOS PARA AGREGAR NUEVOS DATOS -------------------*/
   datosForm: FormGroup = this.formBuilder.group({
@@ -73,7 +72,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
 
   /* ----------- ARRAYS DE FORMULARIOS ----------------------*/
   datoInteresForm: FormGroup = this.formBuilder.group({
-    dato: [''],
+    dato: ['algun dato...'],
   });
 
   conocimientosForms: FormGroup = this.formBuilder.group({
@@ -96,6 +95,10 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
     datosInteres: this.formBuilder.array([]),
   });
 
+  pruebaForm: FormGroup = this.formBuilder.group({
+    prueba: this.formBuilder.array([]),
+  });
+
   constructor(
     private formBuilder: FormBuilder,
     private cvService: CurriculumService,
@@ -110,7 +113,6 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
 
   //Al cargarse el componente me fijo si la ruta tiene un id, lo que indica que debo cargar una plantilla existente
   ngOnInit() {
-    this.imprimirPlantilla.emit(true);
     let id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id !== null && id !== undefined) {
       this.idPlantilla = Number(id);
@@ -185,6 +187,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
         this.cvService.agregarDatoInteres(data.datosInteres[i]);
       }
     }
+    this.cvService.imprimir();
   }
 
   /*-------------- GETTERS DE LOS ARRAYS DE FORMULARIOS --------------------------*/

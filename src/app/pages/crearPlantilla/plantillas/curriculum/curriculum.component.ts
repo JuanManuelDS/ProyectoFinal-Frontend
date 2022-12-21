@@ -31,9 +31,6 @@ export class CurriculumComponent implements OnChanges, OnInit {
     if (changes['generarPDF'].currentValue === true) {
       this.guardarPDF();
     }
-    if (changes['imprimir'].currentValue === true) {
-      console.log('hola cambió mi valor en curriculum plantilla imprimir');
-    }
   }
 
   guardarPDF() {
@@ -128,5 +125,9 @@ export class CurriculumComponent implements OnChanges, OnInit {
 
   get datosInteres() {
     return this.cvService.datosInteres;
+  }
+
+  get imprimir() {
+    return this.cvService.imprimirPlantilla;
   }
 }
