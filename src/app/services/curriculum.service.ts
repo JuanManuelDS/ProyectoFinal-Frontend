@@ -92,9 +92,7 @@ export class CurriculumService {
       .actualizarPlantilla(id, plantilla)
       .subscribe((resp) => {
         console.log('plantilla actualizada con éxito');
-        this.router.navigateByUrl(
-          '/nueva-plantilla/curriculum/' + this._idPlantilla
-        );
+        this.router.navigateByUrl('/nueva-plantilla/curriculum/' + id);
       });
   }
 
