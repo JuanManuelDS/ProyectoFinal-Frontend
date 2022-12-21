@@ -1,4 +1,12 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { CurriculumService } from 'src/app/services/curriculum.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -8,14 +16,23 @@ import html2canvas from 'html2canvas';
   templateUrl: './curriculum.component.html',
   styleUrls: ['./curriculum.component.css'],
 })
-export class CurriculumComponent implements OnChanges {
+export class CurriculumComponent implements OnChanges, OnInit {
   @Input() generarPDF!: boolean;
 
+  @ViewChild('documento') documento!: ElementRef;
+
   constructor(private cvService: CurriculumService) {}
+
+  ngOnInit(): void {
+    console.log('Se ejecuta curriculum-plantilla');
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['generarPDF'].currentValue === true) {
       this.guardarPDF();
+    }
+    if (changes['imprimir'].currentValue === true) {
+      console.log('hola cambió mi valor en curriculum plantilla imprimir');
     }
   }
 

@@ -33,6 +33,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
   idPlantilla: number | undefined;
 
   @Output() crearPDF = new EventEmitter();
+  @Output() imprimirPlantilla = new EventEmitter();
 
   /* --------- FORMULARIOS PARA AGREGAR NUEVOS DATOS -------------------*/
   datosForm: FormGroup = this.formBuilder.group({
@@ -109,6 +110,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
 
   //Al cargarse el componente me fijo si la ruta tiene un id, lo que indica que debo cargar una plantilla existente
   ngOnInit() {
+    this.imprimirPlantilla.emit(true);
     let id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id !== null && id !== undefined) {
       this.idPlantilla = Number(id);
@@ -127,6 +129,7 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
 
   /* - RELLENA TANTO EL FORMULARIO COMO EL NOMBRE DEL ARCHIVO Y LA PLANTILLA (EL DOCUMENTO) ------------ */
   rellenarDatos() {
+    console.log('se ejecuta rellenar datos');
     let data: Curriculum = JSON.parse(this.plantilla!.datos);
     this.cvService.resetearDatos();
     this.nombreArchivo = this.plantilla?.nombreArchivo;
@@ -215,8 +218,8 @@ export class FormularioCurriculumComponent implements OnInit, OnDestroy {
         input: 'text',
         inputValue: '',
         showCancelButton: true,
-        cancelButtonColor: "#CF1414",
-        confirmButtonColor: "#1CC464",
+        cancelButtonColor: '#CF1414',
+        confirmButtonColor: '#1CC464',
         inputValidator: (value) => {
           return new Promise((resolve: any) => {
             if (value === '') {

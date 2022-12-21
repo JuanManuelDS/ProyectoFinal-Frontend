@@ -61,7 +61,7 @@ export class FormularioListadoComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {}
-
+ 
   ngOnDestroy(): void {
     this.lisService.resetearListado();
   }

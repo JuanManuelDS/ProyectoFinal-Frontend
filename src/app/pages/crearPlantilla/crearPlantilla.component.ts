@@ -10,6 +10,7 @@ import { PlantillasService } from 'src/app/services/plantillas.service';
 })
 export class CrearPlantillaComponent implements OnInit {
   plantilla: string | null = '';
+  imprimir: boolean = false;
 
   curriculum: boolean = false;
   listado: boolean = false;
@@ -25,7 +26,8 @@ export class CrearPlantillaComponent implements OnInit {
 
   ngOnInit() {
     this.plantilla = this.activatedRoute.snapshot.paramMap.get('plantilla');
-
+    this.imprimir = true;
+    
     if (this.plantilla === '') {
       this.router.navigateByUrl('/dashboard');
     }
