@@ -111,6 +111,19 @@ export class AuthService {
     );
   }
 
+  setPassword(contrasena: string) {
+    const url =
+      'https://proyectofinal-backend-production-8cff.up.railway.app/api/usuarios/'+localStorage.getItem('nombreUsuario');
+
+    //Tomo el token del local storage (en caso que lo tenga)
+    const token = 'Bearer ' + localStorage.getItem('token');
+
+    //En caso que no tenga un token en el localstorage paso un string vacío
+    const headers = new HttpHeaders().set('Authorization', token || '');
+
+    return this.http.put(url, contrasena, {headers})
+  }
+
   esAdmin() {
     this._isAdmin = true;
   }
