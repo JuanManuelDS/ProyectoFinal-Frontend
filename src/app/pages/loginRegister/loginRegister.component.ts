@@ -16,7 +16,7 @@ export class LoginRegisterComponent {
 
     //ASigno el nombre del título según la ruta en que se encuentra el usuario
     if (this.router.url === '/login') {
-      this.titulo = 'Login';
-    } else this.titulo = 'Register';
+      this.titulo = 'Iniciar Sesión';
+    } else this.titulo = 'Registrar';
   }
 }
