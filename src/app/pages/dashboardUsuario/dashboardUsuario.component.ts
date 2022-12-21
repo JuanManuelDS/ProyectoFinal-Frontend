@@ -80,7 +80,7 @@ export class DashboardUsuarioComponent implements OnInit {
         this.router.navigateByUrl('/nueva-plantilla/listado');
         break;
     }
-  }
+  } 
 
   borrarPlantilla(id: number) {
     Swal.fire({

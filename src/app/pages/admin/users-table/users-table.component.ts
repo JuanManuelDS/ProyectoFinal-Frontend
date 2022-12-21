@@ -28,6 +28,7 @@ export class UsersTableComponent implements OnInit {
       if (result.isConfirmed) {
         this.adminService.eliminarUsuario(nombreUsuario).subscribe((resp) => {
           Swal.fire('Usuario eliminado', '', 'success');
+          this.adminService.cargarUsuarios().subscribe();
         });
       }
     });
